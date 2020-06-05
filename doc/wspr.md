@@ -259,7 +259,7 @@ For export, the 162 two-bit symbols are packed four to a byte, MSB first, into 4
 
 ![](screenshot.jpg)
 
-_This image depicts numerous WSPR transmissions above several QRSS signals near 10.140 MHz. Spectrogram depicts 20 minutes horizontally and 350 Hz vertically. [QRSS Plus](https://swharden.com/qrss/plus) displays live spectrograms like this from around the world in real time._
+_This 10-minute spectrogram shows several WSPR transmissions above a few QRSS signals near 10.140 MHz. [QRSS Plus](https://swharden.com/qrss/plus) displays live spectrograms like this from around the world in real time._
 
 ## Resources
 * [WSPR](https://en.wikipedia.org/wiki/WSPR_(amateur_radio_software)) on Wikipedia
