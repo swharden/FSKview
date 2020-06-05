@@ -257,7 +257,7 @@ For export, the 162 two-bit symbols are packed four to a byte, MSB first, into 4
 
 ## Screenshots
 
-![](doc/lopora-wspr.jpg)
+![](screenshot.jpg)
 
 _This image depicts numerous WSPR transmissions above several QRSS signals near 10.140 MHz. Spectrogram depicts 20 minutes horizontally and 350 Hz vertically. [QRSS Plus](https://swharden.com/qrss/plus) displays live spectrograms like this from around the world in real time._
 
