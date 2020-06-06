@@ -7,7 +7,9 @@
 
 ## Simulating QRSS Data
 
-Sample 10-minute recordings were generated with normally distributed noise and sine waves added near 1400 Hz (15-second squares, 5-second squares, and 15-second ramps, all 5 Hz high) then analyzed to produce spectrograms.
+Sample 10-minute recordings were generated with normally distributed noise and sine waves (of increasing SNR) were added near 1400 Hz (15-second squares, 5-second squares, and 15-second ramps, all 5 Hz high) and the signal was analyzed to produce spectrograms.
+
+
 Many ideas here came from PA2OHH's [Simulation of QRSS Signals](https://www.qsl.net/pa2ohh/12qrsssim1.htm).
 
 Unless otherwise stated examples use these parameters:

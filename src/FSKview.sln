@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Audio", "FSKview.Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Dev", "FSKview.Dev\FSKview.Dev.csproj", "{04925FC1-927E-4E7D-B0AA-011FB247C7EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Tests", "FSKview.Tests\FSKview.Tests.csproj", "{1F894E80-235E-48AF-85A0-62B604AB1A70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

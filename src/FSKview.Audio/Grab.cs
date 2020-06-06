@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -25,6 +26,7 @@ namespace FSKview.Audio
         private readonly int fftStepSize;
         private readonly int fftIndex1;
         private readonly int fftIndex2;
+        private readonly bool[] fftProcessed;
 
         public Grab(int sampleRate = 6000, int fftSize = 1 << 14,
             double minFreq = 0, double maxFreq = double.PositiveInfinity)
@@ -33,6 +35,7 @@ namespace FSKview.Audio
             FftSize = fftSize;
             FftHzPerPixel = (double)sampleRate / FftSize;
             window = FftSharp.Window.Hanning(FftSize);
+
             int totalSeconds = 60 * 10 - 2;
             audio = new double[sampleRate * totalSeconds];
 
@@ -40,6 +43,7 @@ namespace FSKview.Audio
             int targetWidth = 1000;
             fftStepSize = (audio.Length - fftSize) / targetWidth;
             Width = (audio.Length - fftSize) / fftStepSize;
+            fftProcessed = new bool[Width];
 
             fftIndex1 = (minFreq == 0) ? 0 : (int)(minFreq / FftHzPerPixel);
             fftIndex2 = (maxFreq > FftSize / 2) ? FftSize / 2 : (int)(maxFreq / FftHzPerPixel);
@@ -64,6 +68,7 @@ namespace FSKview.Audio
             int valuesRemaining = audio.Length - NextIndex;
             int valuesToCopy = (valuesRemaining >= newAudio.Length) ? newAudio.Length : valuesRemaining;
             Array.Copy(newAudio, 0, audio, NextIndex, valuesToCopy);
+            NextIndex += valuesToCopy;
         }
 
         public void Window(double[] newWindow)
@@ -73,9 +78,21 @@ namespace FSKview.Audio
             Array.Copy(newWindow, 0, window, 0, FftSize);
         }
 
-        public void ProcessAll()
+        public void Process()
         {
-            Parallel.For(0, Width, x =>
+            List<int> colsToProcess = new List<int>();
+            for (int columnIndex = 0; columnIndex < Width; columnIndex++)
+            {
+                int colIndex2 = columnIndex * fftStepSize + FftSize;
+                bool isFilled = colIndex2 <= NextIndex - 1;
+                bool isNotAlreadyProcessed = !fftProcessed[columnIndex];
+
+                if (isFilled && isNotAlreadyProcessed)
+                    colsToProcess.Add(columnIndex);
+            }
+            Console.WriteLine($"cols needing processing: {colsToProcess.Count}");
+
+            Parallel.ForEach(colsToProcess, x =>
             {
                 int offset = x * fftStepSize;
                 Complex[] com = new Complex[FftSize];
@@ -91,6 +108,8 @@ namespace FSKview.Audio
                     value = Math.Min(value, 255);
                     pixelValues[x, i] = (byte)value;
                 }
+
+                fftProcessed[x] = true;
             });
         }
 

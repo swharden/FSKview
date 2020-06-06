@@ -9,20 +9,7 @@ namespace FSKview.Dev
     {
         static void Main(string[] args)
         {
-            SimulatedColormaps();
-        }
 
-        static void Comparison2()
-        {
-            // simulated signals
-            var grab = new Grab(minFreq: 1370, maxFreq: 1435);
-            Console.WriteLine(grab.ToString().Replace(", ", "\n"));
-            double[] audio = Simulate.TestSignals(grab.SampleRate);
-            grab.AddAudio(audio);
-            grab.ProcessAll();
-            Bitmap bmp = grab.GetBitmap();
-            Colormap.Viridis(bmp);
-            bmp.Save("200605-03.png", ImageFormat.Png);
         }
 
         static void SimulatedColormaps()
@@ -31,7 +18,7 @@ namespace FSKview.Dev
             Console.WriteLine(grab.ToString().Replace(", ", "\n"));
             double[] audio = Simulate.TestSignals(grab.SampleRate);
             grab.AddAudio(audio);
-            grab.ProcessAll();
+            grab.Process();
             Bitmap bmp = grab.GetBitmap();
             Colormap.Grayscale(bmp);
             bmp.Save("colormap-grayscale.png", ImageFormat.Png);
@@ -46,7 +33,7 @@ namespace FSKview.Dev
             var grab = new Grab(minFreq: 1220, maxFreq: 1260);
             Console.WriteLine(grab.ToString().Replace(", ", "\n"));
             grab.AddAudio(audio);
-            grab.ProcessAll();
+            grab.Process();
             Bitmap bmp = grab.GetBitmap();
             Colormap.Viridis(bmp);
             bmp.Save("200605-03.png", ImageFormat.Png);

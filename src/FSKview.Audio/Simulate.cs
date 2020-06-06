@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FSKview.Dev
+namespace FSKview.Audio
 {
     public static class Simulate
     {
