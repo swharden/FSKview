@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Audio", "FSKview.Audio\FSKview.Audio.csproj", "{BE1BC9E5-153B-4D64-A17C-15BB96405229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Dev", "FSKview.Dev\FSKview.Dev.csproj", "{04925FC1-927E-4E7D-B0AA-011FB247C7EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2683882F-A64C-41E0-89FD-AE83214FAC6C}
+	EndGlobalSection
+EndGlobal

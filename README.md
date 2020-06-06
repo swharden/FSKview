@@ -5,6 +5,12 @@
 
 > **⚠️ WARNING: FSKview is in development** and it is not intended to be used at this time. Notes and source code in this repository may still be useful for experimenters interested in ultra-narrowband signal analysis.
 
+## Development Notes
+
+While I'm developing this software I'm keeping notes in [/dev](dev)
+
+![](dev/simulation/simulation.png)
+
 ## What is QRSS?
 
 QRSS is a type of continuous wave (CW) radio signal which uses frequency-shift keying (FSK). QRSS is ultra-narrowband (5Hz bandwidth) and ultra slow speed (about 3 letters per minute). The abbreviation QRSS is [Morse code slang](https://en.wikipedia.org/wiki/Q_code) for "transmit a lot slower".
