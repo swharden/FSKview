@@ -23,6 +23,8 @@ View: 1,370 Hz to 1,435 Hz
 
 ### Colormap Comparison
 
-Grayscale | Viridis
----|---
-![](simulation/colormap-grayscale.png)|![](simulation/colormap-viridis.png)
+#### Grayscale
+![](simulation/colormap-grayscale.png)
+
+#### Viridis
+![](simulation/colormap-viridis.png)
