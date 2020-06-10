@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Spectrogram\src\Spectrogram\Spectrogram.csproj">
+      <Project>{a851e351-4657-4ced-b828-0e1697774b2e}</Project>
+      <Name>Spectrogram</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSKview.Tests", "FSKview.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview", "FSKview\FSKview.csproj", "{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectrogram", "..\..\Spectrogram\src\Spectrogram\Spectrogram.csproj", "{A851E351-4657-4CED-B828-0E1697774B2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A851E351-4657-4CED-B828-0E1697774B2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A851E351-4657-4CED-B828-0E1697774B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A851E351-4657-4CED-B828-0E1697774B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A851E351-4657-4CED-B828-0E1697774B2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
