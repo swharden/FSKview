@@ -66,7 +66,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(64, 13);
+            this.pictureBox2.Size = new System.Drawing.Size(64, 11);
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
@@ -74,9 +74,9 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Location = new System.Drawing.Point(67, 1);
+            this.panel1.Location = new System.Drawing.Point(67, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(91, 13);
+            this.panel1.Size = new System.Drawing.Size(91, 11);
             this.panel1.TabIndex = 6;
             // 
             // timer1

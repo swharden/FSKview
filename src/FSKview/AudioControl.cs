@@ -14,6 +14,7 @@ namespace FSKview
     public partial class AudioControl : UserControl
     {
         public Listener listener;
+        public event EventHandler InputDeviceChanged;
 
         [
         Category("Audio"),
@@ -39,9 +40,9 @@ namespace FSKview
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine($"Selected Device {comboBox1.SelectedIndex}");
             listener?.Dispose();
             listener = new Listener(comboBox1.SelectedIndex, SampleRate);
+            InputDeviceChanged?.Invoke(this, e);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
