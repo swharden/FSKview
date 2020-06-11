@@ -97,6 +97,12 @@ namespace FSKview
 
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
 
+            // reset the spectrogram based on where we are in the 10 minute block
+            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
+            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
+            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
+            spec.RollReset(nextIndex);
+
             // resize the image based on the spectrogram dimensions
             bmpSpectrogram = new Bitmap(
                 width: spec.Width + verticalScaleWidth,
@@ -132,82 +138,13 @@ namespace FSKview
                 return;
 
             spec.Add(audioControl1.listener.GetNewAudio());
-            AnnotateSpectrogram(
+            Annotate.Spectrogram(
                 spec, band, spots,
                 bmpSpectrogram, bmpVericalScale,
                 (double)nudBrightness.Value, verticalReduction,
                 drawBandLines: true,
-                partialTenMinute: true);
+                roll: true);
             pictureBox1.Refresh();
-        }
-
-        private static void AnnotateSpectrogram(
-            Spectrogram.Spectrogram spec, WsprBand band, List<WsprSpot> spots,
-            Bitmap bmpSpectrogram, Bitmap bmpVericalScale,
-            double brightness, int verticalReduction,
-            bool drawBandLines, bool partialTenMinute)
-        {
-            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
-            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
-            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
-            if (partialTenMinute == false)
-                nextIndex = 0;
-
-            using (Graphics gfx = Graphics.FromImage(bmpSpectrogram))
-            using (Bitmap bmpIndexed = spec.GetBitmapMax(brightness, reduction: verticalReduction, firstColumnIndex: nextIndex))
-            using (Pen bandEdgePen = new Pen(Color.White) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
-            using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
-            using (var sfMiddleCenter = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
-            using (var sfUpperLeft = new StringFormat { LineAlignment = StringAlignment.Near, Alignment = StringAlignment.Near })
-            {
-                // copy source bitmaps onto this display bitmap
-                gfx.DrawImage(bmpIndexed, 0, 0);
-                gfx.DrawImage(bmpVericalScale, spec.Width, 0);
-
-                int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
-                int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, verticalReduction);
-                int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, verticalReduction);
-                if (drawBandLines)
-                {
-                    gfx.DrawLine(bandEdgePen, 0, wsprBandTopPx, spec.Width, wsprBandTopPx);
-                    gfx.DrawLine(bandEdgePen, 0, wsprBandBottomPx, spec.Width, wsprBandBottomPx);
-                    gfx.DrawLine(bandEdgePen, 0, qrssBandBottomPx, spec.Width, qrssBandBottomPx);
-                }
-
-                if (partialTenMinute)
-                {
-                    gfx.DrawLine(bandEdgePen, nextIndex, 0, nextIndex, spec.Height);
-                }
-
-                int[] seenMinutes = spots.Select(x => x.dt.Minute).Distinct().ToArray();
-
-                int columnsPerTwoMinutes = (int)(60 * 2 / spec.SecPerPx);
-                // TODO: this produces an error, as columns with no spots get shifted left
-
-                for (int j = 0; j < seenMinutes.Length; j++)
-                {
-                    int minute = seenMinutes[j];
-                    WsprSpot[] spotsThisMinute = spots.Where(x => x.dt.Minute == minute).ToArray();
-
-                    for (int i = 0; i < spotsThisMinute.Length; i++)
-                    {
-                        WsprSpot spot = spotsThisMinute[i];
-
-                        int r = 7;
-                        int y = spec.PixelY(spot.frequencyHz - band.dialFreq, verticalReduction);
-                        //int x = spec.Width - (int)(spot.ageSec / spec.SecPerPx);
-                        int x = columnsPerTwoMinutes * j;
-
-                        int xSpot = x + r * 2 * (i + 1);
-                        gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
-                        gfx.DrawString($"{i + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
-
-                        gfx.DrawString($"{i + 1}: {spot.callsign} ({spot.strength}) ", font, Brushes.White, x,
-                            y: wsprBandBottomPx + 13 * i, sfUpperLeft);
-                    }
-
-                }
-            }
         }
 
         private void cbWindow_SelectedIndexChanged(object sender, EventArgs e)
@@ -270,7 +207,10 @@ namespace FSKview
                 {
                     var spot = new WsprSpot(streamReader.ReadLine());
                     bool isRecent = spot.ageSec <= 10 * 60;
-                    //isRecent = true; // for development
+
+                    // TODO: remove this eventually
+                    isRecent = true; // for development
+
                     if (spot.isValid && isRecent)
                         spots.Add(spot);
                 }
@@ -288,7 +228,10 @@ namespace FSKview
             bool isWsprHadTime = DateTime.UtcNow.Second == 5; // gives WSPR time to analyze and save
             bool isLastSaveOld = lastSavedMinute != DateTime.UtcNow.Minute;
             if (cbSave.Checked && isTenMinute && isWsprHadTime && isLastSaveOld)
+            {
+                spec.RollReset();
                 SaveGrab();
+            }
         }
 
         private void cbReduction_CheckedChanged(object sender, EventArgs e)
@@ -308,9 +251,9 @@ namespace FSKview
         {
             // create a full-size custom annotated spectrogram
             Bitmap bmpSpec = spec.GetBitmap((double)nudBrightness.Value);
-            AnnotateSpectrogram(spec, band, spots, bmpSpectrogram, bmpVericalScale,
+            Annotate.Spectrogram(spec, band, spots, bmpSpectrogram, bmpVericalScale,
                 (double)nudBrightness.Value, verticalReduction,
-                drawBandLines: false, partialTenMinute: false);
+                drawBandLines: false, roll: false);
 
             // render both onto a smaller image
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - 10;
