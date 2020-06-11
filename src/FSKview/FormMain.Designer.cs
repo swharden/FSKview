@@ -1,6 +1,6 @@
 ﻿namespace FSKview
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -38,15 +38,19 @@
             this.cbDialFreq = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.btnConfigureWspr = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbWspr = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerUpdateSpectrogram = new System.Windows.Forms.Timer(this.components);
+            this.btnDetails = new System.Windows.Forms.Button();
+            this.cbSave = new System.Windows.Forms.CheckBox();
+            this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
             this.audioControl1 = new FSKview.AudioControl();
+            this.cbReduction = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -141,24 +145,24 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(764, 4);
+            this.label5.Location = new System.Drawing.Point(899, 4);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 26);
             this.label5.TabIndex = 13;
             this.label5.Text = "FSKview";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // label6
+            // lblTime
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label6.Location = new System.Drawing.Point(764, 30);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 26);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "23:17:00 UTC";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblTime.Location = new System.Drawing.Point(899, 30);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(100, 26);
+            this.lblTime.TabIndex = 14;
+            this.lblTime.Text = "23:17:00 UTC";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnConfigureWspr
             // 
@@ -168,18 +172,19 @@
             this.btnConfigureWspr.TabIndex = 15;
             this.btnConfigureWspr.Text = "Configure";
             this.btnConfigureWspr.UseVisualStyleBackColor = true;
+            this.btnConfigureWspr.Click += new System.EventHandler(this.btnConfigureWspr_Click);
             // 
-            // checkBox1
+            // cbWspr
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(614, 9);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(59, 17);
-            this.checkBox1.TabIndex = 17;
-            this.checkBox1.Text = "WSPR";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbWspr.AutoSize = true;
+            this.cbWspr.Checked = true;
+            this.cbWspr.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbWspr.Location = new System.Drawing.Point(614, 9);
+            this.cbWspr.Name = "cbWspr";
+            this.cbWspr.Size = new System.Drawing.Size(59, 17);
+            this.cbWspr.TabIndex = 17;
+            this.cbWspr.Text = "WSPR";
+            this.cbWspr.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -191,7 +196,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(864, 413);
+            this.panel1.Size = new System.Drawing.Size(999, 413);
             this.panel1.TabIndex = 18;
             // 
             // pictureBox1
@@ -209,7 +214,7 @@
             this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 466);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(864, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(999, 22);
             this.statusStrip1.TabIndex = 19;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -225,6 +230,33 @@
             this.timerUpdateSpectrogram.Interval = 500;
             this.timerUpdateSpectrogram.Tick += new System.EventHandler(this.timerUpdateSpectrogram_Tick);
             // 
+            // btnDetails
+            // 
+            this.btnDetails.Location = new System.Drawing.Point(782, 24);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(64, 22);
+            this.btnDetails.TabIndex = 20;
+            this.btnDetails.Text = "Details";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
+            // 
+            // cbSave
+            // 
+            this.cbSave.AutoSize = true;
+            this.cbSave.Location = new System.Drawing.Point(694, 29);
+            this.cbSave.Name = "cbSave";
+            this.cbSave.Size = new System.Drawing.Size(82, 17);
+            this.cbSave.TabIndex = 21;
+            this.cbSave.Text = "Save Grabs";
+            this.cbSave.UseVisualStyleBackColor = true;
+            this.cbSave.CheckedChanged += new System.EventHandler(this.cbSave_CheckedChanged);
+            // 
+            // timerWsprUpdate
+            // 
+            this.timerWsprUpdate.Enabled = true;
+            this.timerWsprUpdate.Interval = 500;
+            this.timerWsprUpdate.Tick += new System.EventHandler(this.timerWsprUpdate_Tick);
+            // 
             // audioControl1
             // 
             this.audioControl1.Location = new System.Drawing.Point(9, 9);
@@ -235,20 +267,36 @@
             this.audioControl1.TabIndex = 3;
             this.audioControl1.InputDeviceChanged += new System.EventHandler(this.audioControl1_InputDeviceChanged);
             // 
+            // cbReduction
+            // 
+            this.cbReduction.AutoSize = true;
+            this.cbReduction.Checked = true;
+            this.cbReduction.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbReduction.Location = new System.Drawing.Point(694, 9);
+            this.cbReduction.Name = "cbReduction";
+            this.cbReduction.Size = new System.Drawing.Size(127, 17);
+            this.cbReduction.TabIndex = 22;
+            this.cbReduction.Text = "2x Vertical Reduction";
+            this.cbReduction.UseVisualStyleBackColor = true;
+            this.cbReduction.CheckedChanged += new System.EventHandler(this.cbReduction_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 488);
+            this.ClientSize = new System.Drawing.Size(999, 488);
+            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.cbReduction);
+            this.Controls.Add(this.cbSave);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbWspr);
             this.Controls.Add(this.btnConfigureWspr);
             this.Controls.Add(this.cbDialFreq);
             this.Controls.Add(this.cbWindow);
@@ -280,14 +328,18 @@
         private System.Windows.Forms.ComboBox cbDialFreq;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Button btnConfigureWspr;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbWspr;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.Timer timerUpdateSpectrogram;
+        private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.CheckBox cbSave;
+        private System.Windows.Forms.Timer timerWsprUpdate;
+        private System.Windows.Forms.CheckBox cbReduction;
     }
 }
 

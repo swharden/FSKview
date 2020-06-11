@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSKview.Audio", "FSKview.Audio\FSKview.Audio.csproj", "{BE1BC9E5-153B-4D64-A17C-15BB96405229}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSKview.Dev", "FSKview.Dev\FSKview.Dev.csproj", "{04925FC1-927E-4E7D-B0AA-011FB247C7EF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSKview.Tests", "FSKview.Tests\FSKview.Tests.csproj", "{1F894E80-235E-48AF-85A0-62B604AB1A70}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview", "FSKview\FSKview.csproj", "{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spectrogram", "..\..\Spectrogram\src\Spectrogram\Spectrogram.csproj", "{A851E351-4657-4CED-B828-0E1697774B2E}"
@@ -19,18 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE1BC9E5-153B-4D64-A17C-15BB96405229}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04925FC1-927E-4E7D-B0AA-011FB247C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F894E80-235E-48AF-85A0-62B604AB1A70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
