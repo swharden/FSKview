@@ -86,6 +86,7 @@ namespace FSKview
         Bitmap bmpVericalScale;
         Bitmap bmpSpectrogram;
         int verticalReduction = 2;
+
         private void ResetSpectrogram()
         {
             int sampleRate = audioControl1.SampleRate;
@@ -135,7 +136,8 @@ namespace FSKview
                 spec, band, spots,
                 bmpSpectrogram, bmpVericalScale,
                 (double)nudBrightness.Value, verticalReduction,
-                drawLines: true);
+                drawBandLines: true,
+                partialTenMinute: true);
             pictureBox1.Refresh();
         }
 
@@ -143,10 +145,16 @@ namespace FSKview
             Spectrogram.Spectrogram spec, WsprBand band, List<WsprSpot> spots,
             Bitmap bmpSpectrogram, Bitmap bmpVericalScale,
             double brightness, int verticalReduction,
-            bool drawLines)
+            bool drawBandLines, bool partialTenMinute)
         {
+            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
+            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
+            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
+            if (partialTenMinute == false)
+                nextIndex = 0;
+
             using (Graphics gfx = Graphics.FromImage(bmpSpectrogram))
-            using (Bitmap bmpIndexed = spec.GetBitmapMax(brightness, roll: true, reduction: verticalReduction))
+            using (Bitmap bmpIndexed = spec.GetBitmapMax(brightness, reduction: verticalReduction, firstColumnIndex: nextIndex))
             using (Pen bandEdgePen = new Pen(Color.White) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
             using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
             using (var sfMiddleCenter = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
@@ -159,11 +167,16 @@ namespace FSKview
                 int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
                 int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, verticalReduction);
                 int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, verticalReduction);
-                if (drawLines)
+                if (drawBandLines)
                 {
                     gfx.DrawLine(bandEdgePen, 0, wsprBandTopPx, spec.Width, wsprBandTopPx);
                     gfx.DrawLine(bandEdgePen, 0, wsprBandBottomPx, spec.Width, wsprBandBottomPx);
                     gfx.DrawLine(bandEdgePen, 0, qrssBandBottomPx, spec.Width, qrssBandBottomPx);
+                }
+
+                if (partialTenMinute)
+                {
+                    gfx.DrawLine(bandEdgePen, nextIndex, 0, nextIndex, spec.Height);
                 }
 
                 int[] seenMinutes = spots.Select(x => x.dt.Minute).Distinct().ToArray();
@@ -296,7 +309,8 @@ namespace FSKview
             // create a full-size custom annotated spectrogram
             Bitmap bmpSpec = spec.GetBitmap((double)nudBrightness.Value);
             AnnotateSpectrogram(spec, band, spots, bmpSpectrogram, bmpVericalScale,
-                (double)nudBrightness.Value, verticalReduction, drawLines: false);
+                (double)nudBrightness.Value, verticalReduction,
+                drawBandLines: false, partialTenMinute: false);
 
             // render both onto a smaller image
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - 10;
