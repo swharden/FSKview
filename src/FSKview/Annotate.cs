@@ -42,33 +42,34 @@ namespace FSKview
                     gfx.DrawLine(rollPen, spec.NextColumnIndex, 0, spec.NextColumnIndex, spec.Height);
                 }
 
-                int[] seenMinutes = spots.Select(x => x.dt.Minute).Distinct().ToArray();
-
-                int columnsPerTwoMinutes = (int)(60 * 2 / spec.SecPerPx);
-                // TODO: this produces an error, as columns with no spots get shifted left
-
-                for (int j = 0; j < seenMinutes.Length; j++)
+                // a segment is a 2-minute block within a ten-minute frame
+                for (int segment = 0; segment < 5; segment++)
                 {
-                    int minute = seenMinutes[j];
-                    WsprSpot[] spotsThisMinute = spots.Where(x => x.dt.Minute == minute).ToArray();
+                    int segmentX = spec.Width * segment / 5;
+                    WsprSpot[] segmentSpots = spots
+                                                .Where(x => x.segment == segment)
+                                                .OrderBy(x => x.frequencyHz)
+                                                .Reverse()
+                                                .ToArray();
 
-                    for (int i = 0; i < spotsThisMinute.Length; i++)
+                    for (int spotIndex = 0; spotIndex < segmentSpots.Length; spotIndex++)
                     {
-                        WsprSpot spot = spotsThisMinute[i];
+                        WsprSpot spot = segmentSpots[spotIndex];
 
                         int r = 7;
                         int y = spec.PixelY(spot.frequencyHz - band.dialFreq, verticalReduction);
-                        //int x = spec.Width - (int)(spot.ageSec / spec.SecPerPx);
-                        int x = columnsPerTwoMinutes * j;
 
-                        int xSpot = x + r * 2 * (i + 1);
+                        // draw the marker
+                        int xSpot = segmentX + r * 2 * (spotIndex % 5 + 1);
                         gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
-                        gfx.DrawString($"{i + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
+                        gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
 
-                        gfx.DrawString($"{i + 1}: {spot.callsign} ({spot.strength}) ", font, Brushes.White, x,
-                            y: wsprBandBottomPx + 13 * i, sfUpperLeft);
+                        // draw the key label
+                        gfx.DrawString($"{spotIndex + 1}: {spot.callsign} ({spot.strength}) ", font, Brushes.White,
+                            x: segmentX,
+                            y: wsprBandBottomPx + 13 * spotIndex,
+                            sfUpperLeft);
                     }
-
                 }
             }
         }
