@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -47,10 +48,9 @@ namespace FSKview
                 {
                     int segmentX = spec.Width * segment / 5;
                     WsprSpot[] segmentSpots = spots
-                                                .Where(x => x.segment == segment)
-                                                .OrderBy(x => x.frequencyHz)
-                                                .Reverse()
-                                                .ToArray();
+                                                .Where(x => x.segment == segment) // only this segment
+                                                .OrderBy(x => x.strength).GroupBy(x => x.callsign).Select(x => x.Last()) // only strongest
+                                                .OrderBy(x => x.frequencyHz).Reverse().ToArray(); // top to bottom
 
                     for (int spotIndex = 0; spotIndex < segmentSpots.Length; spotIndex++)
                     {
@@ -60,18 +60,28 @@ namespace FSKview
                         int y = spec.PixelY(spot.frequencyHz - band.dialFreq, verticalReduction);
 
                         // draw the marker
-                        int xSpot = segmentX + r * 2 * (spotIndex % 5 + 1);
+                        int xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
                         gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
                         gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
 
                         // draw the key label
-                        gfx.DrawString($"{spotIndex + 1}: {spot.callsign} ({spot.strength}) ", font, Brushes.White,
-                            x: segmentX,
-                            y: wsprBandBottomPx + 13 * spotIndex,
-                            sfUpperLeft);
+                        DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength}) ",
+                            segmentX, wsprBandTopPx + 13 * (spotIndex - 8),
+                            font, sfUpperLeft, Brushes.White, Brushes.Black);
                     }
                 }
             }
+        }
+
+        public static void DrawStringWithShadow(Graphics gfx, String str, float x, float y,
+            Font font, StringFormat sf, Brush foreground, Brush background)
+        {
+            for (int dx = -1; dx < 2; dx++)
+                for (int dy = -1; dy < 2; dy++)
+                    if (dx != 0 || dy != 0)
+                        gfx.DrawString(str, font, background, x + dx, y + dy, sf);
+
+            gfx.DrawString(str, font, foreground, x, y, sf);
         }
     }
 }
