@@ -46,11 +46,11 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerUpdateSpectrogram = new System.Windows.Forms.Timer(this.components);
-            this.btnDetails = new System.Windows.Forms.Button();
             this.cbSave = new System.Windows.Forms.CheckBox();
             this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
             this.audioControl1 = new FSKview.AudioControl();
             this.cbReduction = new System.Windows.Forms.CheckBox();
+            this.cbBands = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -230,16 +230,6 @@
             this.timerUpdateSpectrogram.Interval = 500;
             this.timerUpdateSpectrogram.Tick += new System.EventHandler(this.timerUpdateSpectrogram_Tick);
             // 
-            // btnDetails
-            // 
-            this.btnDetails.Location = new System.Drawing.Point(782, 24);
-            this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(64, 22);
-            this.btnDetails.TabIndex = 20;
-            this.btnDetails.Text = "Details";
-            this.btnDetails.UseVisualStyleBackColor = true;
-            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
-            // 
             // cbSave
             // 
             this.cbSave.AutoSize = true;
@@ -274,18 +264,30 @@
             this.cbReduction.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbReduction.Location = new System.Drawing.Point(694, 9);
             this.cbReduction.Name = "cbReduction";
-            this.cbReduction.Size = new System.Drawing.Size(127, 17);
+            this.cbReduction.Size = new System.Drawing.Size(72, 17);
             this.cbReduction.TabIndex = 22;
-            this.cbReduction.Text = "2x Vertical Reduction";
+            this.cbReduction.Text = "Compress";
             this.cbReduction.UseVisualStyleBackColor = true;
             this.cbReduction.CheckedChanged += new System.EventHandler(this.cbReduction_CheckedChanged);
             // 
-            // Form1
+            // cbBands
+            // 
+            this.cbBands.AutoSize = true;
+            this.cbBands.Checked = true;
+            this.cbBands.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbBands.Location = new System.Drawing.Point(772, 8);
+            this.cbBands.Name = "cbBands";
+            this.cbBands.Size = new System.Drawing.Size(56, 17);
+            this.cbBands.TabIndex = 23;
+            this.cbBands.Text = "Bands";
+            this.cbBands.UseVisualStyleBackColor = true;
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 488);
-            this.Controls.Add(this.btnDetails);
+            this.Controls.Add(this.cbBands);
             this.Controls.Add(this.cbReduction);
             this.Controls.Add(this.cbSave);
             this.Controls.Add(this.statusStrip1);
@@ -303,7 +305,7 @@
             this.Controls.Add(this.cbColormap);
             this.Controls.Add(this.nudBrightness);
             this.Controls.Add(this.audioControl1);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FSKview";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -336,10 +338,10 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.Timer timerUpdateSpectrogram;
-        private System.Windows.Forms.Button btnDetails;
         private System.Windows.Forms.CheckBox cbSave;
         private System.Windows.Forms.Timer timerWsprUpdate;
         private System.Windows.Forms.CheckBox cbReduction;
+        private System.Windows.Forms.CheckBox cbBands;
     }
 }
 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -98,7 +99,7 @@ namespace FSKview
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
 
             // reset the spectrogram based on where we are in the 10 minute block
-            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
+            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 5) * 60 + DateTime.UtcNow.Second;
             double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
             int nextIndex = (int)(fracIntoTenMinute * spec.Width);
             spec.RollReset(nextIndex);
@@ -129,7 +130,8 @@ namespace FSKview
             band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
             bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: verticalReduction);
             int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
-            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - 10);
+            int pxPaddingAboveBandLimit = 10 + 13 * 8;
+            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - pxPaddingAboveBandLimit);
         }
 
         private void timerUpdateSpectrogram_Tick(object sender, EventArgs e)
@@ -142,14 +144,23 @@ namespace FSKview
                 spec, band, spots,
                 bmpSpectrogram, bmpVericalScale,
                 (double)nudBrightness.Value, verticalReduction,
-                drawBandLines: true,
+                drawBandLines: cbBands.Checked,
                 roll: true);
             pictureBox1.Refresh();
         }
 
         private void cbWindow_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // TODO: use reflection
+            if (spec is null)
+                return;
+
+            MethodInfo windowInfo = typeof(FftSharp.Window)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(x=>x.Name == cbWindow.Text)
+                .First();
+
+            double[] window = (double[])windowInfo.Invoke(null, new object[] { spec.FftSize });
+            spec.SetWindow(window);
         }
 
         private void cbColormap_SelectedIndexChanged(object sender, EventArgs e)
@@ -160,11 +171,6 @@ namespace FSKview
         private void cbDialFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateVerticalScale();
-        }
-
-        private void btnDetails_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(spec.ToString());
         }
 
         private void btnConfigureWspr_Click(object sender, EventArgs e)
@@ -207,10 +213,6 @@ namespace FSKview
                 {
                     var spot = new WsprSpot(streamReader.ReadLine());
                     bool isRecent = spot.ageSec <= 10 * 60;
-
-                    // TODO: remove this eventually
-                    isRecent = true; // for development
-
                     if (spot.isValid && isRecent)
                         spots.Add(spot);
                 }
@@ -249,29 +251,32 @@ namespace FSKview
         int lastSavedMinute = -1;
         private void SaveGrab()
         {
-            // create a full-size custom annotated spectrogram
-            Bitmap bmpSpec = spec.GetBitmap((double)nudBrightness.Value);
-            Annotate.Spectrogram(spec, band, spots, bmpSpectrogram, bmpVericalScale,
-                (double)nudBrightness.Value, verticalReduction,
-                drawBandLines: false, roll: false);
-
-            // render both onto a smaller image
-            int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - 10;
+            int pxPaddingAboveBandLimit = 10 + 13 * 8;
+            int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - pxPaddingAboveBandLimit;
             int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, verticalReduction) + 10;
+            int height = pxBot - pxTop;
 
-            using (var bmp2 = new Bitmap(bmpSpec.Width + bmpVericalScale.Width, pxBot - pxTop))
-            using (var gfx = Graphics.FromImage(bmp2))
+            using (Bitmap bmpFull = new Bitmap(spec.Width, spec.Height, PixelFormat.Format32bppPArgb))
+            using (Bitmap bmpCropped = new Bitmap(spec.Width, height, PixelFormat.Format32bppPArgb))
+            using (Graphics gfx = Graphics.FromImage(bmpCropped))
             using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
-            using (var sfMiddleCenter = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
             using (var sfLowerLeft = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Near })
             {
-                gfx.DrawImage(bmpSpec, 0, -pxTop);
-                gfx.DrawImage(bmpVericalScale, bmpSpec.Width, -pxTop);
+                // annotate a full-size spectrogram
+                Annotate.Spectrogram(spec, band, spots, bmpFull, bmpVericalScale,
+                                    (double)nudBrightness.Value, verticalReduction,
+                                    drawBandLines: false, roll: false);
 
+                // draw the full-size spectrogram on the cropped Bitmap
+                gfx.DrawImage(bmpFull, 0, -pxTop);
+
+                // decorate the cropped bitmap
                 gfx.DrawString($"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC",
-                    font, Brushes.White, 3, bmp2.Height - 3, sfLowerLeft);
-                bmp2.Save("aj4vd-latest.png", ImageFormat.Png);
-                bmp2.Save($"aj4vd-{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
+                    font, Brushes.White, 3, height - 3, sfLowerLeft);
+
+                // save the cropped bitmap
+                bmpCropped.Save("aj4vd-latest.png", ImageFormat.Png);
+                bmpCropped.Save($"aj4vd-{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
                 lastSavedMinute = DateTime.UtcNow.Minute;
             }
