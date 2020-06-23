@@ -227,7 +227,7 @@
             // timerUpdateSpectrogram
             // 
             this.timerUpdateSpectrogram.Enabled = true;
-            this.timerUpdateSpectrogram.Interval = 500;
+            this.timerUpdateSpectrogram.Interval = 1000;
             this.timerUpdateSpectrogram.Tick += new System.EventHandler(this.timerUpdateSpectrogram_Tick);
             // 
             // cbSave
@@ -308,7 +308,8 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FSKview";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

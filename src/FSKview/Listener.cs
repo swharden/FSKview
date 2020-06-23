@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FSKview
@@ -18,10 +19,11 @@ namespace FSKview
         public readonly int SampleRate;
         private readonly NAudio.Wave.WaveInEvent wvin;
         public double AmplitudeFrac { get; private set; }
-        public double TotalSamples { get; private set; }
+        public int TotalSamples { get; private set; }
         public double TotalTimeSec { get { return (double)TotalSamples / SampleRate; } }
         private readonly List<double> audio = new List<double>();
         public int SamplesInMemory { get { return audio.Count; } }
+        readonly Thread t;
 
         public Listener(int deviceIndex, int sampleRate)
         {
@@ -34,28 +36,52 @@ namespace FSKview
             };
             wvin.DataAvailable += OnNewAudioData;
             wvin.StartRecording();
+
+            t = new Thread(AddBufferToAudioForever);
+            t.Start();
         }
 
         public void Dispose()
         {
+            shuttingDown = true;
             wvin?.StopRecording();
             wvin?.Dispose();
         }
 
+        static double[] buffer;
         private void OnNewAudioData(object sender, NAudio.Wave.WaveInEventArgs args)
         {
             int bytesPerSample = wvin.WaveFormat.BitsPerSample / 8;
             int newSampleCount = args.BytesRecorded / bytesPerSample;
-            double[] buffer = new double[newSampleCount];
+            if (buffer is null)
+                buffer = new double[newSampleCount];
+
             double peak = 0;
             for (int i = 0; i < newSampleCount; i++)
             {
                 buffer[i] = BitConverter.ToInt16(args.Buffer, i * bytesPerSample);
                 peak = Math.Max(peak, buffer[i]);
             }
-            audio.AddRange(buffer);
             AmplitudeFrac = peak / (1 << 15);
             TotalSamples += newSampleCount;
+        }
+
+        static bool shuttingDown = false;
+        public void AddBufferToAudioForever()
+        {
+            int lastSampleAnalyzed = 0;
+            while (shuttingDown == false)
+            {
+                if (lastSampleAnalyzed != TotalSamples)
+                {
+                    lock (audio)
+                    {
+                        audio.AddRange(buffer);
+                    }
+                    lastSampleAnalyzed = TotalSamples;
+                }
+                Thread.Sleep(1);
+            }
         }
 
         public double[] GetNewAudio()

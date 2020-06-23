@@ -64,9 +64,14 @@ namespace FSKview
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             ResetSpectrogram();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            audioControl1.listener.Dispose();
         }
 
         private void audioControl1_InputDeviceChanged(object sender, EventArgs e)
@@ -138,6 +143,7 @@ namespace FSKview
                 drawBandLines: cbBands.Checked,
                 roll: true);
             pictureBox1.Refresh();
+            GC.Collect();
         }
 
         private void cbWindow_SelectedIndexChanged(object sender, EventArgs e)
