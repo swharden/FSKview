@@ -19,6 +19,7 @@ namespace FSKview
         WsprBand band;
         string wsprLogFilePath = null;
         readonly List<WsprSpot> spots = new List<WsprSpot>();
+        readonly string appPath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
         readonly int verticalScaleWidth = 130;
 
@@ -156,7 +157,7 @@ namespace FSKview
 
             MethodInfo windowInfo = typeof(FftSharp.Window)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(x=>x.Name == cbWindow.Text)
+                .Where(x => x.Name == cbWindow.Text)
                 .First();
 
             double[] window = (double[])windowInfo.Invoke(null, new object[] { spec.FftSize });
@@ -245,7 +246,10 @@ namespace FSKview
         private void cbSave_CheckedChanged(object sender, EventArgs e)
         {
             if (cbSave.Checked)
+            {
                 SaveGrab();
+                System.Diagnostics.Process.Start("explorer.exe", $"\"{appPath}\"");
+            }
         }
 
         int lastSavedMinute = -1;
@@ -274,9 +278,17 @@ namespace FSKview
                 gfx.DrawString($"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC",
                     font, Brushes.White, 3, height - 3, sfLowerLeft);
 
+                // ensure output folders exist
+                string pathSaveWeb = $"{appPath}/grabs-web";
+                string pathSaveAll = $"{appPath}/grabs-all";
+                if (!Directory.Exists(pathSaveWeb))
+                    Directory.CreateDirectory(pathSaveWeb);
+                if (!Directory.Exists(pathSaveAll))
+                    Directory.CreateDirectory(pathSaveAll);
+
                 // save the cropped bitmap
-                bmpCropped.Save("aj4vd-latest.png", ImageFormat.Png);
-                bmpCropped.Save($"aj4vd-{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
+                bmpCropped.Save($"{pathSaveWeb}/latest.png", ImageFormat.Png);
+                bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
                 lastSavedMinute = DateTime.UtcNow.Minute;
             }
