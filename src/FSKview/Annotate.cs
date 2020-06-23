@@ -62,7 +62,7 @@ namespace FSKview
                         // draw the marker
                         int xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
                         gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
-                        gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
+                        gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot + 0.5f, y + 1, sfMiddleCenter);
 
                         // draw the key label
                         DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength} dB) ",
