@@ -20,7 +20,7 @@ namespace FSKview
             using (Bitmap bmpIndexed = spec.GetBitmapMax(brightness, reduction: verticalReduction, roll: true))
             using (Pen bandEdgePen = new Pen(Color.White) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
             using (Pen rollPen = new Pen(Color.White))
-            using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
+            using (var font = new Font("consolas", 10, FontStyle.Bold))
             using (var sfMiddleCenter = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
             using (var sfUpperLeft = new StringFormat { LineAlignment = StringAlignment.Near, Alignment = StringAlignment.Near })
             {
@@ -65,7 +65,7 @@ namespace FSKview
                         gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot, y, sfMiddleCenter);
 
                         // draw the key label
-                        DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength}) ",
+                        DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength} dB) ",
                             segmentX, wsprBandTopPx + 13 * (spotIndex - 8),
                             font, sfUpperLeft, Brushes.White, Brushes.Black);
                     }
