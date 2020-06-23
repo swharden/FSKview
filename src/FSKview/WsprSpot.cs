@@ -54,6 +54,18 @@ namespace FSKview
                 // index 5: call sign
                 callsign = parts[5];
 
+                /*
+                 * Callsigns enclosed in angle brackets are actually sent as 15-bit hash codes. 
+                 * If such a code is received by another station before the full callsign has 
+                 * been received, it will be displayed as <...> on the decoded text line. Once 
+                 * the full callsign has been received, the decoder will thereafter recognize 
+                 * the hash code and fill in the blanks. Two very different callsigns might have 
+                 * the same hash code, but the 15-bit hashcode length ensures that in practice 
+                 * such collisions will be rare.
+                 */
+                bool is15bit = callsign.StartsWith("<");
+                callsign = callsign.Trim('<').Trim('>');
+
                 // index 6: grid square
                 grid = parts[6];
 
