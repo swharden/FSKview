@@ -37,17 +37,7 @@ namespace FSKview
                 y: Screen.FromControl(this).Bounds.Height / 2 - Height / 2);
 
             // list window functions
-            cbWindow.Items.AddRange
-            (
-                typeof(FftSharp.Window)
-                    .GetMethods()
-                    .Select(x => x)
-                    .Where(x => x.GetParameters().Length == 1)
-                    .Where(x => x.ReturnType == typeof(double[]))
-                    .OrderBy(x => x.Name)
-                    .Select(x => x.Name)
-                    .ToArray()
-            );
+            cbWindow.Items.AddRange(FftSharp.Window.GetWindowNames());
             cbWindow.SelectedIndex = cbWindow.Items.IndexOf("Cosine");
 
             // list colormaps
@@ -155,12 +145,7 @@ namespace FSKview
             if (spec is null)
                 return;
 
-            MethodInfo windowInfo = typeof(FftSharp.Window)
-                .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(x => x.Name == cbWindow.Text)
-                .First();
-
-            double[] window = (double[])windowInfo.Invoke(null, new object[] { spec.FftSize });
+            double[] window = FftSharp.Window.GetWindowByName(cbWindow.Text, spec.FftSize);
             spec.SetWindow(window);
         }
 
@@ -259,9 +244,10 @@ namespace FSKview
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - pxPaddingAboveBandLimit;
             int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, verticalReduction) + 10;
             int height = pxBot - pxTop;
+            int width = spec.Width + verticalScaleWidth;
 
-            using (Bitmap bmpFull = new Bitmap(spec.Width, spec.Height, PixelFormat.Format32bppPArgb))
-            using (Bitmap bmpCropped = new Bitmap(spec.Width, height, PixelFormat.Format32bppPArgb))
+            using (Bitmap bmpFull = new Bitmap(width, spec.Height, PixelFormat.Format32bppPArgb))
+            using (Bitmap bmpCropped = new Bitmap(width, height, PixelFormat.Format32bppPArgb))
             using (Graphics gfx = Graphics.FromImage(bmpCropped))
             {
                 // annotate a full-size spectrogram
@@ -271,6 +257,9 @@ namespace FSKview
 
                 // draw the full-size spectrogram on the cropped Bitmap
                 gfx.DrawImage(bmpFull, 0, -pxTop);
+
+                // draw the scale
+                gfx.DrawImage(bmpVericalScale, 0, spec.Width);
 
                 // decorate the cropped bitmap
                 string msg = $"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC";
