@@ -263,8 +263,6 @@ namespace FSKview
             using (Bitmap bmpFull = new Bitmap(spec.Width, spec.Height, PixelFormat.Format32bppPArgb))
             using (Bitmap bmpCropped = new Bitmap(spec.Width, height, PixelFormat.Format32bppPArgb))
             using (Graphics gfx = Graphics.FromImage(bmpCropped))
-            using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
-            using (var sfLowerLeft = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Near })
             {
                 // annotate a full-size spectrogram
                 Annotate.Spectrogram(spec, band, spots, bmpFull, bmpVericalScale,
@@ -275,8 +273,8 @@ namespace FSKview
                 gfx.DrawImage(bmpFull, 0, -pxTop);
 
                 // decorate the cropped bitmap
-                gfx.DrawString($"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC",
-                    font, Brushes.White, 3, height - 3, sfLowerLeft);
+                string msg = $"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC";
+                Annotate.Logo(gfx, msg, 3, height - 3);
 
                 // ensure output folders exist
                 string pathSaveWeb = $"{appPath}/grabs-web";

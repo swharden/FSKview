@@ -73,6 +73,15 @@ namespace FSKview
             }
         }
 
+        public static void Logo(Graphics gfx, string message, float x, float y)
+        {
+            using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
+            using (var sfLowerLeft = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Near })
+            {
+                DrawStringWithShadow(gfx, message, x, y, font, sfLowerLeft, Brushes.White, Brushes.Black);
+            }
+        }
+
         public static void DrawStringWithShadow(Graphics gfx, String str, float x, float y,
             Font font, StringFormat sf, Brush foreground, Brush background)
         {
