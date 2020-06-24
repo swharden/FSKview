@@ -66,7 +66,10 @@ namespace FSKview
                 bool is15bit = callsign.StartsWith("<");
                 callsign = callsign.Trim('<').Trim('>');
                 if (callsign == "...")
-                    throw new ArgumentException("empty callsign");
+                {
+                    isValid = false;
+                    return;
+                }
 
                 // index 6: grid square
                 grid = parts[6];
