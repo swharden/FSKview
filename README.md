@@ -5,7 +5,7 @@
 
 ### Download
 
-> **⚠️ WARNING:** FSKview is early in development and a click-to-run program is not yet provided. Developers interested in experimenting with this program can run it from its source code.
+> **⚠️ WARNING:** FSKview is early in development and a click-to-run program is not yet provided. Developers interested in experimenting with this program can run it from its source code using [Visual Studio Community](https://visualstudio.microsoft.com/downloads/) (Free)
 
 ### QRSS Grabber
 
