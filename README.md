@@ -5,7 +5,7 @@
 
 ### Download
 
-> **⚠️ WARNING:** FSKview is early in development and a click-to-run program is not yet provided.
+> **⚠️ WARNING:** FSKview is early in development and a click-to-run program is not yet provided. Developers interested in experimenting with this program can run it from its source code.
 
 ### QRSS Grabber
 
@@ -13,15 +13,15 @@
 
 FSKview can serve as a QRSS grabber, saving the latest grab every 10 minutes. Output images are stamped with the time and date as well as station information.
 
-![](dev/grabber-video.png)
+[![](dev/grabber-video.png)](https://youtu.be/gvbpA6TefgQ)
 
-This video shows my system listening to the 30m WSPR band over a 24 hour period. I don't have a great antenna, but it gets the job done well enough to communicate how this software works.
+This video shows my system listening to the 30m WSPR band over a 24 hour period. I don't have a great antenna, but it gets the job done well enough to demonstrate how this software works. The task manager is left open so you can see FSKview is not particularly resource intensive.
 
 ### Development Notes
 
 Signal analysis is performed by the [FftSharp](https://github.com/swharden/FftSharp) and [Spectrogram](https://github.com/swharden/Spectrogram) libraries and the sound card interface is provided by [NAudio](https://github.com/naudio/NAudio).
 
-[![](dev/simulation/simulation.png)](https://youtu.be/gvbpA6TefgQ)
+![](dev/simulation/simulation.png)
 
 Notes and experiments are in [/dev](dev)
 
