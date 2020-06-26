@@ -18,6 +18,7 @@ This video shows my system listening to the 30m WSPR band over a 24 hour period.
 
 <iframe src="https://www.youtube.com/embed/gvbpA6TefgQ" 
     frameborder="0" 
+    height="315"
     allowfullscreen
     style="top: 0; left: 0; width: 100%; height: 100%;"
 >
