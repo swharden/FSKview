@@ -1,14 +1,14 @@
 # WSPR
 
-This page is a collection of notes and resources related to WSPR transmission and reception.
+_This page is a collection of notes and resources related to WSPR transmission and reception._
+
+**[WSPR](https://en.wikipedia.org/wiki/WSPR_(amateur_radio_software)) is a digital radio communication protocol designed for weak signal transmission**. WSPR uses [frequency-shift keying](https://en.wikipedia.org/wiki/Frequency-shift_keying) and [forward error correction](https://en.wikipedia.org/wiki/Forward_error_correction) to reliably send data tens or thousands of miles with just a few milliwatts of power. WSPR encoding and decoding underlying [WSJT-X](https://physics.princeton.edu/pulsar/K1JT/wsjtx.html) is open-source, but implemented in C and FORTRAN.
 
 <dev align="center">
 
 ![](wspr-spectrogram-2x.png)
 
 </dev>
-
-[WSPR](https://en.wikipedia.org/wiki/WSPR_(amateur_radio_software)) is a digital radio communication protocol designed for weak signal transmission, and it uses [frequency-shift keying](https://en.wikipedia.org/wiki/Frequency-shift_keying) and [forward error correction](https://en.wikipedia.org/wiki/Forward_error_correction) to reliably send data tens or thousands of miles with just a few milliwatts of power. WsprSharp was originally implemented in Fortran as part of the [WSJT-X](https://physics.princeton.edu/pulsar/K1JT/wsjtx.html) project.
 
 ## Anatomy of a WSPR Transmission
 
@@ -253,13 +253,6 @@ Each symbol represents a frequency shift of `12000 / 8192 Hz` (`1.46Hz`) per sym
 
 ### Packing for export and storage
 For export, the 162 two-bit symbols are packed four to a byte, MSB first, into 41 locations. 
-
-
-## Screenshots
-
-![](screenshot.jpg)
-
-_This 10-minute spectrogram shows several WSPR transmissions above a few QRSS signals near 10.140 MHz. [QRSS Plus](https://swharden.com/qrss/plus) displays live spectrograms like this from around the world in real time._
 
 ## Resources
 * [WSPR](https://en.wikipedia.org/wiki/WSPR_(amateur_radio_software)) on Wikipedia
