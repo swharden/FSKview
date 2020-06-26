@@ -16,7 +16,12 @@ FSKview can serve as a QRSS grabber, saving the latest grab every 10 minutes. Ou
 
 This video shows my system listening to the 30m WSPR band over a 24 hour period. I don't have a great antenna, but it gets the job done well enough to demonstrate how this software works. The task manager is left open so you can see FSKview is not particularly resource intensive.
 
-{% include youtubePlayer.html id="gvbpA6TefgQ" %}
+<iframe src="https://www.youtube.com/embed/gvbpA6TefgQ" 
+    frameborder="0" 
+    allowfullscreen
+    style="top: 0; left: 0; width: 100%; height: 100%;"
+>
+</iframe>
 
 ## Developer Notes
 
