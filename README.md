@@ -1,5 +1,5 @@
 # FSKview
-**FSKview is a high-resolution spectrogram for viewing narrowband frequency-shift keyed (FSK) signals in real time.** FSKview can be used as a [QRSS](#QRSS) viewer, and if [WSTJ-X](https://physics.princeton.edu/pulsar/K1JT/wsjtx.html) is running FSKview can label [WSPR](doc/wspr.md) spots directly on the spectrogram in real time.
+**FSKview is a high-resolution spectrogram for viewing narrowband frequency-shift keyed (FSK) signals in real time.** FSKview can be used as a [QRSS](#QRSS) viewer, and if [WSTJ-X](https://physics.princeton.edu/pulsar/K1JT/wsjtx.html) is running FSKview can label [WSPR](dev/WSPR) spots directly on the spectrogram in real time.
 
 ![](dev/screenshot.png)
 
@@ -32,7 +32,7 @@ Notes and experiments are in [/dev](dev)
 QRSS is a type of continuous wave (CW) radio signal which uses frequency-shift keying (FSK). QRSS is ultra-narrowband (5Hz bandwidth) and ultra slow speed (about 3 letters per minute). The abbreviation QRSS is [Morse code slang](https://en.wikipedia.org/wiki/Q_code) for "transmit a lot slower".
 
 ### Notes
-* [Encoding and Decoding WSPR Messages](doc/wspr.md)
+* [Encoding and Decoding WSPR Messages](dev/WSPR)
 
 ### Links
 * [WSPR](https://en.wikipedia.org/wiki/WSPR_(amateur_radio_software)) on Wikipedia
