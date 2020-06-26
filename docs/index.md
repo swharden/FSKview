@@ -1,4 +1,3 @@
-# FSKview
 **FSKview is a high-resolution spectrogram for viewing narrowband frequency-shift keyed (FSK) signals in real time.** FSKview can be used as a [QRSS](#QRSS) viewer, and if [WSTJ-X](https://physics.princeton.edu/pulsar/K1JT/wsjtx.html) is running FSKview can label [WSPR](WSPR.md) spots directly on the spectrogram in real time.
 
 ![](screenshot.png)
@@ -17,7 +16,7 @@ FSKview can serve as a QRSS grabber, saving the latest grab every 10 minutes. Ou
 
 This video shows my system listening to the 30m WSPR band over a 24 hour period. I don't have a great antenna, but it gets the job done well enough to demonstrate how this software works. The task manager is left open so you can see FSKview is not particularly resource intensive.
 
-[![](grabber-video.png)](https://youtu.be/gvbpA6TefgQ)
+{% include youtubePlayer.html id="gvbpA6TefgQ" %}
 
 ## Developer Notes
 
