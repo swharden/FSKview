@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -209,7 +210,10 @@ namespace FSKview
                     var spot = new WsprSpot(streamReader.ReadLine());
                     bool isRecent = spot.ageSec <= 10 * 60;
                     if (spot.isValid && isRecent)
+                    {
+                        Debug.WriteLine($"AT {DateTime.UtcNow} ADDING SPOT WITH AGE {spot.ageSec} sec: {spot}");
                         spots.Add(spot);
+                    }
                 }
             }
 
@@ -222,11 +226,11 @@ namespace FSKview
             LoadWsprSpots();
 
             bool isTenMinute = DateTime.UtcNow.Minute % 10 == 0;
-            bool isWsprHadTime = DateTime.UtcNow.Second == 5; // gives WSPR time to analyze and save
+            bool isWsprHadTime = DateTime.UtcNow.Second > 2;
             bool isLastSaveOld = lastSavedMinute != DateTime.UtcNow.Minute;
             if (cbSave.Checked && isTenMinute && isWsprHadTime && isLastSaveOld)
             {
-                Console.WriteLine($"RESETTING AT {DateTime.UtcNow}");
+                Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
                 spec.RollReset();
                 SaveGrab();
             }
