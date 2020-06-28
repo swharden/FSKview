@@ -2,7 +2,8 @@
 
 FSKview is a high-resolution spectrogram for viewing frequency-shift keyed (FSK) signals in real time.
 
-**FSKview Website: https://swharden.com/software/FSKview** 👈 _start here_
+## FSKview Website
+* **https://swharden.com/software/FSKview** **👈 _start here_**
 
 ![](dev/screenshot.png)
 
