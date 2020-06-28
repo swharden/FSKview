@@ -228,11 +228,12 @@ namespace FSKview
             bool isTenMinute = DateTime.UtcNow.Minute % 10 == 0;
             bool isWsprHadTime = DateTime.UtcNow.Second > 2;
             bool isLastSaveOld = lastSavedMinute != DateTime.UtcNow.Minute;
-            if (cbSave.Checked && isTenMinute && isWsprHadTime && isLastSaveOld)
+            if (isTenMinute && isWsprHadTime && isLastSaveOld)
             {
                 Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
                 spec.RollReset();
-                SaveGrab();
+                if (cbSave.Checked)
+                    SaveGrab();
             }
         }
 
