@@ -30,6 +30,9 @@ namespace FSKview
         {
             InitializeComponent();
 
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            lblVersion.Text = $"FSKview {version.Major}.{version.Minor}.{version.Build}";
+
             // start in center of screen occupying 80% of its height
             Height = (int)(Screen.FromControl(this).Bounds.Height * .8);
             Location = new Point(
@@ -269,7 +272,11 @@ namespace FSKview
                 gfx.DrawImage(bmpVericalScale, 0, spec.Width);
 
                 // decorate the cropped bitmap
-                string msg = $"FSKview: Station AJ4VD (Gainesville, Florida, USA) {UtcDateStamp} {UtcTimeStamp} UTC";
+                string stationInformation = "(station.txt not found)";
+                if (File.Exists("station.txt"))
+                    stationInformation = File.ReadAllText("station.txt").Trim();
+
+                string msg = $"FSKview: {stationInformation} {UtcDateStamp} {UtcTimeStamp} UTC";
                 Annotate.Logo(gfx, msg, 3, height - 3);
 
                 // ensure output folders exist

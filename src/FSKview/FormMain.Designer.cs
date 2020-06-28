@@ -51,6 +51,7 @@
             this.audioControl1 = new FSKview.AudioControl();
             this.cbReduction = new System.Windows.Forms.CheckBox();
             this.cbBands = new System.Windows.Forms.CheckBox();
+            this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -211,7 +212,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus});
+            this.lblStatus,
+            this.lblVersion});
             this.statusStrip1.Location = new System.Drawing.Point(0, 466);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(999, 22);
@@ -221,8 +223,10 @@
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(118, 17);
+            this.lblStatus.Size = new System.Drawing.Size(835, 17);
+            this.lblStatus.Spring = true;
             this.lblStatus.Text = "toolStripStatusLabel1";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // timerUpdateSpectrogram
             // 
@@ -281,6 +285,12 @@
             this.cbBands.TabIndex = 23;
             this.cbBands.Text = "Bands";
             this.cbBands.UseVisualStyleBackColor = true;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(118, 17);
+            this.lblVersion.Text = "toolStripStatusLabel1";
             // 
             // FormMain
             // 
@@ -343,6 +353,7 @@
         private System.Windows.Forms.Timer timerWsprUpdate;
         private System.Windows.Forms.CheckBox cbReduction;
         private System.Windows.Forms.CheckBox cbBands;
+        private System.Windows.Forms.ToolStripStatusLabel lblVersion;
     }
 }
 
