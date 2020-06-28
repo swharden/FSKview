@@ -99,7 +99,7 @@ namespace FSKview
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
 
             // reset the spectrogram based on where we are in the 10 minute block
-            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 5) * 60 + DateTime.UtcNow.Second;
+            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
             double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
             int nextIndex = (int)(fracIntoTenMinute * spec.Width);
             spec.RollReset(nextIndex);
@@ -220,6 +220,7 @@ namespace FSKview
             Status($"Loaded {spots.Count} WSPR spots");
         }
 
+        private DateTime lastReset = DateTime.UtcNow;
         private void timerWsprUpdate_Tick(object sender, EventArgs e)
         {
             lblTime.Text = $"{UtcTimeStamp} UTC";
@@ -227,10 +228,11 @@ namespace FSKview
 
             bool isTenMinute = DateTime.UtcNow.Minute % 10 == 0;
             bool isWsprHadTime = DateTime.UtcNow.Second > 2;
-            bool isLastSaveOld = lastSavedMinute != DateTime.UtcNow.Minute;
-            if (isTenMinute && isWsprHadTime && isLastSaveOld)
+            bool isNotRecentlyReset = (DateTime.UtcNow - lastReset).Seconds > 60;
+            if (isTenMinute && isWsprHadTime && isNotRecentlyReset)
             {
                 Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
+                lastReset = DateTime.UtcNow;
                 spec.RollReset();
                 if (cbSave.Checked)
                     SaveGrab();
