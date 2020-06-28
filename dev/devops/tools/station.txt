@@ -1,0 +1,1 @@
+edit callsign details in station.txt
