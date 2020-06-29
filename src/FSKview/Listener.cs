@@ -48,7 +48,7 @@ namespace FSKview
             wvin?.Dispose();
         }
 
-        static double[] buffer;
+        private double[] buffer;
         private void OnNewAudioData(object sender, NAudio.Wave.WaveInEventArgs args)
         {
             int bytesPerSample = wvin.WaveFormat.BitsPerSample / 8;
@@ -66,7 +66,7 @@ namespace FSKview
             TotalSamples += newSampleCount;
         }
 
-        static bool shuttingDown = false;
+        private bool shuttingDown = false;
         public void AddBufferToAudioForever()
         {
             int lastSampleAnalyzed = 0;
