@@ -10,13 +10,14 @@ rmdir /s /q ..\..\src\FSKview\bin
 
 dotnet build --configuration Release ..\..\src\FSKview
 
-:: clera debug files
+:: clear old builds
 del ..\..\src\FSKview\bin\Release\*.xml
 del ..\..\src\FSKview\bin\Release\*.pdb
 del ..\..\src\FSKview\bin\Release\*.config
 
 :: copy tools into build folder
 copy tools\* ..\..\src\FSKview\bin\Release
+copy ..\..\..\QRSS-Uploader\src\QrssUploader\bin\Release\QrssUploader.exe ..\..\src\FSKview\bin\Release
 
 :: zip
 cd ..\..\src\FSKview\bin\
