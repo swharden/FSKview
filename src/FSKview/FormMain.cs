@@ -96,7 +96,7 @@ namespace FSKview
             int sampleRate = audioControl1.SampleRate;
             int fftSize = 1 << 14;
             int samplesInTenMinutes = sampleRate * 60 * 10;
-            int targetWidth = 800;
+            int targetWidth = 1000;
             int stepSize = samplesInTenMinutes / targetWidth;
 
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
@@ -133,7 +133,8 @@ namespace FSKview
             band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
             bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: verticalReduction);
             int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
-            int pxPaddingAboveBandLimit = 10 + 13 * 8;
+            int wsprSpotsAboveBandEdge = 16;
+            int pxPaddingAboveBandLimit = 10 + 13 * wsprSpotsAboveBandEdge;
             panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - pxPaddingAboveBandLimit);
         }
 
