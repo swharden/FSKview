@@ -25,6 +25,7 @@ namespace FSKview
         readonly int verticalScaleWidth = 130;
 
         private string UtcTimeStamp { get { return $"{DateTime.UtcNow.Hour:D2}:{DateTime.UtcNow.Minute:D2}:{DateTime.UtcNow.Second:D2}"; } }
+        private string UtcTimeStampNoSec { get { return $"{DateTime.UtcNow.Hour:D2}:{DateTime.UtcNow.Minute:D2}"; } }
         private string UtcDateStamp { get { return $"{DateTime.UtcNow.Year}-{DateTime.UtcNow.Month:D2}-{DateTime.UtcNow.Day:D2}"; } }
 
         public FormMain()
@@ -66,6 +67,8 @@ namespace FSKview
                 cbWspr.Enabled = false;
                 cbWspr.Checked = false;
             }
+
+            ActiveControl = cbColormap;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -237,7 +240,7 @@ namespace FSKview
             {
                 Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
                 spec.RollReset();
-                if (cbSave.Checked)
+                if (cbSave.Checked && cbSave.Enabled)
                     SaveGrab();
             }
         }
@@ -287,7 +290,7 @@ namespace FSKview
                 if (File.Exists("station.txt"))
                     stationInformation = File.ReadAllText("station.txt").Trim();
 
-                string msg = $"FSKview: {stationInformation} {UtcDateStamp} {UtcTimeStamp} UTC";
+                string msg = $"FSKview: {stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
                 Annotate.Logo(gfx, msg, 3, height - 3);
 
                 // ensure output folders exist
@@ -298,11 +301,37 @@ namespace FSKview
                 if (!Directory.Exists(pathSaveAll))
                     Directory.CreateDirectory(pathSaveAll);
 
-                // save the cropped bitmap
-                bmpCropped.Save($"{pathSaveWeb}/latest.png", ImageFormat.Png);
+                // save the cropped image for the web
+                ImageFormat imgFmt = ImageFormat.Bmp;
+                if (tbSaveFilename.Text.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                    imgFmt = ImageFormat.Png;
+                else if (tbSaveFilename.Text.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
+                    imgFmt = ImageFormat.Jpeg;
+                else if (tbSaveFilename.Text.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
+                    imgFmt = ImageFormat.Gif;
+                bmpCropped.Save($"{pathSaveWeb}/{tbSaveFilename.Text}", imgFmt);
+
+                // save the cropped bitmap for the log
                 bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
                 lastSavedMinute = DateTime.UtcNow.Minute;
+            }
+        }
+
+        private void tbSaveFilename_TextChanged(object sender, EventArgs e)
+        {
+            bool isPNG = tbSaveFilename.Text.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
+            bool isGIF = tbSaveFilename.Text.EndsWith(".gif", StringComparison.OrdinalIgnoreCase);
+            bool isJPG = tbSaveFilename.Text.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase);
+            bool isBMP = tbSaveFilename.Text.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase);
+            bool isValidFileName = (isPNG || isGIF || isJPG || isBMP) && tbSaveFilename.Text.Length > 4;
+            if (isValidFileName)
+            {
+                cbSave.Enabled = true;
+            }
+            else
+            {
+                cbSave.Enabled = false;
             }
         }
     }
