@@ -140,8 +140,9 @@ namespace FSKview
                 return;
 
             spec.Add(audioControl1.listener.GetNewAudio());
+            var spotsToShow = spots.Where(x => x.ageSec < (10 * 60)).ToList();
             Annotate.Spectrogram(
-                spec, band, spots,
+                spec, band, spotsToShow,
                 bmpSpectrogram, bmpVericalScale,
                 (double)nudBrightness.Value, verticalReduction,
                 drawBandLines: cbBands.Checked,
@@ -208,10 +209,9 @@ namespace FSKview
                 while (!streamReader.EndOfStream)
                 {
                     var spot = new WsprSpot(streamReader.ReadLine());
-                    bool isRecent = spot.ageSec <= 10 * 60;
+                    bool isRecent = spot.ageSec <= 30 * 60; // load spots within the last 15 min (apply a more tighter display rule later)
                     if (spot.isValid && isRecent)
                     {
-                        Debug.WriteLine($"AT {DateTime.UtcNow} ADDING SPOT WITH AGE {spot.ageSec} sec: {spot}");
                         spots.Add(spot);
                     }
                 }
@@ -220,19 +220,22 @@ namespace FSKview
             Status($"Loaded {spots.Count} WSPR spots");
         }
 
-        private DateTime lastReset = DateTime.UtcNow;
+        string stampLast;
         private void timerWsprUpdate_Tick(object sender, EventArgs e)
         {
+            string stampNow = $"{DateTime.UtcNow.Hour}{DateTime.UtcNow.Minute}{DateTime.UtcNow.Second}";
+            if (stampNow == stampLast)
+                return;
+
+            stampLast = stampNow;
             lblTime.Text = $"{UtcTimeStamp} UTC";
             LoadWsprSpots();
 
             bool isTenMinute = DateTime.UtcNow.Minute % 10 == 0;
-            bool isWsprHadTime = DateTime.UtcNow.Second > 2;
-            bool isNotRecentlyReset = (DateTime.UtcNow - lastReset).Seconds > 60;
-            if (isTenMinute && isWsprHadTime && isNotRecentlyReset)
+            bool isWsprHadTime = DateTime.UtcNow.Second == 2;
+            if (isTenMinute && isWsprHadTime)
             {
                 Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
-                lastReset = DateTime.UtcNow;
                 spec.RollReset();
                 if (cbSave.Checked)
                     SaveGrab();
@@ -268,7 +271,8 @@ namespace FSKview
             using (Graphics gfx = Graphics.FromImage(bmpCropped))
             {
                 // annotate a full-size spectrogram
-                Annotate.Spectrogram(spec, band, spots, bmpFull, bmpVericalScale,
+                var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
+                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale,
                                     (double)nudBrightness.Value, verticalReduction,
                                     drawBandLines: false, roll: false);
 
