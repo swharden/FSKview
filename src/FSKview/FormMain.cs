@@ -140,7 +140,7 @@ namespace FSKview
                 return;
 
             spec.Add(audioControl1.listener.GetNewAudio());
-            var spotsToShow = spots.Where(x => x.ageSec < (10 * 60)).ToList();
+            var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
             Annotate.Spectrogram(
                 spec, band, spotsToShow,
                 bmpSpectrogram, bmpVericalScale,
