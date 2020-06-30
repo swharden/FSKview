@@ -260,12 +260,13 @@ namespace FSKview
             }
         }
 
-        int lastSavedMinute = -1;
         private void SaveGrab()
         {
-            int pxPaddingAboveBandLimit = 10 + 13 * 8;
+            int wsprSpotsAboveBandEdge = 16;
+            int pxBelowBandEdge = 150;
+            int pxPaddingAboveBandLimit = 10 + 13 * wsprSpotsAboveBandEdge;
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - pxPaddingAboveBandLimit;
-            int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, verticalReduction) + 10;
+            int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, verticalReduction) + pxBelowBandEdge;
             int height = pxBot - pxTop;
             int width = spec.Width + verticalScaleWidth;
 
@@ -281,9 +282,6 @@ namespace FSKview
 
                 // draw the full-size spectrogram on the cropped Bitmap
                 gfx.DrawImage(bmpFull, 0, -pxTop);
-
-                // draw the scale
-                gfx.DrawImage(bmpVericalScale, 0, spec.Width);
 
                 // decorate the cropped bitmap
                 string stationInformation = "(station.txt not found)";
@@ -314,7 +312,6 @@ namespace FSKview
                 // save the cropped bitmap for the log
                 bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
-                lastSavedMinute = DateTime.UtcNow.Minute;
             }
         }
 
