@@ -256,7 +256,7 @@ namespace FSKview
             if (cbSave.Checked)
             {
                 SaveGrab();
-                System.Diagnostics.Process.Start("explorer.exe", $"\"{appPath}\"");
+                Process.Start("explorer.exe", $"\"{appPath}\"");
             }
         }
 
