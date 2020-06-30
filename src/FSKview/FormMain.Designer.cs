@@ -49,10 +49,10 @@
             this.timerUpdateSpectrogram = new System.Windows.Forms.Timer(this.components);
             this.cbSave = new System.Windows.Forms.CheckBox();
             this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
-            this.audioControl1 = new FSKview.AudioControl();
             this.cbReduction = new System.Windows.Forms.CheckBox();
             this.cbBands = new System.Windows.Forms.CheckBox();
             this.tbSaveFilename = new System.Windows.Forms.TextBox();
+            this.audioControl1 = new FSKview.AudioControl();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -258,16 +258,6 @@
             this.timerWsprUpdate.Interval = 500;
             this.timerWsprUpdate.Tick += new System.EventHandler(this.timerWsprUpdate_Tick);
             // 
-            // audioControl1
-            // 
-            this.audioControl1.Location = new System.Drawing.Point(9, 9);
-            this.audioControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.audioControl1.Name = "audioControl1";
-            this.audioControl1.SampleRate = 6000;
-            this.audioControl1.Size = new System.Drawing.Size(161, 41);
-            this.audioControl1.TabIndex = 3;
-            this.audioControl1.InputDeviceChanged += new System.EventHandler(this.audioControl1_InputDeviceChanged);
-            // 
             // cbReduction
             // 
             this.cbReduction.AutoSize = true;
@@ -301,8 +291,18 @@
             this.tbSaveFilename.Name = "tbSaveFilename";
             this.tbSaveFilename.Size = new System.Drawing.Size(121, 20);
             this.tbSaveFilename.TabIndex = 1;
-            this.tbSaveFilename.Text = "latest.jpg";
+            this.tbSaveFilename.Text = "latest.png";
             this.tbSaveFilename.TextChanged += new System.EventHandler(this.tbSaveFilename_TextChanged);
+            // 
+            // audioControl1
+            // 
+            this.audioControl1.Location = new System.Drawing.Point(9, 9);
+            this.audioControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.audioControl1.Name = "audioControl1";
+            this.audioControl1.SampleRate = 6000;
+            this.audioControl1.Size = new System.Drawing.Size(161, 41);
+            this.audioControl1.TabIndex = 3;
+            this.audioControl1.InputDeviceChanged += new System.EventHandler(this.audioControl1_InputDeviceChanged);
             // 
             // FormMain
             // 
