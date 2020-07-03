@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Listener.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WsprBand.cs" />
     <Compile Include="WsprBands.cs" />
