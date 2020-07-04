@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace FSKview
 {
     public class ProgramSettings
     {
-        public string Version;
+        public string version;
 
         public int audioDeviceIndex = 0;
         public string window = "Cosine";
@@ -27,7 +28,7 @@ namespace FSKview
         public int grabSavePxBelow = 321;
         public int verticalReduction = 2;
         public int freqDisplayOffset = 0;
-        public string grabMessage = "station information not set";
+        public string stationInformation = "station information not set";
 
         public string ftpServerAddress = "ftp://ftp.qsl.net";
         public string ftpRemoteSubfolder = "/";
@@ -38,7 +39,10 @@ namespace FSKview
         public ProgramSettings()
         {
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            Version = $"{version.Major}.{version.Minor}";
+            this.version = $"{version.Major}.{version.Minor}";
+
+            string predictedWsprFilePath = Path.GetFullPath(Application.LocalUserAppDataPath + "../../../../WSJT-X/ALL_WSPR.TXT");
+            wsprLogFilePath = File.Exists(predictedWsprFilePath) ? predictedWsprFilePath : null;
         }
 
         public static ProgramSettings Load(string filePath = "settings.xml")
@@ -50,7 +54,7 @@ namespace FSKview
             using (StreamReader file = new StreamReader(filePath))
             {
                 ProgramSettings loadedConfig = (ProgramSettings)reader.Deserialize(file);
-                if (loadedConfig.Version == expectedVersion)
+                if (loadedConfig.version == expectedVersion)
                     return loadedConfig;
                 else
                     throw new InvalidOperationException("incompatible config file version");

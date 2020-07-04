@@ -67,6 +67,8 @@
             this.cbVerticalReduction = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbStationInfo = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
@@ -468,9 +470,9 @@
             this.cbVerticalReduction.AutoSize = true;
             this.cbVerticalReduction.Location = new System.Drawing.Point(403, 96);
             this.cbVerticalReduction.Name = "cbVerticalReduction";
-            this.cbVerticalReduction.Size = new System.Drawing.Size(72, 17);
+            this.cbVerticalReduction.Size = new System.Drawing.Size(37, 17);
             this.cbVerticalReduction.TabIndex = 58;
-            this.cbVerticalReduction.Text = "enable 2x";
+            this.cbVerticalReduction.Text = "2x";
             this.cbVerticalReduction.UseVisualStyleBackColor = true;
             // 
             // label21
@@ -491,11 +493,29 @@
             this.label22.TabIndex = 60;
             this.label22.Text = "Shrinks output image vertically by 2X (applying a local max filter)";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(227, 308);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 61;
+            this.label2.Text = "Station Information";
+            // 
+            // tbStationInfo
+            // 
+            this.tbStationInfo.Location = new System.Drawing.Point(230, 324);
+            this.tbStationInfo.Name = "tbStationInfo";
+            this.tbStationInfo.Size = new System.Drawing.Size(584, 20);
+            this.tbStationInfo.TabIndex = 62;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 432);
+            this.Controls.Add(this.tbStationInfo);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.cbVerticalReduction);
@@ -577,5 +597,7 @@
         private System.Windows.Forms.CheckBox cbVerticalReduction;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbStationInfo;
     }
 }

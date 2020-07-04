@@ -30,6 +30,7 @@ namespace FSKview
             cbShowFreqScale.Checked = settings.showScaleOnAllGrabs;
             nudPxAbove.Value = settings.grabSavePxAbove;
             nudPxBelow.Value = settings.grabSavePxBelow;
+            tbStationInfo.Text = settings.stationInformation;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace FSKview
             settings.showScaleOnAllGrabs = cbShowFreqScale.Checked;
             settings.grabSavePxAbove = (int)nudPxAbove.Value;
             settings.grabSavePxBelow = (int)nudPxBelow.Value;
+            settings.stationInformation = tbStationInfo.Text;
             settings.Save();
             Close();
         }

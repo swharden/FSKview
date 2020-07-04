@@ -37,10 +37,17 @@ namespace FSKview
                 .Select(x => NAudio.Wave.WaveIn.GetCapabilities(x).ProductName)
                 .ToArray());
 
-            if (comboBox1.Items.Count > 0)
-                comboBox1.SelectedIndex = 0;
-            else
+            if (comboBox1.Items.Count == 0)
                 MessageBox.Show("No audio input devices were found.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void SelectDevice(int deviceIndex)
+        {
+            if (deviceIndex > comboBox1.Items.Count - 1)
+                deviceIndex = comboBox1.Items.Count - 1;
+            if (deviceIndex < 0)
+                deviceIndex = 0;
+            comboBox1.SelectedIndex = deviceIndex;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

@@ -20,7 +20,6 @@ namespace FSKview
 
         readonly Spectrogram.Colormap[] cmaps;
         WsprBand band;
-        string wsprLogFilePath = null;
         readonly List<WsprSpot> spots = new List<WsprSpot>();
         readonly string appPath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
@@ -48,33 +47,19 @@ namespace FSKview
                 x: Screen.FromControl(this).Bounds.Width / 2 - Width / 2,
                 y: Screen.FromControl(this).Bounds.Height / 2 - Height / 2);
 
-            // list window functions
+            // pre-populate listboxes
             cbWindow.Items.AddRange(FftSharp.Window.GetWindowNames());
-            cbWindow.SelectedIndex = cbWindow.Items.IndexOf("Cosine");
-
-            // list colormaps
             cmaps = Spectrogram.Colormap.GetColormaps();
             cbColormap.Items.AddRange(cmaps.Select(x => x.Name).ToArray());
-            cbColormap.SelectedIndex = cbColormap.Items.IndexOf("Viridis");
-
-            // list WSPR bands
             cbDialFreq.Items.AddRange(WsprBands.GetBands().Select(x => $"{x.name}: {x.dialFreq:N0} Hz").ToArray());
-            cbDialFreq.SelectedIndex = 5;
 
-            // predict default WSPR log file path and use it if it exists
-            string predictedWsprFilePath = Path.GetFullPath(Application.LocalUserAppDataPath + "../../../../WSJT-X/ALL_WSPR.TXT");
-            if (File.Exists(predictedWsprFilePath))
-            {
-                wsprLogFilePath = predictedWsprFilePath;
-                cbWspr.Enabled = true;
-                cbWspr.Checked = true;
-            }
-            else
-            {
-                cbWspr.Enabled = false;
-                cbWspr.Checked = false;
-            }
+            // pre-select items based on saved settings
+            audioControl1.SelectDevice(settings.audioDeviceIndex);
+            cbWindow.SelectedIndex = cbWindow.Items.IndexOf(settings.window);
+            cbColormap.SelectedIndex = cbColormap.Items.IndexOf(settings.colormap);
+            cbDialFreq.SelectedIndex = settings.wsprBandIndex;
 
+            // select on load
             ActiveControl = cbColormap;
         }
 
@@ -104,7 +89,7 @@ namespace FSKview
             int sampleRate = audioControl1.SampleRate;
             int fftSize = 1 << 14;
             int samplesInTenMinutes = sampleRate * 60 * 10;
-            int targetWidth = 1000;
+            int targetWidth = settings.targetWidth;
             int stepSize = samplesInTenMinutes / targetWidth;
 
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
@@ -135,7 +120,7 @@ namespace FSKview
 
         private void UpdateVerticalScale()
         {
-            if (spec is null)
+            if (spec is null || cbDialFreq.SelectedIndex < 0)
                 return;
 
             band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
@@ -186,23 +171,34 @@ namespace FSKview
 
         private void btnConfigure_Click(object sender, EventArgs e)
         {
+            int oldTargetWidth = settings.targetWidth;
+            int oldReduction = settings.verticalReduction;
+
             new FormSettings(settings).ShowDialog();
+
+            bool targetWidthChanged = (oldTargetWidth != settings.targetWidth);
+            bool reductionChanged = (oldReduction != settings.verticalReduction);
+            if (targetWidthChanged || reductionChanged)
+                ResetSpectrogram();
         }
 
         DateTime wsprLogLastReadModifiedTime;
         private void LoadWsprSpots()
         {
-            if (wsprLogFilePath is null)
+            if (settings.wsprLogFilePath is null)
                 return;
 
-            var lastModifiedTime = File.GetLastWriteTime(wsprLogFilePath);
+            if (!File.Exists(settings.wsprLogFilePath))
+                return;
+
+            var lastModifiedTime = File.GetLastWriteTime(settings.wsprLogFilePath);
             if (lastModifiedTime == wsprLogLastReadModifiedTime)
                 return;
             else
                 wsprLogLastReadModifiedTime = lastModifiedTime;
 
             spots.Clear();
-            using (var stream = new FileStream(wsprLogFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var stream = new FileStream(settings.wsprLogFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var streamReader = new StreamReader(stream))
             {
                 while (!streamReader.EndOfStream)
@@ -272,11 +268,7 @@ namespace FSKview
                 gfx.DrawImage(bmpFull, 0, -pxTop);
 
                 // decorate the cropped bitmap
-                string stationInformation = "(station.txt not found)";
-                if (File.Exists("station.txt"))
-                    stationInformation = File.ReadAllText("station.txt").Trim();
-
-                string msg = $"FSKview: {stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
+                string msg = $"FSKview: {settings.stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
                 Annotate.Logo(gfx, msg, 3, height - 3);
 
                 // ensure output folders exist
@@ -305,7 +297,7 @@ namespace FSKview
 
         private void nudBrightness_ValueChanged(object sender, EventArgs e)
         {
-            settings.brightness = (int)nudBrightness.Value;
+            settings.brightness = (double)nudBrightness.Value;
             settings.Save();
         }
 
