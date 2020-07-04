@@ -55,6 +55,9 @@ namespace FSKview
                                                 .OrderBy(x => x.strength).GroupBy(x => x.callsign).Select(x => x.Last()) // only strongest
                                                 .OrderBy(x => x.frequencyHz).Reverse().ToArray(); // top to bottom
 
+                    if (settings.isWsprEnabled == false)
+                        segmentSpots = new WsprSpot[0];
+
                     for (int spotIndex = 0; spotIndex < segmentSpots.Length; spotIndex++)
                     {
                         WsprSpot spot = segmentSpots[spotIndex];

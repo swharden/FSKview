@@ -58,6 +58,7 @@ namespace FSKview
             cbWindow.SelectedIndex = cbWindow.Items.IndexOf(settings.window);
             cbColormap.SelectedIndex = cbColormap.Items.IndexOf(settings.colormap);
             cbDialFreq.SelectedIndex = settings.wsprBandIndex;
+            cbWspr.Checked = settings.isWsprEnabled;
 
             // select on load
             ActiveControl = cbColormap;
