@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace FSKview
@@ -23,13 +24,14 @@ namespace FSKview
         public int targetWidth = 1000;
         public int grabSavePxAbove = 123;
         public int grabSavePxBelow = 321;
+        public int verticalReduction = 2;
+        public int freqDisplayOffset = 0;
         public string grabMessage = "station information not set";
 
         public string ftpServerAddress = "ftp://ftp.qsl.net";
         public string ftpRemoteSubfolder = "/";
         public string ftpUsername = "sampleUsername";
-        public string ftpPassword = "do not manually edit passwords in this file";
-        public string ftpPasswordObfuscated = "c2FtcGxlUGFzc3dvcmQ";
+        public string ftpObfuscatedPassword = "c2FtcGxlUGFzc3dvcmQ";
         public int ftpDelaySec = 15;
 
         public ProgramSettings()
@@ -71,6 +73,18 @@ namespace FSKview
                 xmlSerializer.Serialize(textWriter, this);
                 return textWriter.ToString();
             }
+        }
+
+        public string Obfuscate(string message)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(message)).Trim('=');
+        }
+
+        public string DeObfuscate(string obfuscated)
+        {
+            while (obfuscated.Length % 4 != 0)
+                obfuscated += "=";
+            return Encoding.UTF8.GetString(Convert.FromBase64String(obfuscated));
         }
     }
 }

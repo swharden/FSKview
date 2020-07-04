@@ -13,12 +13,12 @@ namespace FSKview
         public static void Spectrogram(
             Spectrogram.Spectrogram spec, WsprBand band, List<WsprSpot> spots,
             Bitmap bmpSpectrogram, Bitmap bmpVericalScale,
-            double brightness, int verticalReduction,
-            bool drawBandLines, bool roll)
+            bool drawBandLines, bool roll, ProgramSettings settings)
         {
             using (Graphics gfx = Graphics.FromImage(bmpSpectrogram))
-            using (Bitmap bmpIndexed = spec.GetBitmapMax(brightness, reduction: verticalReduction, roll: true))
+            using (Bitmap bmpIndexed = spec.GetBitmapMax(settings.brightness, reduction: settings.verticalReduction, roll: true))
             using (Pen bandEdgePen = new Pen(Color.White) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
+            using (Pen grabEdgePen = new Pen(Color.Yellow) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
             using (Pen rollPen = new Pen(Color.White))
             using (var font = new Font("consolas", 10, FontStyle.Bold))
             using (var sfMiddleCenter = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center })
@@ -28,14 +28,18 @@ namespace FSKview
                 gfx.DrawImage(bmpIndexed, 0, 0);
                 gfx.DrawImage(bmpVericalScale, spec.Width, 0);
 
-                int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
-                int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, verticalReduction);
-                int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, verticalReduction);
+                int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction);
+                int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, settings.verticalReduction);
+                int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, settings.verticalReduction);
+                int grabTopPx = wsprBandTopPx - settings.grabSavePxAbove;
+                int grabBotPx = qrssBandBottomPx + settings.grabSavePxBelow;
                 if (drawBandLines)
                 {
                     gfx.DrawLine(bandEdgePen, 0, wsprBandTopPx, spec.Width, wsprBandTopPx);
                     gfx.DrawLine(bandEdgePen, 0, wsprBandBottomPx, spec.Width, wsprBandBottomPx);
                     gfx.DrawLine(bandEdgePen, 0, qrssBandBottomPx, spec.Width, qrssBandBottomPx);
+                    gfx.DrawLine(grabEdgePen, 0, grabTopPx, spec.Width, grabTopPx);
+                    gfx.DrawLine(grabEdgePen, 0, grabBotPx, spec.Width, grabBotPx);
                 }
 
                 if (roll)
@@ -57,7 +61,7 @@ namespace FSKview
                         WsprSpot spot = segmentSpots[spotIndex];
 
                         int r = 7;
-                        int y = spec.PixelY(spot.frequencyHz - band.dialFreq, verticalReduction);
+                        int y = spec.PixelY(spot.frequencyHz - band.dialFreq, settings.verticalReduction);
 
                         // draw the marker
                         int xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);

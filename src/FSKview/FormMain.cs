@@ -16,6 +16,8 @@ namespace FSKview
 {
     public partial class FormMain : Form
     {
+        readonly ProgramSettings settings;
+
         readonly Spectrogram.Colormap[] cmaps;
         WsprBand band;
         string wsprLogFilePath = null;
@@ -31,6 +33,11 @@ namespace FSKview
         public FormMain()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
+            settings = File.Exists("settings.xml") ? ProgramSettings.Load("settings.xml") : new ProgramSettings();
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             lblVersion.Text = $"FSKview {version.Major}.{version.Minor}.{version.Build}";
@@ -89,7 +96,6 @@ namespace FSKview
         Spectrogram.Spectrogram spec;
         Bitmap bmpVericalScale;
         Bitmap bmpSpectrogram;
-        int verticalReduction = 2;
 
         private void ResetSpectrogram()
         {
@@ -110,7 +116,7 @@ namespace FSKview
             // resize the image based on the spectrogram dimensions
             bmpSpectrogram = new Bitmap(
                 width: spec.Width + verticalScaleWidth,
-                height: spec.Height / verticalReduction,
+                height: spec.Height / settings.verticalReduction,
                 format: PixelFormat.Format32bppPArgb);
             pictureBox1.Image = bmpSpectrogram;
             pictureBox1.Size = pictureBox1.Image.Size;
@@ -131,11 +137,9 @@ namespace FSKview
                 return;
 
             band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
-            bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: verticalReduction);
-            int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction);
-            int wsprSpotsAboveBandEdge = 16;
-            int pxPaddingAboveBandLimit = 10 + 13 * wsprSpotsAboveBandEdge;
-            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - pxPaddingAboveBandLimit);
+            bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: settings.verticalReduction);
+            int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction);
+            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - settings.grabSavePxAbove);
         }
 
         private void timerUpdateSpectrogram_Tick(object sender, EventArgs e)
@@ -145,12 +149,7 @@ namespace FSKview
 
             spec.Add(audioControl1.listener.GetNewAudio());
             var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-            Annotate.Spectrogram(
-                spec, band, spotsToShow,
-                bmpSpectrogram, bmpVericalScale,
-                (double)nudBrightness.Value, verticalReduction,
-                drawBandLines: cbBands.Checked,
-                roll: true);
+            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, true, settings);
             pictureBox1.Refresh();
             GC.Collect();
         }
@@ -174,24 +173,9 @@ namespace FSKview
             UpdateVerticalScale();
         }
 
-        private void btnConfigureWspr_Click(object sender, EventArgs e)
+        private void btnConfigure_Click(object sender, EventArgs e)
         {
-            OpenFileDialog diag = new OpenFileDialog();
-            diag.Filter = "WSPR Log Files (*.txt)|*.txt";
-            diag.FileName = "ALL_WSPR.TXT";
-            diag.Title = "Locate WSPR Log File";
-            if (diag.ShowDialog() == DialogResult.OK)
-            {
-                wsprLogFilePath = diag.FileName;
-                cbWspr.Enabled = true;
-                cbWspr.Checked = true;
-            }
-            else
-            {
-                wsprLogFilePath = null;
-                cbWspr.Enabled = false;
-            }
-            wsprLogLastReadModifiedTime = new DateTime(0);
+            new FormSettings(settings).ShowDialog();
         }
 
         DateTime wsprLogLastReadModifiedTime;
@@ -246,12 +230,6 @@ namespace FSKview
             }
         }
 
-        private void cbReduction_CheckedChanged(object sender, EventArgs e)
-        {
-            verticalReduction = (cbReduction.Checked) ? 2 : 1;
-            ResetSpectrogram();
-        }
-
         private void cbSave_CheckedChanged(object sender, EventArgs e)
         {
             if (cbSave.Checked)
@@ -263,11 +241,8 @@ namespace FSKview
 
         private void SaveGrab()
         {
-            int wsprSpotsAboveBandEdge = 16;
-            int pxBelowBandEdge = 150;
-            int pxPaddingAboveBandLimit = 10 + 13 * wsprSpotsAboveBandEdge;
-            int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, verticalReduction) - pxPaddingAboveBandLimit;
-            int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, verticalReduction) + pxBelowBandEdge;
+            int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction) - settings.grabSavePxAbove;
+            int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, settings.verticalReduction) + settings.grabSavePxBelow;
             int height = pxBot - pxTop;
             int width = spec.Width + verticalScaleWidth;
 
@@ -277,9 +252,7 @@ namespace FSKview
             {
                 // annotate a full-size spectrogram
                 var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale,
-                                    (double)nudBrightness.Value, verticalReduction,
-                                    drawBandLines: false, roll: false);
+                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale, false, false, settings);
 
                 // draw the full-size spectrogram on the cropped Bitmap
                 gfx.DrawImage(bmpFull, 0, -pxTop);
@@ -302,34 +275,17 @@ namespace FSKview
 
                 // save the cropped image for the web
                 ImageFormat imgFmt = ImageFormat.Bmp;
-                if (tbSaveFilename.Text.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                if (settings.grabFileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                     imgFmt = ImageFormat.Png;
-                else if (tbSaveFilename.Text.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
+                else if (settings.grabFileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase))
                     imgFmt = ImageFormat.Jpeg;
-                else if (tbSaveFilename.Text.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
+                else if (settings.grabFileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                     imgFmt = ImageFormat.Gif;
-                bmpCropped.Save($"{pathSaveWeb}/{tbSaveFilename.Text}", imgFmt);
+                bmpCropped.Save($"{pathSaveWeb}/{settings.grabFileName}", imgFmt);
 
                 // save the cropped bitmap for the log
                 bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
-            }
-        }
-
-        private void tbSaveFilename_TextChanged(object sender, EventArgs e)
-        {
-            bool isPNG = tbSaveFilename.Text.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
-            bool isGIF = tbSaveFilename.Text.EndsWith(".gif", StringComparison.OrdinalIgnoreCase);
-            bool isJPG = tbSaveFilename.Text.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase);
-            bool isBMP = tbSaveFilename.Text.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase);
-            bool isValidFileName = (isPNG || isGIF || isJPG || isBMP) && tbSaveFilename.Text.Length > 4;
-            if (isValidFileName)
-            {
-                cbSave.Enabled = true;
-            }
-            else
-            {
-                cbSave.Enabled = false;
             }
         }
     }

@@ -25,6 +25,10 @@ namespace FSKview
         public AudioControl()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
             pictureBox2.Width = 0;
 
             comboBox1.Items.AddRange(Enumerable

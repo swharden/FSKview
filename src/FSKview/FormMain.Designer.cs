@@ -39,7 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
-            this.btnConfigureWspr = new System.Windows.Forms.Button();
+            this.btnConfigure = new System.Windows.Forms.Button();
             this.cbWspr = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,9 +49,7 @@
             this.timerUpdateSpectrogram = new System.Windows.Forms.Timer(this.components);
             this.cbSave = new System.Windows.Forms.CheckBox();
             this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
-            this.cbReduction = new System.Windows.Forms.CheckBox();
             this.cbBands = new System.Windows.Forms.CheckBox();
-            this.tbSaveFilename = new System.Windows.Forms.TextBox();
             this.audioControl1 = new FSKview.AudioControl();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
@@ -166,22 +164,22 @@
             this.lblTime.Text = "23:17:00 UTC";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btnConfigureWspr
+            // btnConfigure
             // 
-            this.btnConfigureWspr.Location = new System.Drawing.Point(613, 25);
-            this.btnConfigureWspr.Name = "btnConfigureWspr";
-            this.btnConfigureWspr.Size = new System.Drawing.Size(75, 22);
-            this.btnConfigureWspr.TabIndex = 15;
-            this.btnConfigureWspr.Text = "Configure";
-            this.btnConfigureWspr.UseVisualStyleBackColor = true;
-            this.btnConfigureWspr.Click += new System.EventHandler(this.btnConfigureWspr_Click);
+            this.btnConfigure.Location = new System.Drawing.Point(684, 22);
+            this.btnConfigure.Name = "btnConfigure";
+            this.btnConfigure.Size = new System.Drawing.Size(75, 22);
+            this.btnConfigure.TabIndex = 15;
+            this.btnConfigure.Text = "Configure";
+            this.btnConfigure.UseVisualStyleBackColor = true;
+            this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
             // 
             // cbWspr
             // 
             this.cbWspr.AutoSize = true;
             this.cbWspr.Checked = true;
             this.cbWspr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbWspr.Location = new System.Drawing.Point(614, 9);
+            this.cbWspr.Location = new System.Drawing.Point(685, 6);
             this.cbWspr.Name = "cbWspr";
             this.cbWspr.Size = new System.Drawing.Size(59, 17);
             this.cbWspr.TabIndex = 17;
@@ -244,11 +242,11 @@
             // cbSave
             // 
             this.cbSave.AutoSize = true;
-            this.cbSave.Location = new System.Drawing.Point(772, 8);
+            this.cbSave.Location = new System.Drawing.Point(613, 27);
             this.cbSave.Name = "cbSave";
-            this.cbSave.Size = new System.Drawing.Size(82, 17);
+            this.cbSave.Size = new System.Drawing.Size(71, 17);
             this.cbSave.TabIndex = 21;
-            this.cbSave.Text = "Save Grabs";
+            this.cbSave.Text = "Autosave";
             this.cbSave.UseVisualStyleBackColor = true;
             this.cbSave.CheckedChanged += new System.EventHandler(this.cbSave_CheckedChanged);
             // 
@@ -258,41 +256,17 @@
             this.timerWsprUpdate.Interval = 500;
             this.timerWsprUpdate.Tick += new System.EventHandler(this.timerWsprUpdate_Tick);
             // 
-            // cbReduction
-            // 
-            this.cbReduction.AutoSize = true;
-            this.cbReduction.Checked = true;
-            this.cbReduction.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReduction.Location = new System.Drawing.Point(694, 27);
-            this.cbReduction.Name = "cbReduction";
-            this.cbReduction.Size = new System.Drawing.Size(72, 17);
-            this.cbReduction.TabIndex = 22;
-            this.cbReduction.Text = "Compress";
-            this.cbReduction.UseVisualStyleBackColor = true;
-            this.cbReduction.CheckedChanged += new System.EventHandler(this.cbReduction_CheckedChanged);
-            // 
             // cbBands
             // 
             this.cbBands.AutoSize = true;
             this.cbBands.Checked = true;
             this.cbBands.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBands.Location = new System.Drawing.Point(694, 8);
+            this.cbBands.Location = new System.Drawing.Point(613, 6);
             this.cbBands.Name = "cbBands";
             this.cbBands.Size = new System.Drawing.Size(56, 17);
             this.cbBands.TabIndex = 23;
             this.cbBands.Text = "Bands";
             this.cbBands.UseVisualStyleBackColor = true;
-            // 
-            // tbSaveFilename
-            // 
-            this.tbSaveFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSaveFilename.Location = new System.Drawing.Point(772, 26);
-            this.tbSaveFilename.Name = "tbSaveFilename";
-            this.tbSaveFilename.Size = new System.Drawing.Size(121, 20);
-            this.tbSaveFilename.TabIndex = 1;
-            this.tbSaveFilename.Text = "latest.png";
-            this.tbSaveFilename.TextChanged += new System.EventHandler(this.tbSaveFilename_TextChanged);
             // 
             // audioControl1
             // 
@@ -309,8 +283,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 488);
-            this.Controls.Add(this.tbSaveFilename);
-            this.Controls.Add(this.cbReduction);
             this.Controls.Add(this.cbSave);
             this.Controls.Add(this.cbBands);
             this.Controls.Add(this.statusStrip1);
@@ -322,7 +294,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbWspr);
-            this.Controls.Add(this.btnConfigureWspr);
+            this.Controls.Add(this.btnConfigure);
             this.Controls.Add(this.cbDialFreq);
             this.Controls.Add(this.cbWindow);
             this.Controls.Add(this.cbColormap);
@@ -355,7 +327,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.Button btnConfigureWspr;
+        private System.Windows.Forms.Button btnConfigure;
         private System.Windows.Forms.CheckBox cbWspr;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -364,10 +336,8 @@
         private System.Windows.Forms.Timer timerUpdateSpectrogram;
         private System.Windows.Forms.CheckBox cbSave;
         private System.Windows.Forms.Timer timerWsprUpdate;
-        private System.Windows.Forms.CheckBox cbReduction;
         private System.Windows.Forms.CheckBox cbBands;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
-        private System.Windows.Forms.TextBox tbSaveFilename;
     }
 }
 

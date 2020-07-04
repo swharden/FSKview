@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -38,19 +41,37 @@
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbRemotePath = new System.Windows.Forms.TextBox();
             this.tbServer = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.nudFreqDisplayOffset = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.tbImageFileName = new System.Windows.Forms.TextBox();
+            this.btnSetWsprPath = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tbWsprPath = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.nudTargetWidth = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudPxAbove = new System.Windows.Forms.NumericUpDown();
+            this.cbShowFreqScale = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.nudPxBelow = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cbVerticalReduction = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -67,13 +88,42 @@
             this.groupBox2.Controls.Add(this.tbUsername);
             this.groupBox2.Controls.Add(this.tbRemotePath);
             this.groupBox2.Controls.Add(this.tbServer);
-            this.groupBox2.Enabled = false;
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(201, 403);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP Settings";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 277);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 13);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Connection Log";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox2.Location = new System.Drawing.Point(9, 293);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(181, 104);
+            this.richTextBox2.TabIndex = 29;
+            this.richTextBox2.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(120, 246);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Upload Now";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -159,16 +209,6 @@
             this.tbServer.Size = new System.Drawing.Size(181, 20);
             this.tbServer.TabIndex = 21;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(120, 246);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Upload Now";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.ForeColor = System.Drawing.Color.Red;
@@ -182,7 +222,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(379, 388);
+            this.btnCancel.Location = new System.Drawing.Point(753, 393);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 27);
             this.btnCancel.TabIndex = 6;
@@ -193,103 +233,305 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(312, 388);
+            this.btnSave.Location = new System.Drawing.Point(686, 393);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(61, 27);
             this.btnSave.TabIndex = 30;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(9, 293);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(181, 104);
-            this.richTextBox2.TabIndex = 29;
-            this.richTextBox2.Text = "";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 277);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 13);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Connection Log";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label9
             // 
             this.label9.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label9.Location = new System.Drawing.Point(227, 269);
+            this.label9.Location = new System.Drawing.Point(637, 119);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(204, 33);
+            this.label9.Size = new System.Drawing.Size(151, 48);
             this.label9.TabIndex = 33;
             this.label9.Text = "This number will be added to the default values shown on the frequency ruler.";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(227, 230);
+            this.label11.Location = new System.Drawing.Point(637, 80);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(110, 13);
             this.label11.TabIndex = 34;
             this.label11.Text = "Frequency Offset (Hz)";
             // 
-            // numericUpDown2
+            // nudFreqDisplayOffset
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(230, 246);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.nudFreqDisplayOffset.Location = new System.Drawing.Point(640, 96);
+            this.nudFreqDisplayOffset.Maximum = new decimal(new int[] {
             500,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.nudFreqDisplayOffset.Minimum = new decimal(new int[] {
             500,
             0,
             0,
             -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDown2.TabIndex = 32;
+            this.nudFreqDisplayOffset.Name = "nudFreqDisplayOffset";
+            this.nudFreqDisplayOffset.Size = new System.Drawing.Size(64, 20);
+            this.nudFreqDisplayOffset.TabIndex = 32;
+            this.nudFreqDisplayOffset.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(227, 28);
+            this.label8.Location = new System.Drawing.Point(227, 184);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.Size = new System.Drawing.Size(102, 13);
             this.label8.TabIndex = 41;
-            this.label8.Text = "Autosave Filename";
+            this.label8.Text = "Latest grab filename";
             // 
             // tbImageFileName
             // 
-            this.tbImageFileName.Location = new System.Drawing.Point(230, 44);
+            this.tbImageFileName.Location = new System.Drawing.Point(230, 200);
             this.tbImageFileName.Name = "tbImageFileName";
             this.tbImageFileName.Size = new System.Drawing.Size(201, 20);
             this.tbImageFileName.TabIndex = 42;
-            this.tbImageFileName.Text = "latest.png";
+            // 
+            // btnSetWsprPath
+            // 
+            this.btnSetWsprPath.Location = new System.Drawing.Point(759, 40);
+            this.btnSetWsprPath.Name = "btnSetWsprPath";
+            this.btnSetWsprPath.Size = new System.Drawing.Size(55, 27);
+            this.btnSetWsprPath.TabIndex = 30;
+            this.btnSetWsprPath.Text = "Browse";
+            this.btnSetWsprPath.UseVisualStyleBackColor = true;
+            this.btnSetWsprPath.Click += new System.EventHandler(this.btnSetWsprPath_Click);
+            // 
+            // label12
+            // 
+            this.label12.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label12.Location = new System.Drawing.Point(227, 223);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(204, 63);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "PNG, JPG, GIF, and BMP extensions are supported. PNG files are recommended (super" +
+    "ior quality to JPG and GIF, smaller file size than BMP)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(227, 28);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 45;
+            this.label13.Text = "WSPR Log File";
+            // 
+            // tbWsprPath
+            // 
+            this.tbWsprPath.Location = new System.Drawing.Point(230, 44);
+            this.tbWsprPath.Name = "tbWsprPath";
+            this.tbWsprPath.Size = new System.Drawing.Size(517, 20);
+            this.tbWsprPath.TabIndex = 46;
+            // 
+            // label14
+            // 
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label14.Location = new System.Drawing.Point(227, 119);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(106, 58);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "Approximate spectrogram width (not including scale)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(227, 80);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(69, 13);
+            this.label15.TabIndex = 49;
+            this.label15.Text = "Target Width";
+            // 
+            // nudTargetWidth
+            // 
+            this.nudTargetWidth.Location = new System.Drawing.Point(230, 96);
+            this.nudTargetWidth.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.nudTargetWidth.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudTargetWidth.Name = "nudTargetWidth";
+            this.nudTargetWidth.Size = new System.Drawing.Size(64, 20);
+            this.nudTargetWidth.TabIndex = 47;
+            this.nudTargetWidth.ThousandsSeparator = true;
+            this.nudTargetWidth.Value = new decimal(new int[] {
+            111,
+            0,
+            0,
+            0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(605, 187);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 13);
+            this.label16.TabIndex = 50;
+            this.label16.Text = "Px Above WSPR";
+            // 
+            // nudPxAbove
+            // 
+            this.nudPxAbove.Location = new System.Drawing.Point(608, 203);
+            this.nudPxAbove.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.nudPxAbove.Name = "nudPxAbove";
+            this.nudPxAbove.Size = new System.Drawing.Size(64, 20);
+            this.nudPxAbove.TabIndex = 51;
+            this.nudPxAbove.Value = new decimal(new int[] {
+            111,
+            0,
+            0,
+            0});
+            // 
+            // cbShowFreqScale
+            // 
+            this.cbShowFreqScale.AutoSize = true;
+            this.cbShowFreqScale.Location = new System.Drawing.Point(469, 203);
+            this.cbShowFreqScale.Name = "cbShowFreqScale";
+            this.cbShowFreqScale.Size = new System.Drawing.Size(53, 17);
+            this.cbShowFreqScale.TabIndex = 52;
+            this.cbShowFreqScale.Text = "Show";
+            this.cbShowFreqScale.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(466, 187);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(87, 13);
+            this.label17.TabIndex = 53;
+            this.label17.Text = "Frequency Scale";
+            // 
+            // label18
+            // 
+            this.label18.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label18.Location = new System.Drawing.Point(466, 223);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(111, 63);
+            this.label18.TabIndex = 54;
+            this.label18.Text = "only affects \"grabs-all\" output";
+            // 
+            // nudPxBelow
+            // 
+            this.nudPxBelow.Location = new System.Drawing.Point(717, 203);
+            this.nudPxBelow.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.nudPxBelow.Name = "nudPxBelow";
+            this.nudPxBelow.Size = new System.Drawing.Size(64, 20);
+            this.nudPxBelow.TabIndex = 55;
+            this.nudPxBelow.Value = new decimal(new int[] {
+            111,
+            0,
+            0,
+            0});
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(714, 187);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(84, 13);
+            this.label19.TabIndex = 56;
+            this.label19.Text = "Px Below QRSS";
+            // 
+            // label20
+            // 
+            this.label20.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label20.Location = new System.Drawing.Point(605, 227);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(202, 58);
+            this.label20.TabIndex = 57;
+            this.label20.Text = "Values describe distance above and below band edges";
+            // 
+            // cbVerticalReduction
+            // 
+            this.cbVerticalReduction.AutoSize = true;
+            this.cbVerticalReduction.Location = new System.Drawing.Point(403, 96);
+            this.cbVerticalReduction.Name = "cbVerticalReduction";
+            this.cbVerticalReduction.Size = new System.Drawing.Size(72, 17);
+            this.cbVerticalReduction.TabIndex = 58;
+            this.cbVerticalReduction.Text = "enable 2x";
+            this.cbVerticalReduction.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(400, 80);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(94, 13);
+            this.label21.TabIndex = 59;
+            this.label21.Text = "Vertical Reduction";
+            // 
+            // label22
+            // 
+            this.label22.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label22.Location = new System.Drawing.Point(400, 116);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(186, 60);
+            this.label22.TabIndex = 60;
+            this.label22.Text = "Shrinks output image vertically by 2X (applying a local max filter)";
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 427);
+            this.ClientSize = new System.Drawing.Size(826, 432);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.cbVerticalReduction);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.nudPxBelow);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.cbShowFreqScale);
+            this.Controls.Add(this.nudPxAbove);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.nudTargetWidth);
+            this.Controls.Add(this.tbWsprPath);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.tbImageFileName);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.nudFreqDisplayOffset);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.btnSetWsprPath);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.groupBox2);
             this.Name = "FormSettings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FSKview Settings";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,8 +556,26 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown nudFreqDisplayOffset;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbImageFileName;
+        private System.Windows.Forms.Button btnSetWsprPath;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbWsprPath;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown nudTargetWidth;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown nudPxAbove;
+        private System.Windows.Forms.CheckBox cbShowFreqScale;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.NumericUpDown nudPxBelow;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox cbVerticalReduction;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
     }
 }
