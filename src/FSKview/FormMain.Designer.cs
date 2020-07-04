@@ -44,6 +44,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.pbTimeFrac = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerUpdateSpectrogram = new System.Windows.Forms.Timer(this.components);
@@ -213,6 +215,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pbTimeFrac,
+            this.lblStatusTime,
             this.lblStatus,
             this.lblVersion});
             this.statusStrip1.Location = new System.Drawing.Point(0, 466);
@@ -221,19 +225,31 @@
             this.statusStrip1.TabIndex = 19;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // pbTimeFrac
+            // 
+            this.pbTimeFrac.Maximum = 600;
+            this.pbTimeFrac.Name = "pbTimeFrac";
+            this.pbTimeFrac.Size = new System.Drawing.Size(100, 16);
+            this.pbTimeFrac.Value = 123;
+            // 
+            // lblStatusTime
+            // 
+            this.lblStatusTime.Name = "lblStatusTime";
+            this.lblStatusTime.Size = new System.Drawing.Size(31, 17);
+            this.lblStatusTime.Text = "time";
+            // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(866, 17);
+            this.lblStatus.Size = new System.Drawing.Size(775, 17);
             this.lblStatus.Spring = true;
-            this.lblStatus.Text = "toolStripStatusLabel1";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblStatus.Text = "status";
             // 
             // lblVersion
             // 
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(118, 17);
-            this.lblVersion.Text = "toolStripStatusLabel1";
+            this.lblVersion.Size = new System.Drawing.Size(45, 17);
+            this.lblVersion.Text = "version";
             // 
             // timerUpdateSpectrogram
             // 
@@ -341,6 +357,8 @@
         private System.Windows.Forms.Timer timerWsprUpdate;
         private System.Windows.Forms.CheckBox cbBands;
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
+        private System.Windows.Forms.ToolStripProgressBar pbTimeFrac;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatusTime;
     }
 }
 

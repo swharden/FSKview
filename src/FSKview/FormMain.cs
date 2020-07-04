@@ -120,11 +120,12 @@ namespace FSKview
 
         private void UpdateVerticalScale()
         {
-            if (spec is null || cbDialFreq.SelectedIndex < 0)
-                return;
+            if (spec != null && cbDialFreq.SelectedIndex >= 0)
+                bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: settings.verticalReduction);
+        }
 
-            band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
-            bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: settings.verticalReduction);
+        private void ScrollToUpperBandEdge()
+        {
             int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction);
             panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - settings.grabSavePxAbove);
         }
@@ -163,6 +164,7 @@ namespace FSKview
 
         private void cbDialFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
+            band = WsprBands.GetBands()[cbDialFreq.SelectedIndex];
             settings.wsprBandIndex = cbDialFreq.SelectedIndex;
             settings.Save();
 
@@ -223,7 +225,10 @@ namespace FSKview
                 return;
 
             stampLast = stampNow;
+            int second = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
             lblTime.Text = $"{UtcTimeStamp} UTC";
+            lblStatusTime.Text = $"{UtcTimeStamp} UTC (second {second}/600)";
+            pbTimeFrac.Value = second;
             LoadWsprSpots();
 
             bool isTenMinute = DateTime.UtcNow.Minute % 10 == 0;
@@ -305,6 +310,8 @@ namespace FSKview
         {
             settings.showBands = cbBands.Checked;
             settings.Save();
+            if (cbBands.Checked)
+                ScrollToUpperBandEdge();
         }
 
         private void cbWspr_CheckedChanged(object sender, EventArgs e)
