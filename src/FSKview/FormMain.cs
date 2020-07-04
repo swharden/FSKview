@@ -17,6 +17,7 @@ namespace FSKview
     public partial class FormMain : Form
     {
         readonly ProgramSettings settings;
+        readonly Version version = Assembly.GetExecutingAssembly().GetName().Version;
 
         readonly Spectrogram.Colormap[] cmaps;
         WsprBand band;
@@ -37,8 +38,6 @@ namespace FSKview
                 return;
 
             settings = File.Exists("settings.xml") ? ProgramSettings.Load("settings.xml") : new ProgramSettings();
-
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
             lblVersion.Text = $"FSKview {version.Major}.{version.Minor}.{version.Build}";
 
             // start in center of screen occupying 80% of its height
@@ -273,7 +272,8 @@ namespace FSKview
                 gfx.DrawImage(bmpFull, 0, -pxTop);
 
                 // decorate the cropped bitmap
-                string msg = $"FSKview: {settings.stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
+                string msg = $"FSKview {version.Major}.{version.Minor}.{version.Build}: " +
+                    $"{settings.stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
                 Annotate.Logo(gfx, msg, 3, height - 3);
 
                 // ensure output folders exist
