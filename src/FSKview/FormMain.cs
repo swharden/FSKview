@@ -92,6 +92,7 @@ namespace FSKview
             int stepSize = samplesInTenMinutes / targetWidth;
 
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
+            spec?.SetColormap(cmaps[cbColormap.SelectedIndex]);
 
             // reset the spectrogram based on where we are in the 10 minute block
             int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
