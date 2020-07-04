@@ -22,6 +22,7 @@ namespace FSKview
         public bool saveGrabs = true;
         public bool showScaleOnAllGrabs = false;
         public string grabFileName = "latest.png";
+        public bool roll = true;
 
         public int targetWidth = 1000;
         public int grabSavePxAbove = 120;

@@ -31,6 +31,7 @@ namespace FSKview
             nudPxAbove.Value = settings.grabSavePxAbove;
             nudPxBelow.Value = settings.grabSavePxBelow;
             tbStationInfo.Text = settings.stationInformation;
+            cbRoll.Checked = settings.roll;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -48,6 +49,7 @@ namespace FSKview
             settings.grabSavePxAbove = (int)nudPxAbove.Value;
             settings.grabSavePxBelow = (int)nudPxBelow.Value;
             settings.stationInformation = tbStationInfo.Text;
+            settings.roll = cbRoll.Checked;
             settings.Save();
             Close();
         }
@@ -65,8 +67,7 @@ namespace FSKview
             diag.Title = "Locate WSPR Log File";
             if (diag.ShowDialog() == DialogResult.OK)
             {
-                //wsprLogFilePath = diag.FileName;
-                //wsprLogLastReadModifiedTime = new DateTime(0);
+                tbWsprPath.Text = diag.FileName;
             }
         }
     }

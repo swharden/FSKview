@@ -70,6 +70,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbStationInfo = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.cbRoll = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
@@ -469,7 +472,7 @@
             // cbVerticalReduction
             // 
             this.cbVerticalReduction.AutoSize = true;
-            this.cbVerticalReduction.Location = new System.Drawing.Point(403, 96);
+            this.cbVerticalReduction.Location = new System.Drawing.Point(349, 96);
             this.cbVerticalReduction.Name = "cbVerticalReduction";
             this.cbVerticalReduction.Size = new System.Drawing.Size(37, 17);
             this.cbVerticalReduction.TabIndex = 58;
@@ -479,7 +482,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(400, 80);
+            this.label21.Location = new System.Drawing.Point(346, 80);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(94, 13);
             this.label21.TabIndex = 59;
@@ -488,9 +491,9 @@
             // label22
             // 
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label22.Location = new System.Drawing.Point(400, 116);
+            this.label22.Location = new System.Drawing.Point(346, 116);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(186, 60);
+            this.label22.Size = new System.Drawing.Size(101, 60);
             this.label22.TabIndex = 60;
             this.label22.Text = "Shrinks output image vertically by 2X (applying a local max filter)";
             // 
@@ -519,11 +522,44 @@
             this.label23.TabIndex = 63;
             this.label23.Text = "To reset all settings, close FSKview and delete settings.xml";
             // 
+            // cbRoll
+            // 
+            this.cbRoll.AutoSize = true;
+            this.cbRoll.Checked = true;
+            this.cbRoll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRoll.Location = new System.Drawing.Point(489, 96);
+            this.cbRoll.Name = "cbRoll";
+            this.cbRoll.Size = new System.Drawing.Size(44, 17);
+            this.cbRoll.TabIndex = 64;
+            this.cbRoll.Text = "Roll";
+            this.cbRoll.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(486, 80);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(71, 13);
+            this.label24.TabIndex = 65;
+            this.label24.Text = "Display Mode";
+            // 
+            // label25
+            // 
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label25.Location = new System.Drawing.Point(486, 116);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(94, 60);
+            this.label25.TabIndex = 66;
+            this.label25.Text = "Roll is best for WSPR";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 432);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.cbRoll);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.tbStationInfo);
             this.Controls.Add(this.label2);
@@ -611,5 +647,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbStationInfo;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox cbRoll;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }

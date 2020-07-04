@@ -96,7 +96,7 @@ namespace FSKview
             spec.SetColormap(cmaps.Where(x => x.Name == settings.colormap).First());
 
             // reset the spectrogram based on where we are in the 10 minute block
-            ResetSpecPositionRoll();
+            ResetSpectrogramPosition();
 
             // resize the image based on the spectrogram dimensions
             bmpSpectrogram = new Bitmap(
@@ -138,7 +138,7 @@ namespace FSKview
 
             spec.Add(audioControl1.listener.GetNewAudio());
             var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, cbRoll.Checked, settings);
+            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, settings);
             pictureBox1.Refresh();
             GC.Collect();
         }
@@ -270,7 +270,7 @@ namespace FSKview
             {
                 // annotate a full-size spectrogram
                 var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale, false, false, settings);
+                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale, false, settings);
 
                 // draw the full-size spectrogram on the cropped Bitmap
                 gfx.DrawImage(bmpFull, 0, -pxTop);
@@ -324,25 +324,24 @@ namespace FSKview
             settings.Save();
         }
 
-        private void ResetSpecPositionRoll()
+        private void ResetSpectrogramPosition()
         {
-            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
-            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
-            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
-            spec.RollReset(nextIndex);
-        }
-
-        private void ResetSpecPositionScroll()
-        {
-            spec.RollReset(spec.Width - 10);
+            if (settings.roll)
+            {
+                int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
+                double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
+                int nextIndex = (int)(fracIntoTenMinute * spec.Width);
+                spec.RollReset(nextIndex);
+            }
+            else
+            {
+                spec.RollReset(spec.Width);
+            }
         }
 
         private void cbRoll_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbRoll.Checked)
-                ResetSpecPositionRoll();
-            else
-                ResetSpecPositionScroll();
+            ResetSpectrogramPosition();
         }
     }
 }

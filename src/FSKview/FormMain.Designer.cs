@@ -52,7 +52,6 @@
             this.cbSave = new System.Windows.Forms.CheckBox();
             this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
             this.cbBands = new System.Windows.Forms.CheckBox();
-            this.cbRoll = new System.Windows.Forms.CheckBox();
             this.audioControl1 = new FSKview.AudioControl();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
@@ -288,20 +287,6 @@
             this.cbBands.UseVisualStyleBackColor = true;
             this.cbBands.CheckedChanged += new System.EventHandler(this.cbBands_CheckedChanged);
             // 
-            // cbRoll
-            // 
-            this.cbRoll.AutoSize = true;
-            this.cbRoll.Checked = true;
-            this.cbRoll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRoll.Location = new System.Drawing.Point(765, 6);
-            this.cbRoll.Name = "cbRoll";
-            this.cbRoll.Size = new System.Drawing.Size(44, 17);
-            this.cbRoll.TabIndex = 24;
-            this.cbRoll.Text = "Roll";
-            this.cbRoll.UseVisualStyleBackColor = true;
-            this.cbRoll.Visible = false;
-            this.cbRoll.CheckedChanged += new System.EventHandler(this.cbRoll_CheckedChanged);
-            // 
             // audioControl1
             // 
             this.audioControl1.Location = new System.Drawing.Point(9, 9);
@@ -317,7 +302,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 488);
-            this.Controls.Add(this.cbRoll);
             this.Controls.Add(this.cbSave);
             this.Controls.Add(this.cbBands);
             this.Controls.Add(this.statusStrip1);
@@ -375,7 +359,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.ToolStripProgressBar pbTimeFrac;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusTime;
-        private System.Windows.Forms.CheckBox cbRoll;
     }
 }
 
