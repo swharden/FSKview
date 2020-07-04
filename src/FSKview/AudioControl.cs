@@ -21,6 +21,7 @@ namespace FSKview
         Description("Audio device sample rate (Hz)")
         ]
         public int SampleRate { get; set; } = 6000;
+        public int AudioDeviceIndex { get { return comboBox1.SelectedIndex; } }
 
         public AudioControl()
         {

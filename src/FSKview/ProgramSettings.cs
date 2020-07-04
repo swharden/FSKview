@@ -16,6 +16,7 @@ namespace FSKview
         public double brightness = 2.0;
         public bool isWsprEnabled = true;
         public string wsprLogFilePath = null;
+        public int wsprBandIndex = 5;
         public bool showBands = true;
         public bool saveGrabs = true;
         public bool showScaleOnAllGrabs = false;

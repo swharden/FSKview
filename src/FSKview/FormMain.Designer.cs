@@ -74,6 +74,7 @@
             0,
             0,
             0});
+            this.nudBrightness.ValueChanged += new System.EventHandler(this.nudBrightness_ValueChanged);
             // 
             // label1
             // 
@@ -185,6 +186,7 @@
             this.cbWspr.TabIndex = 17;
             this.cbWspr.Text = "WSPR";
             this.cbWspr.UseVisualStyleBackColor = true;
+            this.cbWspr.CheckedChanged += new System.EventHandler(this.cbWspr_CheckedChanged);
             // 
             // panel1
             // 
@@ -267,6 +269,7 @@
             this.cbBands.TabIndex = 23;
             this.cbBands.Text = "Bands";
             this.cbBands.UseVisualStyleBackColor = true;
+            this.cbBands.CheckedChanged += new System.EventHandler(this.cbBands_CheckedChanged);
             // 
             // audioControl1
             // 

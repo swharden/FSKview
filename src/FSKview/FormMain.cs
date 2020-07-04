@@ -90,6 +90,8 @@ namespace FSKview
 
         private void audioControl1_InputDeviceChanged(object sender, EventArgs e)
         {
+            settings.audioDeviceIndex = audioControl1.AudioDeviceIndex;
+            settings.Save();
             ResetSpectrogram();
         }
 
@@ -159,17 +161,26 @@ namespace FSKview
             if (spec is null)
                 return;
 
+            settings.window = cbWindow.Text;
+            settings.Save();
+
             double[] window = FftSharp.Window.GetWindowByName(cbWindow.Text, spec.FftSize);
             spec.SetWindow(window);
         }
 
         private void cbColormap_SelectedIndexChanged(object sender, EventArgs e)
         {
+            settings.colormap = cbColormap.Text;
+            settings.Save();
+
             spec?.SetColormap(cmaps[cbColormap.SelectedIndex]);
         }
 
         private void cbDialFreq_SelectedIndexChanged(object sender, EventArgs e)
         {
+            settings.wsprBandIndex = cbDialFreq.SelectedIndex;
+            settings.Save();
+
             UpdateVerticalScale();
         }
 
@@ -232,6 +243,9 @@ namespace FSKview
 
         private void cbSave_CheckedChanged(object sender, EventArgs e)
         {
+            settings.saveGrabs = cbSave.Checked;
+            settings.Save();
+
             if (cbSave.Checked)
             {
                 SaveGrab();
@@ -287,6 +301,24 @@ namespace FSKview
                 bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
                 Status("Saved spectrogram as image file");
             }
+        }
+
+        private void nudBrightness_ValueChanged(object sender, EventArgs e)
+        {
+            settings.brightness = (int)nudBrightness.Value;
+            settings.Save();
+        }
+
+        private void cbBands_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.showBands = cbBands.Checked;
+            settings.Save();
+        }
+
+        private void cbWspr_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.isWsprEnabled = cbWspr.Checked;
+            settings.Save();
         }
     }
 }
