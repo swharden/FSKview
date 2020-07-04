@@ -16,7 +16,7 @@ namespace FSKview
             bool drawBandLines, bool roll, ProgramSettings settings)
         {
             using (Graphics gfx = Graphics.FromImage(bmpSpectrogram))
-            using (Bitmap bmpIndexed = spec.GetBitmapMax(settings.brightness, reduction: settings.verticalReduction, roll: true))
+            using (Bitmap bmpIndexed = spec.GetBitmapMax(settings.brightness, reduction: settings.verticalReduction, roll: roll))
             using (Pen bandEdgePen = new Pen(Color.White) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
             using (Pen grabEdgePen = new Pen(Color.Yellow) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dash })
             using (Pen rollPen = new Pen(Color.White))
@@ -53,6 +53,7 @@ namespace FSKview
                     int segmentX = spec.Width * segment / 5;
                     WsprSpot[] segmentSpots = spots
                                                 .Where(x => x.segment == segment) // only this segment
+                                                .Where(x => Math.Abs(x.frequencyHz - band.dialFreq) < 1e5) // only this band
                                                 .OrderBy(x => x.strength).GroupBy(x => x.callsign).Select(x => x.Last()) // only strongest
                                                 .OrderBy(x => x.frequencyHz).Reverse().ToArray(); // top to bottom
 

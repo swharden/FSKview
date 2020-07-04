@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectrogram;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -92,13 +93,10 @@ namespace FSKview
             int stepSize = samplesInTenMinutes / targetWidth;
 
             spec = new Spectrogram.Spectrogram(sampleRate, fftSize, stepSize, fixedWidth: targetWidth);
-            spec?.SetColormap(cmaps[cbColormap.SelectedIndex]);
+            spec.SetColormap(cmaps.Where(x => x.Name == settings.colormap).First());
 
             // reset the spectrogram based on where we are in the 10 minute block
-            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
-            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
-            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
-            spec.RollReset(nextIndex);
+            ResetSpecPositionRoll();
 
             // resize the image based on the spectrogram dimensions
             bmpSpectrogram = new Bitmap(
@@ -140,7 +138,7 @@ namespace FSKview
 
             spec.Add(audioControl1.listener.GetNewAudio());
             var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, true, settings);
+            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, cbRoll.Checked, settings);
             pictureBox1.Refresh();
             GC.Collect();
         }
@@ -324,6 +322,27 @@ namespace FSKview
         {
             settings.isWsprEnabled = cbWspr.Checked;
             settings.Save();
+        }
+
+        private void ResetSpecPositionRoll()
+        {
+            int secondsIntoTenMinute = (DateTime.UtcNow.Minute % 10) * 60 + DateTime.UtcNow.Second;
+            double fracIntoTenMinute = secondsIntoTenMinute / 600.0;
+            int nextIndex = (int)(fracIntoTenMinute * spec.Width);
+            spec.RollReset(nextIndex);
+        }
+
+        private void ResetSpecPositionScroll()
+        {
+            spec.RollReset(spec.Width - 10);
+        }
+
+        private void cbRoll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbRoll.Checked)
+                ResetSpecPositionRoll();
+            else
+                ResetSpecPositionScroll();
         }
     }
 }
