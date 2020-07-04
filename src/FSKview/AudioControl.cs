@@ -51,6 +51,8 @@ namespace FSKview
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (listener is null)
+                return;
             int targetWidth = (int)(listener.AmplitudeFrac * panel1.Width);
             pictureBox2.Width = (targetWidth >= pictureBox2.Width) ? targetWidth : pictureBox2.Width - 1;
             pictureBox2.BackColor = (listener.AmplitudeFrac < .9) ? Color.LightSeaGreen : Color.Magenta;
