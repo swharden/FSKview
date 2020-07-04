@@ -69,6 +69,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbStationInfo = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
@@ -509,11 +510,21 @@
             this.tbStationInfo.Size = new System.Drawing.Size(584, 20);
             this.tbStationInfo.TabIndex = 62;
             // 
+            // label23
+            // 
+            this.label23.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label23.Location = new System.Drawing.Point(227, 400);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(378, 17);
+            this.label23.TabIndex = 63;
+            this.label23.Text = "To reset all settings, close FSKview and delete settings.xml";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 432);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.tbStationInfo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label22);
@@ -599,5 +610,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbStationInfo;
+        private System.Windows.Forms.Label label23;
     }
 }
