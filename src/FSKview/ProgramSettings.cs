@@ -24,8 +24,8 @@ namespace FSKview
         public string grabFileName = "latest.png";
 
         public int targetWidth = 1000;
-        public int grabSavePxAbove = 123;
-        public int grabSavePxBelow = 321;
+        public int grabSavePxAbove = 120;
+        public int grabSavePxBelow = 270;
         public int verticalReduction = 2;
         public int freqDisplayOffset = 0;
         public string stationInformation = "station information not set";

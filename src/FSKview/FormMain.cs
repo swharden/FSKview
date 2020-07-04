@@ -120,13 +120,16 @@ namespace FSKview
         private void UpdateVerticalScale()
         {
             if (spec != null && cbDialFreq.SelectedIndex >= 0)
+            {
                 bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: settings.verticalReduction);
+                ScrollToUpperBandEdge();
+            }
         }
 
         private void ScrollToUpperBandEdge()
         {
             int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction);
-            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - settings.grabSavePxAbove);
+            panel1.AutoScrollPosition = new Point(0, wsprBandTopPx - settings.grabSavePxAbove + 1);
         }
 
         private void timerUpdateSpectrogram_Tick(object sender, EventArgs e)
@@ -181,6 +184,8 @@ namespace FSKview
             bool reductionChanged = (oldReduction != settings.verticalReduction);
             if (targetWidthChanged || reductionChanged)
                 ResetSpectrogram();
+
+            ScrollToUpperBandEdge();
         }
 
         DateTime wsprLogLastReadModifiedTime;

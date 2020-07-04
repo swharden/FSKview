@@ -69,9 +69,8 @@ namespace FSKview
                         gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot + 0.5f, y + 1, sfMiddleCenter);
 
                         // draw the key label
-                        int spotsToPadAboveBandEdge = 16;
                         DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength} dB) ",
-                            segmentX, wsprBandTopPx + 13 * (spotIndex - spotsToPadAboveBandEdge),
+                            segmentX, wsprBandTopPx - settings.grabSavePxAbove + 13 * spotIndex,
                             font, sfUpperLeft, Brushes.White, Brushes.Black);
                     }
                 }
