@@ -58,6 +58,9 @@ namespace FSKview
                     if (settings.isWsprEnabled == false)
                         segmentSpots = new WsprSpot[0];
 
+                    if (settings.roll == false && segmentSpots.Length > 0)
+                        segmentX = (int)(spec.Width - segmentSpots[0].ageSec / spec.SecPerPx);
+
                     for (int spotIndex = 0; spotIndex < segmentSpots.Length; spotIndex++)
                     {
                         WsprSpot spot = segmentSpots[spotIndex];

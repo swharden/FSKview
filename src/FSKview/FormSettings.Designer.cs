@@ -550,7 +550,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(94, 60);
             this.label25.TabIndex = 66;
-            this.label25.Text = "Roll is best for WSPR";
+            this.label25.Text = "Roll is like \"wipe\". Off is like scroll.";
             // 
             // FormSettings
             // 
