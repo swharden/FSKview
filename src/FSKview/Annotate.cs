@@ -60,7 +60,7 @@ namespace FSKview
                         segmentSpots = new WsprSpot[0];
 
                     if (settings.roll == false && segmentSpots.Length > 0)
-                        segmentX = (int)(spec.Width - segmentSpots[0].ageSec / spec.SecPerPx);
+                        segmentX = (int)(spec.Width - segmentSpots[0].ageSec / spec.SecPerPx) + 10;
 
                     for (int spotIndex = 0; spotIndex < segmentSpots.Length; spotIndex++)
                     {
