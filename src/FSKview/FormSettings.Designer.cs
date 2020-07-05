@@ -412,9 +412,9 @@
             this.cbShowFreqScale.AutoSize = true;
             this.cbShowFreqScale.Location = new System.Drawing.Point(469, 203);
             this.cbShowFreqScale.Name = "cbShowFreqScale";
-            this.cbShowFreqScale.Size = new System.Drawing.Size(53, 17);
+            this.cbShowFreqScale.Size = new System.Drawing.Size(67, 17);
             this.cbShowFreqScale.TabIndex = 52;
-            this.cbShowFreqScale.Text = "Show";
+            this.cbShowFreqScale.Text = "all saves";
             this.cbShowFreqScale.UseVisualStyleBackColor = true;
             // 
             // label17
@@ -433,7 +433,7 @@
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(111, 63);
             this.label18.TabIndex = 54;
-            this.label18.Text = "only affects \"grabs-all\" output";
+            this.label18.Text = "leave this off so images in \"grabs-all\" are suitable for stitching";
             // 
             // nudPxBelow
             // 
