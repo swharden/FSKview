@@ -303,8 +303,7 @@
             // cbFTP
             // 
             this.cbFTP.AutoSize = true;
-            this.cbFTP.Checked = true;
-            this.cbFTP.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFTP.Enabled = false;
             this.cbFTP.Location = new System.Drawing.Point(685, 27);
             this.cbFTP.Name = "cbFTP";
             this.cbFTP.Size = new System.Drawing.Size(46, 17);
