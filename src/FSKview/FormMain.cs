@@ -336,7 +336,7 @@ namespace FSKview
                         result = "Incorrect username/password";
                     else if (result.Contains("File name not allowed"))
                         result = "Invalid path (does the target folder exist?)";
-                    else if (result == "FTP upload success!")
+                    else if (result == "upload successful")
                         result = "FTP upload successful";
                     else
                         result = "FTP ERROR (get full message in settings)\n" + result;
