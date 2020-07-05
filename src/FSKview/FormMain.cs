@@ -264,10 +264,10 @@ namespace FSKview
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction) - settings.grabSavePxAbove;
             int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, settings.verticalReduction) + settings.grabSavePxBelow;
             int height = pxBot - pxTop;
-            int width = (settings.showScaleOnAllGrabs) ? spec.Width + verticalScaleWidth : spec.Width;
+            int widthWithScale = spec.Width + verticalScaleWidth;
 
-            using (Bitmap bmpFull = new Bitmap(width, spec.Height, PixelFormat.Format32bppPArgb))
-            using (Bitmap bmpCropped = new Bitmap(width, height, PixelFormat.Format32bppPArgb))
+            using (Bitmap bmpFull = new Bitmap(widthWithScale, spec.Height, PixelFormat.Format32bppPArgb))
+            using (Bitmap bmpCropped = new Bitmap(widthWithScale, height, PixelFormat.Format32bppPArgb))
             using (Graphics gfx = Graphics.FromImage(bmpCropped))
             {
                 // annotate a full-size spectrogram
@@ -300,9 +300,23 @@ namespace FSKview
                     imgFmt = ImageFormat.Gif;
                 bmpCropped.Save($"{pathSaveWeb}/{settings.grabFileName}", imgFmt);
 
-                // save the cropped bitmap for the log
-                bmpCropped.Save($"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png", ImageFormat.Png);
-                Status("Saved spectrogram as image file");
+                // save the cropped bitmap for stitching
+                string stitchFileName = $"{pathSaveAll}/{UtcDateStamp.Replace("-", "")}-{UtcTimeStamp.Replace(":", "")}.png";
+                if (settings.showScaleOnAllGrabs)
+                {
+                    bmpCropped.Save(stitchFileName, ImageFormat.Png);
+                }
+                else
+                {
+                    using (Bitmap bmpCropped2 = new Bitmap(spec.Width, height, PixelFormat.Format32bppPArgb))
+                    using (Graphics gfx2 = Graphics.FromImage(bmpCropped2))
+                    {
+                        gfx2.DrawImage(bmpCropped, 0, 0);
+                        bmpCropped2.Save(stitchFileName, ImageFormat.Png);
+                    }
+                }
+
+                Status($"Saved spectrogram as {settings.grabFileName}");
             }
         }
 
