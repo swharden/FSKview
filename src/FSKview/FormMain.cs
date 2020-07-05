@@ -323,7 +323,7 @@ namespace FSKview
                 if (uploadToo)
                 {
                     Enabled = false;
-                    Status($"Uploading to via FTP...");
+                    Status($"Performing FTP upload...");
                     Application.DoEvents();
                     string result = FTP.Upload(settings.ftpServerAddress, settings.ftpRemoteSubfolder, settings.ftpUsername, 
                         settings.DeObfuscate(settings.ftpObfuscatedPassword), $"{pathSaveWeb}/{settings.grabFileName}");
@@ -331,7 +331,7 @@ namespace FSKview
                         result = "Incorrect username/password";
                     else if (result.Contains("File name not allowed"))
                         result = "Invalid path (does the target folder exist?)";
-                    else if (result == "upload successful")
+                    else if (result == "FTP upload success!")
                         result = "FTP upload successful";
                     else
                         result = "FTP ERROR (get full message in settings)";
