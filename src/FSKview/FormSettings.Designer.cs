@@ -117,7 +117,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 45);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Password will be stored as obfuscated (not encrypted) text in config.txt";
+            this.label1.Text = "stored as obfuscated (not encrypted) text in the settings file";
             // 
             // label7
             // 
