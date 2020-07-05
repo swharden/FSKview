@@ -263,7 +263,7 @@ namespace FSKview
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction) - settings.grabSavePxAbove;
             int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, settings.verticalReduction) + settings.grabSavePxBelow;
             int height = pxBot - pxTop;
-            int width = spec.Width + verticalScaleWidth;
+            int width = (settings.showScaleOnAllGrabs) ? spec.Width + verticalScaleWidth : spec.Width;
 
             using (Bitmap bmpFull = new Bitmap(width, spec.Height, PixelFormat.Format32bppPArgb))
             using (Bitmap bmpCropped = new Bitmap(width, height, PixelFormat.Format32bppPArgb))
