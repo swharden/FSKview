@@ -263,6 +263,8 @@
             // cbSave
             // 
             this.cbSave.AutoSize = true;
+            this.cbSave.Checked = true;
+            this.cbSave.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSave.Location = new System.Drawing.Point(613, 27);
             this.cbSave.Name = "cbSave";
             this.cbSave.Size = new System.Drawing.Size(71, 17);
@@ -303,7 +305,6 @@
             // cbFTP
             // 
             this.cbFTP.AutoSize = true;
-            this.cbFTP.Enabled = false;
             this.cbFTP.Location = new System.Drawing.Point(685, 27);
             this.cbFTP.Name = "cbFTP";
             this.cbFTP.Size = new System.Drawing.Size(46, 17);
