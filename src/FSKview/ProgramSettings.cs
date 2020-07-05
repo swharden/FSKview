@@ -36,6 +36,7 @@ namespace FSKview
         public string ftpUsername = "sampleUsername";
         public string ftpObfuscatedPassword = "c2FtcGxlUGFzc3dvcmQ";
         public int ftpDelaySec = 15;
+        public bool isFtpEnabled = false;
 
         public ProgramSettings()
         {

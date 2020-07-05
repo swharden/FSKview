@@ -54,6 +54,7 @@
             this.timerWsprUpdate = new System.Windows.Forms.Timer(this.components);
             this.cbBands = new System.Windows.Forms.CheckBox();
             this.audioControl1 = new FSKview.AudioControl();
+            this.cbFTP = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudBrightness)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -170,11 +171,12 @@
             // 
             // btnConfigure
             // 
-            this.btnConfigure.Location = new System.Drawing.Point(684, 22);
+            this.btnConfigure.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfigure.Location = new System.Drawing.Point(750, 12);
             this.btnConfigure.Name = "btnConfigure";
-            this.btnConfigure.Size = new System.Drawing.Size(75, 22);
+            this.btnConfigure.Size = new System.Drawing.Size(86, 32);
             this.btnConfigure.TabIndex = 15;
-            this.btnConfigure.Text = "Configure";
+            this.btnConfigure.Text = "Settings";
             this.btnConfigure.UseVisualStyleBackColor = true;
             this.btnConfigure.Click += new System.EventHandler(this.btnConfigure_Click);
             // 
@@ -298,11 +300,25 @@
             this.audioControl1.TabIndex = 3;
             this.audioControl1.InputDeviceChanged += new System.EventHandler(this.audioControl1_InputDeviceChanged);
             // 
+            // cbFTP
+            // 
+            this.cbFTP.AutoSize = true;
+            this.cbFTP.Checked = true;
+            this.cbFTP.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFTP.Location = new System.Drawing.Point(685, 27);
+            this.cbFTP.Name = "cbFTP";
+            this.cbFTP.Size = new System.Drawing.Size(46, 17);
+            this.cbFTP.TabIndex = 24;
+            this.cbFTP.Text = "FTP";
+            this.cbFTP.UseVisualStyleBackColor = true;
+            this.cbFTP.CheckedChanged += new System.EventHandler(this.cbFTP_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 488);
+            this.Controls.Add(this.cbFTP);
             this.Controls.Add(this.cbSave);
             this.Controls.Add(this.cbBands);
             this.Controls.Add(this.statusStrip1);
@@ -361,6 +377,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lblVersion;
         private System.Windows.Forms.ToolStripProgressBar pbTimeFrac;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusTime;
+        private System.Windows.Forms.CheckBox cbFTP;
     }
 }
 

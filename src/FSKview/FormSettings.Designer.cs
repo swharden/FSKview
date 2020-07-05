@@ -32,7 +32,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUploadNow = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -85,7 +85,7 @@
             // 
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.richTextBox2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnUploadNow);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label4);
@@ -121,16 +121,16 @@
             this.richTextBox2.TabIndex = 29;
             this.richTextBox2.Text = "";
             // 
-            // button1
+            // btnUploadNow
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(120, 246);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Upload Now";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnUploadNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUploadNow.Location = new System.Drawing.Point(120, 246);
+            this.btnUploadNow.Name = "btnUploadNow";
+            this.btnUploadNow.Size = new System.Drawing.Size(75, 23);
+            this.btnUploadNow.TabIndex = 28;
+            this.btnUploadNow.Text = "Upload Now";
+            this.btnUploadNow.UseVisualStyleBackColor = true;
+            this.btnUploadNow.Click += new System.EventHandler(this.btnUploadNow_Click);
             // 
             // label1
             // 
@@ -609,7 +609,7 @@
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUploadNow;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;

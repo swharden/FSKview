@@ -59,6 +59,7 @@ namespace FSKview
             cbColormap.SelectedIndex = cbColormap.Items.IndexOf(settings.colormap);
             cbDialFreq.SelectedIndex = settings.wsprBandIndex;
             cbWspr.Checked = settings.isWsprEnabled;
+            cbFTP.Checked = settings.isFtpEnabled;
 
             // select on load
             ActiveControl = cbColormap;
@@ -240,10 +241,9 @@ namespace FSKview
             bool isWsprHadTime = DateTime.UtcNow.Second == 2;
             if (isTenMinute && isWsprHadTime)
             {
-                Debug.WriteLine($"RESETTING AT {DateTime.UtcNow}");
                 spec.RollReset();
                 if (cbSave.Checked && cbSave.Enabled)
-                    SaveGrab();
+                    SaveGrab(uploadToo: cbFTP.Checked);
             }
         }
 
@@ -252,6 +252,8 @@ namespace FSKview
             settings.saveGrabs = cbSave.Checked;
             settings.Save();
 
+            cbFTP.Enabled = cbSave.Checked;
+
             if (cbSave.Checked)
             {
                 SaveGrab();
@@ -259,7 +261,7 @@ namespace FSKview
             }
         }
 
-        private void SaveGrab()
+        private void SaveGrab(bool uploadToo = false)
         {
             int pxTop = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction) - settings.grabSavePxAbove;
             int pxBot = spec.PixelY(band.lowerFreq - 200 - band.dialFreq, settings.verticalReduction) + settings.grabSavePxBelow;
@@ -317,6 +319,25 @@ namespace FSKview
                 }
 
                 Status($"Saved spectrogram as {settings.grabFileName}");
+
+                if (uploadToo)
+                {
+                    Enabled = false;
+                    Status($"Uploading to via FTP...");
+                    Application.DoEvents();
+                    string result = FTP.Upload(settings.ftpServerAddress, settings.ftpRemoteSubfolder, settings.ftpUsername, 
+                        settings.DeObfuscate(settings.ftpObfuscatedPassword), $"{pathSaveWeb}/{settings.grabFileName}");
+                    if (result.Contains("Not logged in"))
+                        result = "Incorrect username/password";
+                    else if (result.Contains("File name not allowed"))
+                        result = "Invalid path (does the target folder exist?)";
+                    else if (result == "upload successful")
+                        result = "FTP upload successful";
+                    else
+                        result = "FTP ERROR (get full message in settings)";
+                    Status(result);
+                    Enabled = true;
+                }
             }
         }
 
@@ -358,6 +379,12 @@ namespace FSKview
         private void cbRoll_CheckedChanged(object sender, EventArgs e)
         {
             ResetSpectrogramPosition();
+        }
+
+        private void cbFTP_CheckedChanged(object sender, EventArgs e)
+        {
+            settings.isFtpEnabled = cbFTP.Checked;
+            settings.Save();
         }
     }
 }

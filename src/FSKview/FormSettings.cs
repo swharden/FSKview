@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -68,6 +70,29 @@ namespace FSKview
             if (diag.ShowDialog() == DialogResult.OK)
             {
                 tbWsprPath.Text = diag.FileName;
+            }
+        }
+
+        private void btnUploadNow_Click(object sender, EventArgs e)
+        {
+            string appPath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            string localFilePath = $"{appPath}/grabs-web/{settings.grabFileName}";
+
+            if (File.Exists(localFilePath))
+            {
+                Enabled = false;
+                string result = FTP.Upload(tbServer.Text, tbRemotePath.Text, tbUsername.Text, tbPassword.Text, localFilePath);
+                if (result.Contains("Not logged in"))
+                    MessageBox.Show("Incorrect username/password", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (result.Contains("File name not allowed"))
+                    MessageBox.Show("Invalid path (does the target folder exist?)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(result, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show($"latest grab file does not exist:\n{localFilePath}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
