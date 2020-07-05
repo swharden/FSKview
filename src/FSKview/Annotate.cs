@@ -29,9 +29,9 @@ namespace FSKview
                 gfx.DrawImage(bmpIndexed, 0, 0);
                 gfx.DrawImage(bmpVericalScale, spec.Width, 0);
 
-                int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction);
-                int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, settings.verticalReduction);
-                int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, settings.verticalReduction);
+                int wsprBandTopPx = spec.PixelY(band.upperFreq - band.dialFreq, settings.verticalReduction) + 1;
+                int wsprBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq, settings.verticalReduction) + 1;
+                int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, settings.verticalReduction) + 1;
                 int grabTopPx = wsprBandTopPx - settings.grabSavePxAbove;
                 int grabBotPx = qrssBandBottomPx + settings.grabSavePxBelow;
                 if (drawBandLines)
