@@ -14,7 +14,7 @@ namespace FSKview
         public static void Spectrogram(
             Spectrogram.Spectrogram spec, WsprBand band, List<WsprSpot> spots,
             Bitmap bmpSpectrogram, Bitmap bmpVericalScale,
-            bool drawBandLines, ProgramSettings settings)
+            bool drawBandLines, bool drawVerticalLine, ProgramSettings settings)
         {
             using (Graphics gfx = Graphics.FromImage(bmpSpectrogram))
             using (Bitmap bmpIndexed = spec.GetBitmapMax(settings.brightness, reduction: settings.verticalReduction, roll: settings.roll))
@@ -43,7 +43,7 @@ namespace FSKview
                     gfx.DrawLine(grabEdgePen, 0, grabBotPx, spec.Width, grabBotPx);
                 }
 
-                if (settings.roll)
+                if (settings.roll && drawVerticalLine)
                     gfx.DrawLine(rollPen, spec.NextColumnIndex, 0, spec.NextColumnIndex, spec.Height);
 
                 // a segment is a 2-minute block within a ten-minute frame

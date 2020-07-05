@@ -145,7 +145,7 @@ namespace FSKview
 
             spec.Add(audioControl1.listener.GetNewAudio());
             var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, settings);
+            Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, true, settings);
             pictureBox1.Refresh();
             GC.Collect();
         }
@@ -279,7 +279,7 @@ namespace FSKview
             {
                 // annotate a full-size spectrogram
                 var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
-                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale, false, settings);
+                Annotate.Spectrogram(spec, band, spotsToShow, bmpFull, bmpVericalScale, false, false, settings);
 
                 // draw the full-size spectrogram on the cropped Bitmap
                 gfx.DrawImage(bmpFull, 0, -pxTop);
