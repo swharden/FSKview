@@ -10,7 +10,7 @@ namespace FSKview
 {
     public static class Ruler
     {
-        public static Bitmap GetVerticalScale(int width, Spectrogram.Spectrogram spec, int offsetHz = 0, int reduction = 1)
+        public static Bitmap GetVerticalScale(int width, Spectrogram.Spectrogram spec, int offsetFromZeroHz = 0, int offsetHz = 0, int reduction = 1)
         {
             int majorTickHz = 50;
             int majorTickLength = 4;
@@ -44,14 +44,14 @@ namespace FSKview
 
                 foreach (var freq in freqsMajor)
                 {
-                    int y = spec.PixelY(freq) / reduction;
+                    int y = spec.PixelY(freq + offsetHz) / reduction;
                     gfx.DrawLine(pen, 0, y, majorTickLength, y);
-                    gfx.DrawString($"{freq + offsetHz:N0} Hz", font, brush, majorTickLength, y, sf);
+                    gfx.DrawString($"{freq + offsetFromZeroHz:N0} Hz", font, brush, majorTickLength, y, sf);
                 }
 
                 foreach (var freq in freqsMinor)
                 {
-                    int y = spec.PixelY(freq) / reduction;
+                    int y = spec.PixelY(freq + offsetHz) / reduction;
                     gfx.DrawLine(pen, 0, y, minorTickLength, y);
                 }
             }
