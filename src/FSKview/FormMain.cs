@@ -121,7 +121,7 @@ namespace FSKview
         {
             if (spec != null && cbDialFreq.SelectedIndex >= 0)
             {
-                bmpVericalScale = spec.GetVerticalScale(verticalScaleWidth, band.dialFreq, reduction: settings.verticalReduction);
+                bmpVericalScale = Ruler.GetVerticalScale(verticalScaleWidth, spec, band.dialFreq, settings.verticalReduction);
                 ScrollToUpperBandEdge();
             }
         }
