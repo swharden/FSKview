@@ -116,6 +116,11 @@ namespace FSKview
         private void Status(string message)
         {
             lblStatus.Text = $"{UtcTimeStamp} UTC: {message}";
+
+            using (StreamWriter sw = File.AppendText("log.txt"))
+            {
+                sw.WriteLine($"{DateTime.UtcNow}: {message}");
+            }
         }
 
         private void UpdateVerticalScale()
@@ -334,7 +339,7 @@ namespace FSKview
                     else if (result == "FTP upload success!")
                         result = "FTP upload successful";
                     else
-                        result = "FTP ERROR (get full message in settings)";
+                        result = "FTP ERROR (get full message in settings)\n" + result;
                     Status(result);
                     Enabled = true;
                 }
