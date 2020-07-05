@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.btnUploadNow = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -42,7 +40,6 @@
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbRemotePath = new System.Windows.Forms.TextBox();
             this.tbServer = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -83,8 +80,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.richTextBox2);
             this.groupBox2.Controls.Add(this.btnUploadNow);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label7);
@@ -97,29 +92,10 @@
             this.groupBox2.Controls.Add(this.tbServer);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(201, 403);
+            this.groupBox2.Size = new System.Drawing.Size(201, 275);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FTP Settings";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 277);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 13);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Connection Log";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(9, 293);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(181, 104);
-            this.richTextBox2.TabIndex = 29;
-            this.richTextBox2.Text = "";
             // 
             // btnUploadNow
             // 
@@ -216,20 +192,10 @@
             this.tbServer.Size = new System.Drawing.Size(181, 20);
             this.tbServer.TabIndex = 21;
             // 
-            // label6
-            // 
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(40, 322);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(152, 74);
-            this.label6.TabIndex = 29;
-            this.label6.Text = "FTP integration has not yet been implemented. The QRSS Uploader program (in the F" +
-    "SKview folder) can be used for this task at this time.";
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(753, 393);
+            this.btnCancel.Location = new System.Drawing.Point(753, 339);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(61, 27);
             this.btnCancel.TabIndex = 6;
@@ -240,7 +206,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(686, 393);
+            this.btnSave.Location = new System.Drawing.Point(686, 339);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(61, 27);
             this.btnSave.TabIndex = 30;
@@ -501,7 +467,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 308);
+            this.label2.Location = new System.Drawing.Point(18, 300);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 13);
             this.label2.TabIndex = 61;
@@ -509,15 +475,15 @@
             // 
             // tbStationInfo
             // 
-            this.tbStationInfo.Location = new System.Drawing.Point(230, 324);
+            this.tbStationInfo.Location = new System.Drawing.Point(21, 316);
             this.tbStationInfo.Name = "tbStationInfo";
-            this.tbStationInfo.Size = new System.Drawing.Size(584, 20);
+            this.tbStationInfo.Size = new System.Drawing.Size(410, 20);
             this.tbStationInfo.TabIndex = 62;
             // 
             // label23
             // 
-            this.label23.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label23.Location = new System.Drawing.Point(227, 400);
+            this.label23.ForeColor = System.Drawing.Color.Red;
+            this.label23.Location = new System.Drawing.Point(18, 352);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(378, 17);
             this.label23.TabIndex = 63;
@@ -557,7 +523,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(826, 432);
+            this.ClientSize = new System.Drawing.Size(826, 378);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.cbRoll);
@@ -586,7 +552,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.nudFreqDisplayOffset);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnSetWsprPath);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
@@ -608,7 +573,6 @@
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnUploadNow;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
@@ -621,8 +585,6 @@
         private System.Windows.Forms.TextBox tbServer;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown nudFreqDisplayOffset;
