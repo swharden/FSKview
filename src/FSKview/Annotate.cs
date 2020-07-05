@@ -39,7 +39,7 @@ namespace FSKview
                     gfx.DrawLine(bandEdgePen, 0, wsprBandTopPx, spec.Width, wsprBandTopPx);
                     gfx.DrawLine(bandEdgePen, 0, wsprBandBottomPx, spec.Width, wsprBandBottomPx);
                     gfx.DrawLine(bandEdgePen, 0, qrssBandBottomPx, spec.Width, qrssBandBottomPx);
-                    gfx.DrawLine(grabEdgePen, 0, grabTopPx, spec.Width, grabTopPx);
+                    gfx.DrawLine(grabEdgePen, 0, grabTopPx + 1, spec.Width, grabTopPx);
                     gfx.DrawLine(grabEdgePen, 0, grabBotPx, spec.Width, grabBotPx);
                 }
 
