@@ -12,12 +12,12 @@ namespace FSKview
         public readonly int dialFreq;
         public readonly int lowerFreq;
         public readonly int upperFreq;
-        public WsprBand(string name, int dial, int low, int high)
+        public WsprBand(string name, int dial)
         {
             this.name = name ?? $"?";
             dialFreq = dial;
-            lowerFreq = low;
-            upperFreq = high;
+            lowerFreq = dial + 1400;
+            upperFreq = dial + 1600;
         }
     }
 }
