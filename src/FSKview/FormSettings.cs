@@ -86,6 +86,8 @@ namespace FSKview
                     MessageBox.Show("Incorrect username/password", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (result.Contains("File name not allowed"))
                     MessageBox.Show("Invalid path (does the target folder exist?)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (result == "upload successful")
+                    MessageBox.Show("FTP upload was successful", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                     MessageBox.Show(result, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Enabled = true;
