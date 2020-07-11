@@ -92,6 +92,22 @@ namespace FSKview
             }
         }
 
+        public static void TimeTicks(Graphics gfx, float height, double secPerPx, int tickLength = 3)
+        {
+            using (var font = new Font(FontFamily.GenericMonospace, 10, FontStyle.Bold))
+            using (var sfLowerLeft = new StringFormat { LineAlignment = StringAlignment.Far, Alignment = StringAlignment.Near })
+            {
+                for (int i = 1; i < 10; i++)
+                {
+                    int seconds = i * 60;
+                    int pxFromLeft = (int)(seconds / secPerPx);
+                    gfx.DrawLine(Pens.Black, pxFromLeft - 1, height, pxFromLeft - 1, height - tickLength);
+                    gfx.DrawLine(Pens.Black, pxFromLeft + 1, height, pxFromLeft + 1, height - tickLength);
+                    gfx.DrawLine(Pens.White, pxFromLeft, height, pxFromLeft, height - tickLength);
+                }
+            }
+        }
+
         public static void DrawStringWithShadow(Graphics gfx, String str, float x, float y,
             Font font, StringFormat sf, Brush foreground, Brush background)
         {

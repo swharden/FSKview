@@ -288,6 +288,7 @@ namespace FSKview
                 string msg = $"FSKview {version.Major}.{version.Minor}.{version.Build}: " +
                     $"{settings.stationInformation} {UtcDateStamp} {UtcTimeStampNoSec} UTC";
                 Annotate.Logo(gfx, msg, 3, height - 3);
+                Annotate.TimeTicks(gfx, height, spec.SecPerPx);
 
                 // ensure output folders exist
                 string pathSaveWeb = $"{appPath}/grabs-web";
