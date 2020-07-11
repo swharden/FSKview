@@ -10,13 +10,16 @@ namespace FSKview
     {
         public static WsprBand[] GetBands(bool ascending = true)
         {
-            // http://wsprnet.org/drupal/node/218
+            // list came from the top left corner of http://wsprnet.org/
+            // 0.136, 0.4742, 1.8366, 3.5686, 5.2872, 5364.7, 7.0386, 
+            // 10.1387, 14.0956, 18.1046, 21.0946, 24.9246, 28.1246, 
+            // 50.293, 70.091, 144.489, 432.300, 1296.500
 
             WsprBand[] bands =
             {
                 new WsprBand("None", 0),
                 new WsprBand("160m", 1836600),
-                new WsprBand("80m", 3592600),
+                new WsprBand("80m", 3568600),
                 new WsprBand("60m", 5287200),
                 new WsprBand("40m", 7038600),
                 new WsprBand("30m", 10138700),
