@@ -14,6 +14,3 @@ Developers interested in experimenting with this program can run it from its sou
 
 ## Libraries Used by FSKview
 Signal analysis is performed by the [FftSharp](https://github.com/swharden/FftSharp) and [Spectrogram](https://github.com/swharden/Spectrogram) libraries and the sound card interface is provided by [NAudio](https://github.com/naudio/NAudio).
-
-## Supported Platforms
-FSKview is written in C# and targets .NET Framework for a Windows-specific build. However, can be compiled to target .NET Core, so a cross-platform version is likely feasible with little additional effort. A cross-platform version of FSKview will be explored following the release of [MAUI](https://devblogs.microsoft.com/dotnet/introducing-net-multi-platform-app-ui/) and .NET 5 which is predicted to be released in the end of 2020.
