@@ -88,6 +88,7 @@
     <Compile Include="Ruler.cs" />
     <Compile Include="WsprBand.cs" />
     <Compile Include="WsprBands.cs" />
+    <Compile Include="WsprLogFile.cs" />
     <Compile Include="WsprSpot.cs" />
     <EmbeddedResource Include="AudioControl.resx">
       <DependentUpon>AudioControl.cs</DependentUpon>
