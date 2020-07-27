@@ -1,10 +1,6 @@
 :: delete old builds
 del *.zip
 
-:: rebuild QRSS uploader
-rmdir /s /q ..\..\..\QRSS-Uploader\src\QrssUploader\bin\Release
-dotnet build --configuration Release ..\..\..\QRSS-Uploader\src\QrssUploader
-
 :: rebuild FSKview
 rmdir /s /q ..\..\src\FSKview\bin
 
@@ -18,7 +14,6 @@ del ..\..\src\FSKview\bin\Release\*.config
 
 :: copy tools into build folder
 copy tools\* ..\..\src\FSKview\bin\Release
-copy ..\..\..\QRSS-Uploader\src\QrssUploader\bin\Release\QrssUploader.exe ..\..\src\FSKview\bin\Release
 
 :: zip
 cd ..\..\src\FSKview\bin\
