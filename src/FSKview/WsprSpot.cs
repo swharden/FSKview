@@ -12,12 +12,12 @@ namespace FSKview
         public DateTime dt { get; private set; }
         public string timestamp { get; private set; }
         public double strength { get; private set; }
-        public double deltaT { get; private set; }
+        //public double deltaT { get; private set; }
         public double frequencyMHz { get; private set; }
         public double frequencyHz { get { return Math.Round(frequencyMHz * 1e6, 1); } }
         public string grid { get; private set; }
-        public double power { get; private set; }
-        public double drift { get; private set; }
+        //public double power { get; private set; }
+        //public double drift { get; private set; }
         public string callsign { get; private set; }
 
         public double ageSec { get { return (DateTime.UtcNow - dt).TotalSeconds; } }
@@ -36,6 +36,9 @@ namespace FSKview
                 Parse73(line);
             else
                 throw new InvalidOperationException($"unsupported WSPR log line format");
+
+            if (!string.IsNullOrWhiteSpace(callsign))
+                isValid = true;
 
             /*
              * Callsigns enclosed in angle brackets are actually sent as 15-bit hash codes. 
