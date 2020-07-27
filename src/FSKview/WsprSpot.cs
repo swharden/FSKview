@@ -53,6 +53,11 @@ namespace FSKview
                 isValid = false;
         }
 
+        public override string ToString()
+        {
+            return (isValid) ? $"{callsign} ({strength} dB) from {grid} at {dt}" : "invalid";
+        }
+
         private void Parse96(string line)
         {
             // WSJT-X 2.2.2 Format (line length 96)
@@ -60,19 +65,28 @@ namespace FSKview
             // 200603 1720 -27 -1.34  10.1401891  N8XEF EM99 37           3  0.13  1  1    0  1  38     1   810
             // 000000000011111111112222222222333333333344444444445555555555666666666677777777778888888888999999
 
-            int year = int.Parse(line.Substring(0, 2)) + 2000;
-            int month = int.Parse(line.Substring(2, 2));
-            int day = int.Parse(line.Substring(4, 2));
-            int hour = int.Parse(line.Substring(7, 2));
-            int minute = int.Parse(line.Substring(9, 2));
-            int second = 0;
-            dt = new DateTime(year, month, day, hour, minute, second);
-            timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+            try
+            {
+                int year = int.Parse(line.Substring(0, 2)) + 2000;
+                int month = int.Parse(line.Substring(2, 2));
+                int day = int.Parse(line.Substring(4, 2));
+                int hour = int.Parse(line.Substring(7, 2));
+                int minute = int.Parse(line.Substring(9, 2));
+                int second = 0;
+                dt = new DateTime(year, month, day, hour, minute, second);
+                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
 
-            strength = int.Parse(line.Substring(11, 4));
-            frequencyMHz = double.Parse(line.Substring(21, 12));
-            callsign = line.Substring(33, 7).Trim();
-            grid = line.Substring(40, 5).Trim();
+                strength = int.Parse(line.Substring(11, 4));
+                frequencyMHz = double.Parse(line.Substring(21, 12));
+                callsign = line.Substring(33, 7).Trim();
+                grid = line.Substring(40, 5).Trim();
+
+                isValid = true;
+            }
+            catch
+            {
+                isValid = false;
+            }
         }
 
         private void Parse88(string line)
@@ -82,19 +96,28 @@ namespace FSKview
             // 200713 1908   4 -17  0.32  14.0970666  DL6NL JO50 27           0     1    0    1  527  0
             // 0000000000111111111122222222223333333333444444444455555555556666666666777777777788888888
 
-            int year = int.Parse(line.Substring(0, 2)) + 2000;
-            int month = int.Parse(line.Substring(2, 2));
-            int day = int.Parse(line.Substring(4, 2));
-            int hour = int.Parse(line.Substring(7, 2));
-            int minute = int.Parse(line.Substring(9, 2));
-            int second = 0;
-            dt = new DateTime(year, month, day, hour, minute, second);
-            timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+            try
+            {
+                int year = int.Parse(line.Substring(0, 2)) + 2000;
+                int month = int.Parse(line.Substring(2, 2));
+                int day = int.Parse(line.Substring(4, 2));
+                int hour = int.Parse(line.Substring(7, 2));
+                int minute = int.Parse(line.Substring(9, 2));
+                int second = 0;
+                dt = new DateTime(year, month, day, hour, minute, second);
+                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
 
-            strength = int.Parse(line.Substring(15, 4));
-            frequencyMHz = double.Parse(line.Substring(25, 12));
-            callsign = line.Substring(37, 7).Trim().Trim('<').Trim('>');
-            grid = line.Substring(44, 5).Trim();
+                strength = int.Parse(line.Substring(15, 4));
+                frequencyMHz = double.Parse(line.Substring(25, 12));
+                callsign = line.Substring(37, 7).Trim().Trim('<').Trim('>');
+                grid = line.Substring(44, 5).Trim();
+
+                isValid = true;
+            }
+            catch
+            {
+                isValid = false;
+            }
         }
 
         private void Parse73(string line)
@@ -103,28 +126,28 @@ namespace FSKview
             // 200715 1006  10 -23 -0.3   7.040078  G6JVT IO90 23           0     1    0
             // 0000000000111111111122222222223333333333444444444455555555556666666666777
 
-            int year = int.Parse(line.Substring(0, 2)) + 2000;
-            int month = int.Parse(line.Substring(2, 2));
-            int day = int.Parse(line.Substring(4, 2));
-            int hour = int.Parse(line.Substring(7, 2));
-            int minute = int.Parse(line.Substring(9, 2));
-            int second = 0;
-            dt = new DateTime(year, month, day, hour, minute, second);
-            timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+            try
+            {
+                int year = int.Parse(line.Substring(0, 2)) + 2000;
+                int month = int.Parse(line.Substring(2, 2));
+                int day = int.Parse(line.Substring(4, 2));
+                int hour = int.Parse(line.Substring(7, 2));
+                int minute = int.Parse(line.Substring(9, 2));
+                int second = 0;
+                dt = new DateTime(year, month, day, hour, minute, second);
+                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
 
-            strength = int.Parse(line.Substring(15, 4));
-            frequencyMHz = double.Parse(line.Substring(24, 11));
-            callsign = line.Substring(35, 7).Trim().Trim('<').Trim('>');
-            grid = line.Substring(42, 5).Trim();
-        }
+                strength = int.Parse(line.Substring(15, 4));
+                frequencyMHz = double.Parse(line.Substring(24, 11));
+                callsign = line.Substring(35, 7).Trim().Trim('<').Trim('>');
+                grid = line.Substring(42, 5).Trim();
 
-        private void ParseVersion222(string[] parts)
-        {
-        }
-
-        public override string ToString()
-        {
-            return (isValid) ? $"{callsign} ({strength} dB) from {grid} at {dt}" : "invalid";
+                isValid = true;
+            }
+            catch
+            {
+                isValid = false;
+            }
         }
     }
 }
