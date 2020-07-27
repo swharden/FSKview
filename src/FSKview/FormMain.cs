@@ -60,6 +60,7 @@ namespace FSKview
             cbDialFreq.SelectedIndex = settings.wsprBandIndex;
             cbWspr.Checked = settings.isWsprEnabled;
             cbFTP.Checked = settings.isFtpEnabled;
+            nudBrightness.Value = (decimal)settings.brightness;
 
             // select on load
             ActiveControl = cbColormap;
