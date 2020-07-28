@@ -80,5 +80,25 @@ namespace FSKview.Tests
             Assert.AreEqual("N8XEF", spot.callsign);
             Assert.AreEqual("EM99", spot.grid);
         }
+
+        [Test]
+        public void Test_LogFormat_FT()
+        {
+            string line = "191011_130213    14.080 Rx FT4    -16  0.2 2012 UA4CCH YO9NC -07";
+            var spot = new WsprSpot(line);
+
+            Assert.AreEqual(2019, spot.dt.Year);
+            Assert.AreEqual(10, spot.dt.Month);
+            Assert.AreEqual(11, spot.dt.Day);
+            Assert.AreEqual(13, spot.dt.Hour);
+            Assert.AreEqual(2, spot.dt.Minute);
+            Assert.AreEqual(13, spot.dt.Second);
+            Assert.AreEqual("191011130213", spot.timestamp);
+            Assert.AreEqual(-16, spot.strength);
+            Assert.AreEqual(14.080, spot.frequencyMHz);
+            Assert.AreEqual(14_080_000, spot.frequencyHz);
+            Assert.AreEqual("UA4CCH", spot.callsign);
+            Assert.AreEqual("YO9NC", spot.grid);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,14 +29,19 @@ namespace FSKview
             // WSPR log files may be in multiple formats as described in:
             // https://github.com/swharden/FSKview/issues/26
 
-            if (line.Length == 96)
+            string[] parts = line.Split(' ').Where(x => x.Length > 0).ToArray();
+            Console.WriteLine(string.Join("|", parts));
+
+            if (line.Contains(" Rx FT"))
+                ParseFT(parts);
+            else if (line.Length == 96)
                 Parse96(line);
             else if (line.Length == 88)
                 Parse88(line);
             else if (line.Length == 73)
                 Parse73(line);
             else
-                throw new InvalidOperationException($"unsupported WSPR log line format");
+                Console.WriteLine($"unsupported WSPR log line format");
 
             if (!string.IsNullOrWhiteSpace(callsign))
                 isValid = true;
@@ -49,6 +55,7 @@ namespace FSKview
              * the same hash code, but the 15-bit hashcode length ensures that in practice 
              * such collisions will be rare.
              */
+            callsign = callsign.Trim('<').Trim('>');
             if (callsign == "...")
                 isValid = false;
         }
@@ -56,6 +63,35 @@ namespace FSKview
         public override string ToString()
         {
             return (isValid) ? $"{callsign} ({strength} dB) from {grid} at {dt}" : "invalid";
+        }
+
+        private void ParseFT(string[] parts)
+        {
+            // WSJT-X 2.2.2 Format
+            // 0             1      2  3   4   5   6    7      8     9               
+            // 191010_130200|14.080|Rx|FT4|-16|0.2|2012|UA4CCH|YO9NC|-07
+            try
+            {
+                int year = int.Parse(parts[0].Substring(0, 2)) + 2000;
+                int month = int.Parse(parts[0].Substring(2, 2));
+                int day = int.Parse(parts[0].Substring(4, 2));
+                int hour = int.Parse(parts[0].Substring(7, 2));
+                int minute = int.Parse(parts[0].Substring(9, 2));
+                int second = int.Parse(parts[0].Substring(11, 2));
+                dt = new DateTime(year, month, day, hour, minute, second);
+                timestamp = parts[0].Replace("_", "");
+
+                strength = int.Parse(parts[4]);
+                frequencyMHz = double.Parse(parts[1]);
+                callsign = parts[7];
+                grid = parts[8];
+
+                isValid = true;
+            }
+            catch
+            {
+                isValid = false;
+            }
         }
 
         private void Parse96(string line)
@@ -109,7 +145,7 @@ namespace FSKview
 
                 strength = int.Parse(line.Substring(15, 4));
                 frequencyMHz = double.Parse(line.Substring(25, 12));
-                callsign = line.Substring(37, 7).Trim().Trim('<').Trim('>');
+                callsign = line.Substring(37, 7).Trim();
                 grid = line.Substring(44, 5).Trim();
 
                 isValid = true;
@@ -139,7 +175,7 @@ namespace FSKview
 
                 strength = int.Parse(line.Substring(15, 4));
                 frequencyMHz = double.Parse(line.Substring(24, 11));
-                callsign = line.Substring(35, 7).Trim().Trim('<').Trim('>');
+                callsign = line.Substring(35, 7).Trim();
                 grid = line.Substring(42, 5).Trim();
 
                 isValid = true;
