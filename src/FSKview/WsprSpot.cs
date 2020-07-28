@@ -30,21 +30,18 @@ namespace FSKview
             // https://github.com/swharden/FSKview/issues/26
 
             string[] parts = line.Split(' ').Where(x => x.Length > 0).ToArray();
-            Console.WriteLine(string.Join("|", parts));
 
-            if (line.Contains(" Rx FT"))
+            if (line.Contains(" Rx FT") && parts.Length == 10)
                 ParseFT(parts);
-            else if (line.Length == 96)
-                Parse96(line);
-            else if (line.Length == 88)
-                Parse88(line);
-            else if (line.Length == 73)
-                Parse73(line);
+            else if (line.Length == 96 && parts.Length == 17)
+                Parse96(parts);
+            else if (line.Length == 88 && parts.Length == 15)
+                Parse88(parts);
+            else if (line.Length == 73 && parts.Length == 12)
+                Parse73(parts);
             else
                 Console.WriteLine($"unsupported WSPR log line format");
 
-            if (!string.IsNullOrWhiteSpace(callsign))
-                isValid = true;
 
             /*
              * Callsigns enclosed in angle brackets are actually sent as 15-bit hash codes. 
@@ -55,9 +52,15 @@ namespace FSKview
              * the same hash code, but the 15-bit hashcode length ensures that in practice 
              * such collisions will be rare.
              */
-            callsign = callsign.Trim('<').Trim('>');
-            if (callsign == "...")
-                isValid = false;
+            if (!string.IsNullOrWhiteSpace(callsign))
+            {
+                callsign = callsign.Trim('<').Trim('>');
+                if (callsign == "...")
+                    callsign = null;
+            }
+
+            if (!string.IsNullOrWhiteSpace(callsign))
+                isValid = true;
         }
 
         public override string ToString()
@@ -67,7 +70,7 @@ namespace FSKview
 
         private void ParseFT(string[] parts)
         {
-            // WSJT-X 2.2.2 Format
+            // WSJT-X 2.2.2
             // 0             1      2  3   4   5   6    7      8     9               
             // 191010_130200|14.080|Rx|FT4|-16|0.2|2012|UA4CCH|YO9NC|-07
             try
@@ -94,28 +97,28 @@ namespace FSKview
             }
         }
 
-        private void Parse96(string line)
+        private void Parse96(string[] parts)
         {
-            // WSJT-X 2.2.2 Format (line length 96)
-            // 0      1    2   3      4           5     6    7            8  9     10 11   12 13 14     15  16
-            // 200603 1720 -27 -1.34  10.1401891  N8XEF EM99 37           3  0.13  1  1    0  1  38     1   810
-            // 000000000011111111112222222222333333333344444444445555555555666666666677777777778888888888999999
+            // WSJT-X 2.2.2
+            // 0      1    2   3     4          5     6
+            // 200603|1720|-27|-1.34|10.1401891|N8XEF|EM99|37|3|0.13|1|1|0|1|38|1|810
+            Console.WriteLine(string.Join("|", parts));
 
             try
             {
-                int year = int.Parse(line.Substring(0, 2)) + 2000;
-                int month = int.Parse(line.Substring(2, 2));
-                int day = int.Parse(line.Substring(4, 2));
-                int hour = int.Parse(line.Substring(7, 2));
-                int minute = int.Parse(line.Substring(9, 2));
+                int year = int.Parse(parts[0].Substring(0, 2)) + 2000;
+                int month = int.Parse(parts[0].Substring(2, 2));
+                int day = int.Parse(parts[0].Substring(4, 2));
+                int hour = int.Parse(parts[1].Substring(0, 2));
+                int minute = int.Parse(parts[1].Substring(2, 2));
                 int second = 0;
                 dt = new DateTime(year, month, day, hour, minute, second);
-                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+                timestamp = parts[0]+parts[1];
 
-                strength = int.Parse(line.Substring(11, 4));
-                frequencyMHz = double.Parse(line.Substring(21, 12));
-                callsign = line.Substring(33, 7).Trim();
-                grid = line.Substring(40, 5).Trim();
+                strength = int.Parse(parts[2]);
+                frequencyMHz = double.Parse(parts[4]);
+                callsign = parts[5];
+                grid = parts[6];
 
                 isValid = true;
             }
@@ -125,28 +128,27 @@ namespace FSKview
             }
         }
 
-        private void Parse88(string line)
+        private void Parse88(string[] parts)
         {
-            // WSJT-X 2.1.2 Format (line length 88)
-            // 0      1      2 3    4     5           6     7    8            9    10   11   12  13  14
-            // 200713 1908   4 -17  0.32  14.0970666  DL6NL JO50 27           0     1    0    1  527  0
-            // 0000000000111111111122222222223333333333444444444455555555556666666666777777777788888888
+            // WSJT-X 2.1.2
+            // 0      1    2 3   4    5          6     7    
+            // 200713|1908|4|-17|0.32|14.0970666|DL6NL|JO50|27|0|1|0|1|527|0
 
             try
             {
-                int year = int.Parse(line.Substring(0, 2)) + 2000;
-                int month = int.Parse(line.Substring(2, 2));
-                int day = int.Parse(line.Substring(4, 2));
-                int hour = int.Parse(line.Substring(7, 2));
-                int minute = int.Parse(line.Substring(9, 2));
+                int year = int.Parse(parts[0].Substring(0, 2)) + 2000;
+                int month = int.Parse(parts[0].Substring(2, 2));
+                int day = int.Parse(parts[0].Substring(4, 2));
+                int hour = int.Parse(parts[1].Substring(0, 2));
+                int minute = int.Parse(parts[1].Substring(2, 2));
                 int second = 0;
                 dt = new DateTime(year, month, day, hour, minute, second);
-                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+                timestamp = parts[0] + parts[1];
 
-                strength = int.Parse(line.Substring(15, 4));
-                frequencyMHz = double.Parse(line.Substring(25, 12));
-                callsign = line.Substring(37, 7).Trim();
-                grid = line.Substring(44, 5).Trim();
+                strength = int.Parse(parts[3]);
+                frequencyMHz = double.Parse(parts[5]);
+                callsign = parts[6];
+                grid = parts[7];
 
                 isValid = true;
             }
@@ -156,27 +158,27 @@ namespace FSKview
             }
         }
 
-        private void Parse73(string line)
+        private void Parse73(string[] parts)
         {
-            // WSPR (line length 73)
-            // 200715 1006  10 -23 -0.3   7.040078  G6JVT IO90 23           0     1    0
-            // 0000000000111111111122222222223333333333444444444455555555556666666666777
+            // WSPR classic
+            // 0      1    2  3   4    5        6     7
+            // 200715|1006|10|-23|-0.3|7.040078|G6JVT|IO90|23|0|1|0
 
             try
             {
-                int year = int.Parse(line.Substring(0, 2)) + 2000;
-                int month = int.Parse(line.Substring(2, 2));
-                int day = int.Parse(line.Substring(4, 2));
-                int hour = int.Parse(line.Substring(7, 2));
-                int minute = int.Parse(line.Substring(9, 2));
+                int year = int.Parse(parts[0].Substring(0, 2)) + 2000;
+                int month = int.Parse(parts[0].Substring(2, 2));
+                int day = int.Parse(parts[0].Substring(4, 2));
+                int hour = int.Parse(parts[1].Substring(0, 2));
+                int minute = int.Parse(parts[1].Substring(2, 2));
                 int second = 0;
                 dt = new DateTime(year, month, day, hour, minute, second);
-                timestamp = line.Substring(0, 6) + line.Substring(7, 4);
+                timestamp = parts[0] + parts[1];
 
-                strength = int.Parse(line.Substring(15, 4));
-                frequencyMHz = double.Parse(line.Substring(24, 11));
-                callsign = line.Substring(35, 7).Trim();
-                grid = line.Substring(42, 5).Trim();
+                strength = int.Parse(parts[3]);
+                frequencyMHz = double.Parse(parts[5]);
+                callsign = parts[6];
+                grid = parts[7];
 
                 isValid = true;
             }
