@@ -59,8 +59,8 @@ namespace FSKview
                     callsign = null;
             }
 
-            if (!string.IsNullOrWhiteSpace(callsign))
-                isValid = true;
+            if (string.IsNullOrWhiteSpace(callsign))
+                isValid = false;
         }
 
         public override string ToString()
