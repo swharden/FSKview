@@ -161,8 +161,8 @@ namespace FSKview.Tests
             Assert.AreEqual(13, spot.dt.Second);
             Assert.AreEqual("191011130213", spot.timestamp);
             Assert.AreEqual(-16, spot.strength);
-            Assert.AreEqual(14.080, spot.frequencyMHz);
-            Assert.AreEqual(14_080_000, spot.frequencyHz);
+            Assert.AreEqual(14.080 + 0.002012, spot.frequencyMHz);
+            Assert.AreEqual(14_082_012, spot.frequencyHz);
             Assert.AreEqual("UA4CCH", spot.callsign);
             Assert.AreEqual("YO9NC", spot.grid);
             Assert.IsTrue(spot.isValid);

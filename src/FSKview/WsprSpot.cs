@@ -86,6 +86,7 @@ namespace FSKview
 
                 strength = int.Parse(parts[4]);
                 frequencyMHz = double.Parse(parts[1]);
+                frequencyMHz += double.Parse(parts[6]) / 1e6;
                 callsign = parts[7];
                 grid = parts[8];
 
