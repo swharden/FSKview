@@ -17,7 +17,7 @@ namespace FSKview.Tests
             {
                 Console.WriteLine($"\n{Path.GetFileName(logFilePath)}");
                 var log = new WsprLogFile(logFilePath);
-                Assert.Greater(log.spots.Count, 50);
+                Assert.Greater(log.spots.Count, 5);
             }
         }
 
