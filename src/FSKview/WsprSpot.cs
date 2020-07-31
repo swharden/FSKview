@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,8 +90,8 @@ namespace FSKview
                 timestamp = parts[0].Replace("_", "");
 
                 strength = int.Parse(parts[4]);
-                frequencyMHz = double.Parse(parts[1]);
-                frequencyMHz += double.Parse(parts[6]) / 1e6;
+                frequencyMHz = double.Parse(parts[1], CultureInfo.InvariantCulture);
+                frequencyMHz += double.Parse(parts[6], CultureInfo.InvariantCulture) / 1e6;
                 callsign = parts[7];
                 grid = parts[8];
 
@@ -121,7 +122,7 @@ namespace FSKview
                 timestamp = parts[0]+parts[1];
 
                 strength = int.Parse(parts[2]);
-                frequencyMHz = double.Parse(parts[4]);
+                frequencyMHz = double.Parse(parts[4], CultureInfo.InvariantCulture);
                 callsign = parts[5];
                 grid = parts[6];
 
@@ -151,7 +152,7 @@ namespace FSKview
                 timestamp = parts[0] + parts[1];
 
                 strength = int.Parse(parts[3]);
-                frequencyMHz = double.Parse(parts[5]);
+                frequencyMHz = double.Parse(parts[5], CultureInfo.InvariantCulture);
                 callsign = parts[6];
                 grid = parts[7];
 
@@ -181,7 +182,7 @@ namespace FSKview
                 timestamp = parts[0] + parts[1];
 
                 strength = int.Parse(parts[3]);
-                frequencyMHz = double.Parse(parts[5]);
+                frequencyMHz = double.Parse(parts[5], CultureInfo.InvariantCulture);
                 callsign = parts[6];
                 grid = parts[7];
 
