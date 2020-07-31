@@ -69,7 +69,7 @@
             0,
             0,
             65536});
-            this.nudBrightness.Location = new System.Drawing.Point(554, 26);
+            this.nudBrightness.Location = new System.Drawing.Point(614, 26);
             this.nudBrightness.Name = "nudBrightness";
             this.nudBrightness.Size = new System.Drawing.Size(53, 20);
             this.nudBrightness.TabIndex = 5;
@@ -83,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(551, 9);
+            this.label1.Location = new System.Drawing.Point(611, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 6;
@@ -133,7 +133,7 @@
             this.cbDialFreq.FormattingEnabled = true;
             this.cbDialFreq.Location = new System.Drawing.Point(427, 25);
             this.cbDialFreq.Name = "cbDialFreq";
-            this.cbDialFreq.Size = new System.Drawing.Size(121, 21);
+            this.cbDialFreq.Size = new System.Drawing.Size(181, 21);
             this.cbDialFreq.TabIndex = 11;
             this.cbDialFreq.SelectedIndexChanged += new System.EventHandler(this.cbDialFreq_SelectedIndexChanged);
             // 
@@ -172,7 +172,7 @@
             // btnConfigure
             // 
             this.btnConfigure.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfigure.Location = new System.Drawing.Point(750, 12);
+            this.btnConfigure.Location = new System.Drawing.Point(810, 12);
             this.btnConfigure.Name = "btnConfigure";
             this.btnConfigure.Size = new System.Drawing.Size(86, 32);
             this.btnConfigure.TabIndex = 15;
@@ -185,7 +185,7 @@
             this.cbWspr.AutoSize = true;
             this.cbWspr.Checked = true;
             this.cbWspr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbWspr.Location = new System.Drawing.Point(685, 6);
+            this.cbWspr.Location = new System.Drawing.Point(745, 6);
             this.cbWspr.Name = "cbWspr";
             this.cbWspr.Size = new System.Drawing.Size(59, 17);
             this.cbWspr.TabIndex = 17;
@@ -265,7 +265,7 @@
             this.cbSave.AutoSize = true;
             this.cbSave.Checked = true;
             this.cbSave.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSave.Location = new System.Drawing.Point(613, 27);
+            this.cbSave.Location = new System.Drawing.Point(673, 27);
             this.cbSave.Name = "cbSave";
             this.cbSave.Size = new System.Drawing.Size(71, 17);
             this.cbSave.TabIndex = 21;
@@ -284,7 +284,7 @@
             this.cbBands.AutoSize = true;
             this.cbBands.Checked = true;
             this.cbBands.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBands.Location = new System.Drawing.Point(613, 6);
+            this.cbBands.Location = new System.Drawing.Point(673, 6);
             this.cbBands.Name = "cbBands";
             this.cbBands.Size = new System.Drawing.Size(56, 17);
             this.cbBands.TabIndex = 23;
@@ -305,7 +305,7 @@
             // cbFTP
             // 
             this.cbFTP.AutoSize = true;
-            this.cbFTP.Location = new System.Drawing.Point(685, 27);
+            this.cbFTP.Location = new System.Drawing.Point(745, 27);
             this.cbFTP.Name = "cbFTP";
             this.cbFTP.Size = new System.Drawing.Size(46, 17);
             this.cbFTP.TabIndex = 24;
