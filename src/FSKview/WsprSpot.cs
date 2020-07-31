@@ -21,6 +21,8 @@ namespace FSKview
         //public double drift { get; private set; }
         public string callsign { get; private set; }
 
+        public bool isWspr { get; private set; } = true;
+
         public double ageSec { get { return (DateTime.UtcNow - dt).TotalSeconds; } }
         public int segment { get { return (dt.Minute % 10) / 2; } }
 
@@ -75,6 +77,8 @@ namespace FSKview
             // 191010_130200|14.080|Rx|FT4|-16|0.2|2012|UA4CCH|YO9NC|-07
             try
             {
+                isWspr = false;
+
                 int year = int.Parse(parts[0].Substring(0, 2)) + 2000;
                 int month = int.Parse(parts[0].Substring(2, 2));
                 int day = int.Parse(parts[0].Substring(4, 2));

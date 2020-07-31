@@ -46,19 +46,19 @@ namespace FSKview
                 if (settings.roll && drawVerticalLine)
                     gfx.DrawLine(rollPen, spec.NextColumnIndex, 0, spec.NextColumnIndex, spec.Height);
 
-                // a segment is a 2-minute block within a ten-minute frame
+                if (settings.isWsprEnabled == false)
+                    return;
+
+                // plot spots in a single segment (the 2m block within a 10m time frame)
                 for (int segment = 0; segment < 5; segment++)
                 {
-                    int segmentX = spec.Width * segment / 5;
                     WsprSpot[] segmentSpots = spots
                                                 .Where(x => x.segment == segment) // only this segment
                                                 .Where(x => Math.Abs(x.frequencyHz - band.dialFreq) < 1e5) // only this band
                                                 .OrderBy(x => x.strength).GroupBy(x => x.callsign).Select(x => x.Last()) // only strongest
                                                 .OrderBy(x => x.frequencyHz).Reverse().ToArray(); // top to bottom
 
-                    if (settings.isWsprEnabled == false)
-                        segmentSpots = new WsprSpot[0];
-
+                    int segmentX = spec.Width * segment / 5;
                     if (settings.roll == false && segmentSpots.Length > 0)
                         segmentX = (int)(spec.Width - segmentSpots[0].ageSec / spec.SecPerPx) + 10;
 
@@ -70,7 +70,13 @@ namespace FSKview
                         int y = spec.PixelY(spot.frequencyHz - band.dialFreq, settings.verticalReduction);
 
                         // draw the marker
-                        int xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
+                        int xSpot;
+                        if (spot.isWspr)
+                            xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
+                        else
+                            xSpot = (int)(segmentX + (spot.dt.Minute % 2 * 60 + spot.dt.Second) / spec.SecPerPx);
+
+                        // determine where to place the marker
                         gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
                         gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot + 0.5f, y + 1, sfMiddleCenter);
 
