@@ -15,8 +15,8 @@ namespace FSKview.Tests
             string[] logFilePaths = Directory.GetFiles(logFolderPath, "*.txt");
             foreach (string logFilePath in logFilePaths)
             {
-                Console.WriteLine($"\n{Path.GetFileName(logFilePath)}");
                 var log = new WsprLogFile(logFilePath);
+                Console.WriteLine($"{Path.GetFileName(logFilePath)} has {log.spots.Count} valid spots");
                 Assert.Greater(log.spots.Count, 5);
             }
         }

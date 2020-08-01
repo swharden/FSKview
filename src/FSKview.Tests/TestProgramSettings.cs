@@ -6,7 +6,6 @@ namespace FSKview.Tests
 {
     public class TestProgramSettings
     {
-        [Test]
         public void Test_Settings_SaveAndLoad()
         {
             var settings = new ProgramSettings();

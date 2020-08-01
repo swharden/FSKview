@@ -43,7 +43,7 @@ namespace FSKview
             else if (line.Length == 73 && parts.Length == 12)
                 Parse73(parts);
             else
-                Console.WriteLine($"unsupported WSPR log line format");
+                Debug.WriteLine($"unsupported WSPR log line format");
 
 
             /*
@@ -108,7 +108,6 @@ namespace FSKview
             // WSJT-X 2.2.2
             // 0      1    2   3     4          5     6
             // 200603|1720|-27|-1.34|10.1401891|N8XEF|EM99|37|3|0.13|1|1|0|1|38|1|810
-            Console.WriteLine(string.Join("|", parts));
 
             try
             {
