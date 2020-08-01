@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview", "FSKview\FSKview.csproj", "{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Tests", "FSKview.Tests\FSKview.Tests.csproj", "{8E0C2898-DB2E-40F8-ADED-502B6070A1D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSKview.Tests", "FSKview.Tests\FSKview.Tests.csproj", "{AC248652-1080-43CF-AA9D-3BD78DBEB421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C287EDE-C5EB-4975-AC81-6E87907F6B2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E0C2898-DB2E-40F8-ADED-502B6070A1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E0C2898-DB2E-40F8-ADED-502B6070A1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E0C2898-DB2E-40F8-ADED-502B6070A1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E0C2898-DB2E-40F8-ADED-502B6070A1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC248652-1080-43CF-AA9D-3BD78DBEB421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC248652-1080-43CF-AA9D-3BD78DBEB421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC248652-1080-43CF-AA9D-3BD78DBEB421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC248652-1080-43CF-AA9D-3BD78DBEB421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,27 +1,26 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FSKview.Tests
 {
-    class TestWsprLog
+    [TestClass]
+    public class WsprLogFile
     {
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_ReadAllLogs()
         {
-            string logFolderPath = Path.GetFullPath("../../../../../dev/wspr-logs");
+            string logFolderPath = Path.GetFullPath("../../../../dev/wspr-logs");
             string[] logFilePaths = Directory.GetFiles(logFolderPath, "*.txt");
             foreach (string logFilePath in logFilePaths)
             {
-                var log = new WsprLogFile(logFilePath);
+                var log = new FSKview.WsprLogFile(logFilePath);
                 Console.WriteLine($"{Path.GetFileName(logFilePath)} has {log.spots.Count} valid spots");
-                Assert.Greater(log.spots.Count, 5);
+                Assert.IsTrue(log.spots.Count > 5);
             }
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_73()
         {
             string line = "200715 1006  10 -23 -0.3   7.040078  G6JVT IO90 23           0     1    0";
@@ -42,7 +41,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_73b()
         {
             string line = "200712 1326   3 -27  0.6  14.097006  HB9FID JN47 37          0   306    0";
@@ -63,7 +62,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_73c()
         {
             string line = "200712 1322   1 -28 -1.1  14.097110  <PA0ANH> JO22LH 27     -1  5495   -2";
@@ -84,7 +83,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_73d()
         {
             string line = "200712 1036   5 -27 -0.5  14.097014  <...> B000AA 63         0     2    0";
@@ -105,7 +104,7 @@ namespace FSKview.Tests
             Assert.IsFalse(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_88()
         {
             string line = "200713 1908   4 -17  0.32  14.0970666  DL6NL JO50 27           0     1    0    1  527  0";
@@ -126,7 +125,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_96()
         {
             string line = "200603 1720 -27 -1.34  10.1401891  N8XEF EM99 37           3  0.13  1  1    0  1  38     1   810";
@@ -147,7 +146,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_FT()
         {
             string line = "191011_130213    14.080 Rx FT4    -16  0.2 2012 UA4CCH YO9NC -07";
@@ -168,7 +167,7 @@ namespace FSKview.Tests
             Assert.IsTrue(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_garbage()
         {
             string line = "sdaf jldafj sdjfjas jfej alsjflk jes";
@@ -177,7 +176,7 @@ namespace FSKview.Tests
             Assert.IsFalse(spot.isValid);
         }
 
-        [Test]
+        [TestMethod]
         public void Test_LogFormat_empty()
         {
             string line = "";
