@@ -1,4 +1,5 @@
 # FSKview
+[![Build Status](https://dev.azure.com/swharden/swharden/_apis/build/status/swharden.FSKview?branchName=master)](https://dev.azure.com/swharden/swharden/_build/latest?definitionId=10&branchName=master)
 
 FSKview is a high-resolution spectrogram for viewing frequency-shift keyed (FSK) signals in real time.
 
