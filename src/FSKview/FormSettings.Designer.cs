@@ -71,6 +71,9 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.nudVerticalReduction = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbAgcMode = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
@@ -533,11 +536,44 @@
             0,
             0});
             // 
+            // label10
+            // 
+            this.label10.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label10.Location = new System.Drawing.Point(466, 340);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(138, 31);
+            this.label10.TabIndex = 70;
+            this.label10.Text = "Auto-adjust gain to achieve a stable noise floor";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(465, 300);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 13);
+            this.label6.TabIndex = 69;
+            this.label6.Text = "Spectral AGC";
+            // 
+            // cbAgcMode
+            // 
+            this.cbAgcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAgcMode.FormattingEnabled = true;
+            this.cbAgcMode.Items.AddRange(new object[] {
+            "AGC Off",
+            "Constant Floor"});
+            this.cbAgcMode.Location = new System.Drawing.Point(469, 316);
+            this.cbAgcMode.Name = "cbAgcMode";
+            this.cbAgcMode.Size = new System.Drawing.Size(135, 21);
+            this.cbAgcMode.TabIndex = 71;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 378);
+            this.Controls.Add(this.cbAgcMode);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.nudVerticalReduction);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
@@ -570,6 +606,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -629,5 +666,8 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.NumericUpDown nudVerticalReduction;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbAgcMode;
     }
 }

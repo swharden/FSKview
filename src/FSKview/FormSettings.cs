@@ -34,6 +34,7 @@ namespace FSKview
             nudPxBelow.Value = settings.grabSavePxBelow;
             tbStationInfo.Text = settings.stationInformation;
             cbRoll.Checked = settings.roll;
+            cbAgcMode.SelectedIndex = settings.agcMode;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -52,6 +53,7 @@ namespace FSKview
             settings.grabSavePxBelow = (int)nudPxBelow.Value;
             settings.stationInformation = tbStationInfo.Text;
             settings.roll = cbRoll.Checked;
+            settings.agcMode = cbAgcMode.SelectedIndex;
             settings.Save();
             Close();
         }
