@@ -26,7 +26,7 @@ namespace FSKview
             tbPassword.Text = settings.DeObfuscate(settings.ftpObfuscatedPassword);
             tbWsprPath.Text = settings.wsprLogFilePath;
             nudTargetWidth.Value = settings.targetWidth;
-            cbVerticalReduction.Checked = settings.verticalReduction == 2;
+            nudVerticalReduction.Value = settings.verticalReduction;
             nudFreqDisplayOffset.Value = settings.freqDisplayOffset;
             tbImageFileName.Text = settings.grabFileName;
             cbShowFreqScale.Checked = settings.showScaleOnAllGrabs;
@@ -44,7 +44,7 @@ namespace FSKview
             settings.ftpObfuscatedPassword = settings.Obfuscate(tbPassword.Text);
             settings.wsprLogFilePath = tbWsprPath.Text;
             settings.targetWidth = (int)nudTargetWidth.Value;
-            settings.verticalReduction = cbVerticalReduction.Checked ? 2 : 1;
+            settings.verticalReduction = (int)nudVerticalReduction.Value;
             settings.freqDisplayOffset = (int)nudFreqDisplayOffset.Value;
             settings.grabFileName = tbImageFileName.Text;
             settings.showScaleOnAllGrabs = cbShowFreqScale.Checked;

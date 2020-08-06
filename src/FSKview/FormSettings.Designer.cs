@@ -62,7 +62,6 @@
             this.nudPxBelow = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.cbVerticalReduction = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,11 +70,13 @@
             this.cbRoll = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.nudVerticalReduction = new System.Windows.Forms.NumericUpDown();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVerticalReduction)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -436,16 +437,6 @@
             this.label20.TabIndex = 57;
             this.label20.Text = "Values describe distance above and below band edges";
             // 
-            // cbVerticalReduction
-            // 
-            this.cbVerticalReduction.AutoSize = true;
-            this.cbVerticalReduction.Location = new System.Drawing.Point(349, 96);
-            this.cbVerticalReduction.Name = "cbVerticalReduction";
-            this.cbVerticalReduction.Size = new System.Drawing.Size(37, 17);
-            this.cbVerticalReduction.TabIndex = 58;
-            this.cbVerticalReduction.Text = "2x";
-            this.cbVerticalReduction.UseVisualStyleBackColor = true;
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -458,11 +449,11 @@
             // label22
             // 
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label22.Location = new System.Drawing.Point(346, 116);
+            this.label22.Location = new System.Drawing.Point(346, 119);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(101, 60);
             this.label22.TabIndex = 60;
-            this.label22.Text = "Shrinks output image vertically by 2X (applying a local max filter)";
+            this.label22.Text = "Shrinks output image vertically (applying a local max filter)";
             // 
             // label2
             // 
@@ -519,11 +510,35 @@
             this.label25.TabIndex = 66;
             this.label25.Text = "Roll is like \"wipe\". Off is like scroll.";
             // 
+            // nudVerticalReduction
+            // 
+            this.nudVerticalReduction.Location = new System.Drawing.Point(349, 97);
+            this.nudVerticalReduction.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudVerticalReduction.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudVerticalReduction.Name = "nudVerticalReduction";
+            this.nudVerticalReduction.Size = new System.Drawing.Size(64, 20);
+            this.nudVerticalReduction.TabIndex = 67;
+            this.nudVerticalReduction.ThousandsSeparator = true;
+            this.nudVerticalReduction.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 378);
+            this.Controls.Add(this.nudVerticalReduction);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.cbRoll);
@@ -532,7 +547,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.cbVerticalReduction);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.nudPxBelow);
@@ -566,6 +580,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVerticalReduction)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -605,7 +620,6 @@
         private System.Windows.Forms.NumericUpDown nudPxBelow;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.CheckBox cbVerticalReduction;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label2;
@@ -614,5 +628,6 @@
         private System.Windows.Forms.CheckBox cbRoll;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.NumericUpDown nudVerticalReduction;
     }
 }
