@@ -557,6 +557,7 @@
             // cbAgcMode
             // 
             this.cbAgcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAgcMode.Enabled = false;
             this.cbAgcMode.FormattingEnabled = true;
             this.cbAgcMode.Items.AddRange(new object[] {
             "AGC Off",
