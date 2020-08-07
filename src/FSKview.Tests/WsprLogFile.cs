@@ -162,8 +162,7 @@ namespace FSKview.Tests
             Assert.AreEqual(-16, spot.strength);
             Assert.AreEqual(14.080 + 0.002012, spot.frequencyMHz);
             Assert.AreEqual(14_082_012, spot.frequencyHz);
-            Assert.AreEqual("UA4CCH", spot.callsign);
-            Assert.AreEqual("YO9NC", spot.grid);
+            Assert.AreEqual("UA4CCH YO9NC -07", spot.callsign);
             Assert.IsTrue(spot.isValid);
         }
 

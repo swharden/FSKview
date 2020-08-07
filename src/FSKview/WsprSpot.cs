@@ -92,8 +92,7 @@ namespace FSKview
                 strength = int.Parse(parts[4]);
                 frequencyMHz = double.Parse(parts[1], CultureInfo.InvariantCulture);
                 frequencyMHz += double.Parse(parts[6], CultureInfo.InvariantCulture) / 1e6;
-                callsign = parts[7];
-                grid = parts[8];
+                callsign = string.Join(" ", parts.Skip(7));
 
                 isValid = true;
             }
