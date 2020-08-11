@@ -70,20 +70,25 @@ namespace FSKview
                         int y = spec.PixelY(spot.frequencyHz - band.dialFreq, settings.verticalReduction);
 
                         // draw the marker
-                        int xSpot;
                         if (spot.isWspr)
-                            xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
+                        {
+                            int xSpot = segmentX + r * 2 * (spotIndex % 8 + 1);
+
+                            // determine where to place the marker
+                            gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
+                            gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot + 0.5f, y + 1, sfMiddleCenter);
+
+                            // draw the key label at the top of the band edge
+                            DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength} dB) ",
+                                segmentX, wsprBandTopPx - settings.grabSavePxAbove + 13 * spotIndex,
+                                font, sfUpperLeft, Brushes.White, Brushes.Black);
+                        }
                         else
-                            xSpot = (int)(segmentX + (spot.dt.Minute % 2 * 60 + spot.dt.Second) / spec.SecPerPx);
-
-                        // determine where to place the marker
-                        gfx.FillEllipse(Brushes.Black, xSpot - r, y - r, r * 2, r * 2);
-                        gfx.DrawString($"{spotIndex + 1}", font, Brushes.White, xSpot + 0.5f, y + 1, sfMiddleCenter);
-
-                        // draw the key label
-                        DrawStringWithShadow(gfx, $"{spotIndex + 1}: {spot.callsign} ({spot.strength} dB) ",
-                            segmentX, wsprBandTopPx - settings.grabSavePxAbove + 13 * spotIndex,
-                            font, sfUpperLeft, Brushes.White, Brushes.Black);
+                        {
+                            // draw the callsign exactly where the spot is on the spectrogram
+                            int xSpot = (int)(segmentX + (spot.dt.Minute % 2 * 60 + spot.dt.Second) / spec.SecPerPx);
+                            DrawStringWithShadow(gfx, spot.callsign, xSpot, y, font, sfUpperLeft, Brushes.White, Brushes.Black);
+                        }
                     }
                 }
             }
