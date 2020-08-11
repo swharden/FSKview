@@ -31,6 +31,7 @@ namespace FSKview
                 new WsprBand("WSPR 6m",   50_293_000),
                 new WsprBand("WSPR 2m",  144_488_500),
 
+                /*
                 new WsprBand("FT8 80m",  3_573_000),
                 new WsprBand("FT8 40m",  7_074_000),
                 new WsprBand("FT8 30m", 10_136_000),
@@ -52,6 +53,7 @@ namespace FSKview
                 new WsprBand("FT4 6m",  50_318_000),
 
                 new WsprBand("JS8 40m",  7_078_000),
+                */
             };
 
             if (ascending == false)
