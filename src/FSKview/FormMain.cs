@@ -144,7 +144,24 @@ namespace FSKview
             if (spec is null)
                 return;
 
+            // capture new FFTs and note their indexes
+            int fftsBefore = spec.FftsProcessed;
             spec.Add(audioControl1.listener.GetNewAudio());
+            int fftsAfter = spec.FftsProcessed;
+            int newFftCount = fftsAfter - fftsBefore;
+            int[] newFftIndexes = Enumerable.Range(spec.Width - newFftCount - 1, newFftCount).ToArray();
+            var ffts = spec.GetFFTs();
+
+            // optionally apply some sort of filter or AGC
+            if (settings.agcMode == 1)
+            {
+                foreach (int fftIndex in newFftIndexes)
+                {
+                    ffts[fftIndex] = AGC.SubtractMovingWindowFloor(ffts[fftIndex]);
+                }
+            }
+
+            // display the annotated spectrogram
             var spotsToShow = spots.Where(x => x.ageSec < (11 * 60)).ToList();
             Annotate.Spectrogram(spec, band, spotsToShow, bmpSpectrogram, bmpVericalScale, cbBands.Checked, true, settings);
             pictureBox1.Refresh();
@@ -332,7 +349,7 @@ namespace FSKview
                     Enabled = false;
                     Status($"Performing FTP upload...");
                     Application.DoEvents();
-                    string result = FTP.Upload(settings.ftpServerAddress, settings.ftpRemoteSubfolder, settings.ftpUsername, 
+                    string result = FTP.Upload(settings.ftpServerAddress, settings.ftpRemoteSubfolder, settings.ftpUsername,
                         settings.DeObfuscate(settings.ftpObfuscatedPassword), $"{pathSaveWeb}/{settings.grabFileName}");
                     if (result.Contains("Not logged in"))
                         result = "Incorrect username/password";

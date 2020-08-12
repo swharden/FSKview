@@ -557,11 +557,10 @@
             // cbAgcMode
             // 
             this.cbAgcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAgcMode.Enabled = false;
             this.cbAgcMode.FormattingEnabled = true;
             this.cbAgcMode.Items.AddRange(new object[] {
             "AGC Off",
-            "Constant Floor"});
+            "Windowed Noise Floor"});
             this.cbAgcMode.Location = new System.Drawing.Point(469, 316);
             this.cbAgcMode.Name = "cbAgcMode";
             this.cbAgcMode.Size = new System.Drawing.Size(135, 21);
