@@ -35,6 +35,7 @@ namespace FSKview
             tbStationInfo.Text = settings.stationInformation;
             cbRoll.Checked = settings.roll;
             cbAgcMode.SelectedIndex = settings.agcMode;
+            nudAgcPower.Value = (decimal)settings.agcPower;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -54,6 +55,7 @@ namespace FSKview
             settings.stationInformation = tbStationInfo.Text;
             settings.roll = cbRoll.Checked;
             settings.agcMode = cbAgcMode.SelectedIndex;
+            settings.agcPower = (double)nudAgcPower.Value;
             settings.Save();
             Close();
         }

@@ -37,6 +37,7 @@ namespace FSKview
         public string ftpObfuscatedPassword = "c2FtcGxlUGFzc3dvcmQ";
         public bool isFtpEnabled = false;
         public int agcMode = 0;
+        public double agcPower = 1;
 
         public ProgramSettings()
         {

@@ -74,12 +74,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cbAgcMode = new System.Windows.Forms.ComboBox();
+            this.nudAgcPower = new System.Windows.Forms.NumericUpDown();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFreqDisplayOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTargetWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVerticalReduction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAgcPower)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -550,9 +552,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(465, 300);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 13);
+            this.label6.Size = new System.Drawing.Size(153, 13);
             this.label6.TabIndex = 69;
-            this.label6.Text = "Spectral AGC";
+            this.label6.Text = "Spectral AGC mode and power";
             // 
             // cbAgcMode
             // 
@@ -566,11 +568,20 @@
             this.cbAgcMode.Size = new System.Drawing.Size(135, 21);
             this.cbAgcMode.TabIndex = 71;
             // 
+            // nudAgcPower
+            // 
+            this.nudAgcPower.DecimalPlaces = 1;
+            this.nudAgcPower.Location = new System.Drawing.Point(610, 317);
+            this.nudAgcPower.Name = "nudAgcPower";
+            this.nudAgcPower.Size = new System.Drawing.Size(62, 20);
+            this.nudAgcPower.TabIndex = 72;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 378);
+            this.Controls.Add(this.nudAgcPower);
             this.Controls.Add(this.cbAgcMode);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label6);
@@ -618,6 +629,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPxAbove)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPxBelow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVerticalReduction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAgcPower)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -669,5 +681,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbAgcMode;
+        private System.Windows.Forms.NumericUpDown nudAgcPower;
     }
 }

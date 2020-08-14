@@ -157,7 +157,7 @@ namespace FSKview
             {
                 foreach (int fftIndex in newFftIndexes)
                 {
-                    ffts[fftIndex] = AGC.SubtractMovingWindowFloor(ffts[fftIndex]);
+                    ffts[fftIndex] = AGC.SubtractMovingWindowFloor(ffts[fftIndex], power: settings.agcPower);
                 }
             }
 
