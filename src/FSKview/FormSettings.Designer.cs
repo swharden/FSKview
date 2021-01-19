@@ -562,7 +562,8 @@
             this.cbAgcMode.FormattingEnabled = true;
             this.cbAgcMode.Items.AddRange(new object[] {
             "AGC Off",
-            "Windowed Noise Floor"});
+            "Noise Floor (original)",
+            "Noise Floor (version 2)"});
             this.cbAgcMode.Location = new System.Drawing.Point(469, 316);
             this.cbAgcMode.Name = "cbAgcMode";
             this.cbAgcMode.Size = new System.Drawing.Size(135, 21);

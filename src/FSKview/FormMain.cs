@@ -157,7 +157,14 @@ namespace FSKview
             {
                 foreach (int fftIndex in newFftIndexes)
                 {
-                    ffts[fftIndex] = AGC.SubtractMovingWindowFloor(ffts[fftIndex], power: settings.agcPower);
+                    ffts[fftIndex] = AGC.Method1_SortedFloorMean(ffts[fftIndex], power: settings.agcPower);
+                }
+            }
+            else if (settings.agcMode == 2)
+            {
+                foreach (int fftIndex in newFftIndexes)
+                {
+                    ffts[fftIndex] = AGC.Method2_QuicksortFloor(ffts[fftIndex], power: settings.agcPower);
                 }
             }
 
