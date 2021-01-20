@@ -69,9 +69,10 @@
             0,
             0,
             65536});
-            this.nudBrightness.Location = new System.Drawing.Point(614, 26);
+            this.nudBrightness.Location = new System.Drawing.Point(716, 30);
+            this.nudBrightness.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.nudBrightness.Name = "nudBrightness";
-            this.nudBrightness.Size = new System.Drawing.Size(53, 20);
+            this.nudBrightness.Size = new System.Drawing.Size(62, 23);
             this.nudBrightness.TabIndex = 5;
             this.nudBrightness.Value = new decimal(new int[] {
             2,
@@ -83,9 +84,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(611, 9);
+            this.label1.Location = new System.Drawing.Point(713, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(62, 15);
             this.label1.TabIndex = 6;
             this.label1.Text = "Brightness";
             // 
@@ -93,18 +95,20 @@
             // 
             this.cbColormap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbColormap.FormattingEnabled = true;
-            this.cbColormap.Location = new System.Drawing.Point(300, 25);
+            this.cbColormap.Location = new System.Drawing.Point(350, 29);
+            this.cbColormap.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbColormap.Name = "cbColormap";
-            this.cbColormap.Size = new System.Drawing.Size(121, 21);
+            this.cbColormap.Size = new System.Drawing.Size(140, 23);
             this.cbColormap.TabIndex = 7;
             this.cbColormap.SelectedIndexChanged += new System.EventHandler(this.cbColormap_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(297, 9);
+            this.label2.Location = new System.Drawing.Point(346, 10);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(60, 15);
             this.label2.TabIndex = 8;
             this.label2.Text = "Colormap";
             // 
@@ -112,18 +116,20 @@
             // 
             this.cbWindow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWindow.FormattingEnabled = true;
-            this.cbWindow.Location = new System.Drawing.Point(173, 25);
+            this.cbWindow.Location = new System.Drawing.Point(202, 29);
+            this.cbWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbWindow.Name = "cbWindow";
-            this.cbWindow.Size = new System.Drawing.Size(121, 21);
+            this.cbWindow.Size = new System.Drawing.Size(140, 23);
             this.cbWindow.TabIndex = 9;
             this.cbWindow.SelectedIndexChanged += new System.EventHandler(this.cbWindow_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(170, 9);
+            this.label3.Location = new System.Drawing.Point(198, 10);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 10;
             this.label3.Text = "Window";
             // 
@@ -131,28 +137,31 @@
             // 
             this.cbDialFreq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDialFreq.FormattingEnabled = true;
-            this.cbDialFreq.Location = new System.Drawing.Point(427, 25);
+            this.cbDialFreq.Location = new System.Drawing.Point(498, 29);
+            this.cbDialFreq.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbDialFreq.Name = "cbDialFreq";
-            this.cbDialFreq.Size = new System.Drawing.Size(181, 21);
+            this.cbDialFreq.Size = new System.Drawing.Size(210, 23);
             this.cbDialFreq.TabIndex = 11;
             this.cbDialFreq.SelectedIndexChanged += new System.EventHandler(this.cbDialFreq_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(424, 9);
+            this.label4.Location = new System.Drawing.Point(495, 10);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
+            this.label4.Size = new System.Drawing.Size(85, 15);
             this.label4.TabIndex = 12;
             this.label4.Text = "Dial Frequency";
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(899, 4);
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(1049, 5);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 26);
+            this.label5.Size = new System.Drawing.Size(117, 30);
             this.label5.TabIndex = 13;
             this.label5.Text = "FSKview";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -160,21 +169,23 @@
             // lblTime
             // 
             this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTime.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblTime.Location = new System.Drawing.Point(899, 30);
+            this.lblTime.Location = new System.Drawing.Point(1049, 35);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(100, 26);
+            this.lblTime.Size = new System.Drawing.Size(117, 30);
             this.lblTime.TabIndex = 14;
             this.lblTime.Text = "23:17:00 UTC";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnConfigure
             // 
-            this.btnConfigure.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfigure.Location = new System.Drawing.Point(810, 12);
+            this.btnConfigure.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConfigure.Location = new System.Drawing.Point(931, 16);
+            this.btnConfigure.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnConfigure.Name = "btnConfigure";
-            this.btnConfigure.Size = new System.Drawing.Size(86, 32);
+            this.btnConfigure.Size = new System.Drawing.Size(69, 28);
             this.btnConfigure.TabIndex = 15;
             this.btnConfigure.Text = "Settings";
             this.btnConfigure.UseVisualStyleBackColor = true;
@@ -185,9 +196,10 @@
             this.cbWspr.AutoSize = true;
             this.cbWspr.Checked = true;
             this.cbWspr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbWspr.Location = new System.Drawing.Point(745, 6);
+            this.cbWspr.Location = new System.Drawing.Point(869, 7);
+            this.cbWspr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbWspr.Name = "cbWspr";
-            this.cbWspr.Size = new System.Drawing.Size(59, 17);
+            this.cbWspr.Size = new System.Drawing.Size(57, 19);
             this.cbWspr.TabIndex = 17;
             this.cbWspr.Text = "WSPR";
             this.cbWspr.UseVisualStyleBackColor = true;
@@ -201,17 +213,19 @@
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(0, 53);
+            this.panel1.Location = new System.Drawing.Point(0, 61);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(999, 413);
+            this.panel1.Size = new System.Drawing.Size(1166, 477);
             this.panel1.TabIndex = 18;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Purple;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(630, 313);
+            this.pictureBox1.Size = new System.Drawing.Size(735, 361);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -222,9 +236,10 @@
             this.lblStatusTime,
             this.lblStatus,
             this.lblVersion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 466);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(999, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1166, 24);
             this.statusStrip1.TabIndex = 19;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -232,26 +247,26 @@
             // 
             this.pbTimeFrac.Maximum = 600;
             this.pbTimeFrac.Name = "pbTimeFrac";
-            this.pbTimeFrac.Size = new System.Drawing.Size(100, 16);
+            this.pbTimeFrac.Size = new System.Drawing.Size(117, 18);
             this.pbTimeFrac.Value = 123;
             // 
             // lblStatusTime
             // 
             this.lblStatusTime.Name = "lblStatusTime";
-            this.lblStatusTime.Size = new System.Drawing.Size(31, 17);
+            this.lblStatusTime.Size = new System.Drawing.Size(31, 19);
             this.lblStatusTime.Text = "time";
             // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(806, 17);
+            this.lblStatus.Size = new System.Drawing.Size(954, 19);
             this.lblStatus.Spring = true;
             this.lblStatus.Text = "status";
             // 
             // lblVersion
             // 
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(45, 17);
+            this.lblVersion.Size = new System.Drawing.Size(45, 19);
             this.lblVersion.Text = "version";
             // 
             // timerUpdateSpectrogram
@@ -265,9 +280,10 @@
             this.cbSave.AutoSize = true;
             this.cbSave.Checked = true;
             this.cbSave.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSave.Location = new System.Drawing.Point(673, 27);
+            this.cbSave.Location = new System.Drawing.Point(785, 31);
+            this.cbSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbSave.Name = "cbSave";
-            this.cbSave.Size = new System.Drawing.Size(71, 17);
+            this.cbSave.Size = new System.Drawing.Size(75, 19);
             this.cbSave.TabIndex = 21;
             this.cbSave.Text = "Autosave";
             this.cbSave.UseVisualStyleBackColor = true;
@@ -284,9 +300,10 @@
             this.cbBands.AutoSize = true;
             this.cbBands.Checked = true;
             this.cbBands.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbBands.Location = new System.Drawing.Point(673, 6);
+            this.cbBands.Location = new System.Drawing.Point(785, 7);
+            this.cbBands.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbBands.Name = "cbBands";
-            this.cbBands.Size = new System.Drawing.Size(56, 17);
+            this.cbBands.Size = new System.Drawing.Size(58, 19);
             this.cbBands.TabIndex = 23;
             this.cbBands.Text = "Bands";
             this.cbBands.UseVisualStyleBackColor = true;
@@ -294,20 +311,21 @@
             // 
             // audioControl1
             // 
-            this.audioControl1.Location = new System.Drawing.Point(9, 9);
+            this.audioControl1.Location = new System.Drawing.Point(10, 10);
             this.audioControl1.Margin = new System.Windows.Forms.Padding(0);
             this.audioControl1.Name = "audioControl1";
             this.audioControl1.SampleRate = 6000;
-            this.audioControl1.Size = new System.Drawing.Size(161, 41);
+            this.audioControl1.Size = new System.Drawing.Size(188, 47);
             this.audioControl1.TabIndex = 3;
             this.audioControl1.InputDeviceChanged += new System.EventHandler(this.audioControl1_InputDeviceChanged);
             // 
             // cbFTP
             // 
             this.cbFTP.AutoSize = true;
-            this.cbFTP.Location = new System.Drawing.Point(745, 27);
+            this.cbFTP.Location = new System.Drawing.Point(869, 31);
+            this.cbFTP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbFTP.Name = "cbFTP";
-            this.cbFTP.Size = new System.Drawing.Size(46, 17);
+            this.cbFTP.Size = new System.Drawing.Size(45, 19);
             this.cbFTP.TabIndex = 24;
             this.cbFTP.Text = "FTP";
             this.cbFTP.UseVisualStyleBackColor = true;
@@ -315,9 +333,9 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 488);
+            this.ClientSize = new System.Drawing.Size(1166, 563);
             this.Controls.Add(this.cbFTP);
             this.Controls.Add(this.cbSave);
             this.Controls.Add(this.cbBands);
@@ -337,6 +355,7 @@
             this.Controls.Add(this.nudBrightness);
             this.Controls.Add(this.audioControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FSKview";

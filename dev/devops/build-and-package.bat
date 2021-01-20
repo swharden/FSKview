@@ -8,16 +8,13 @@ rmdir /s /q ..\..\src\FSKview\bin
 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\amd64\MSBuild.exe" "C:\Users\scott\Documents\GitHub\FSKview\src\FSKview.sln" /property:Configuration=Release
 
 :: clear old builds
-del ..\..\src\FSKview\bin\Release\*.xml
-del ..\..\src\FSKview\bin\Release\*.pdb
-del ..\..\src\FSKview\bin\Release\*.config
-
-:: copy tools into build folder
-copy tools\* ..\..\src\FSKview\bin\Release
+del ..\..\src\FSKview\bin\Release\net5.0-windows\*.xml
+del ..\..\src\FSKview\bin\Release\net5.0-windows\*.pdb
+del ..\..\src\FSKview\bin\Release\net5.0-windows\*.config
 
 :: zip
-cd ..\..\src\FSKview\bin\
-move Release FSKview
+cd ..\..\src\FSKview\bin\Release
+move net5.0-windows FSKview
 powershell "Compress-Archive FSKview FSKview-VERSION.zip"
 explorer .\
 ::cd ..\..\src\FSKview\bin\Release
