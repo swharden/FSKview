@@ -10,7 +10,7 @@ namespace FSKview.Tests
         [TestMethod]
         public void Test_LogFormat_ReadAllLogs()
         {
-            string logFolderPath = Path.GetFullPath("../../../../dev/wspr-logs");
+            string logFolderPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../../dev/wspr-logs"));
             string[] logFilePaths = Directory.GetFiles(logFolderPath, "*.txt");
             foreach (string logFilePath in logFilePaths)
             {
