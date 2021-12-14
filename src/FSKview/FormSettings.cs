@@ -36,6 +36,7 @@ namespace FSKview
             cbRoll.Checked = settings.roll;
             cbAgcMode.SelectedIndex = settings.agcMode;
             nudAgcPower.Value = (decimal)settings.agcPower;
+            cbShowTimeLines.Checked = settings.showTimeLines;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -56,6 +57,7 @@ namespace FSKview
             settings.roll = cbRoll.Checked;
             settings.agcMode = cbAgcMode.SelectedIndex;
             settings.agcPower = (double)nudAgcPower.Value;
+            settings.showTimeLines = cbShowTimeLines.Checked;
             settings.Save();
             Close();
         }

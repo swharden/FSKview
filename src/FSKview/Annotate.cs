@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable CA1416 // Ignore System.Drawing platform compatibility
+
 namespace FSKview
 {
     static class Annotate
@@ -34,6 +36,7 @@ namespace FSKview
                 int qrssBandBottomPx = spec.PixelY(band.lowerFreq - band.dialFreq - 200, settings.verticalReduction) + 1;
                 int grabTopPx = wsprBandTopPx - settings.grabSavePxAbove;
                 int grabBotPx = qrssBandBottomPx + settings.grabSavePxBelow;
+
                 if (drawBandLines)
                 {
                     gfx.DrawLine(bandEdgePen, 0, wsprBandTopPx, spec.Width, wsprBandTopPx);
@@ -41,6 +44,17 @@ namespace FSKview
                     gfx.DrawLine(bandEdgePen, 0, qrssBandBottomPx, spec.Width, qrssBandBottomPx);
                     gfx.DrawLine(grabEdgePen, 0, grabTopPx - 1, spec.Width, grabTopPx - 1);
                     gfx.DrawLine(grabEdgePen, 0, grabBotPx, spec.Width, grabBotPx);
+                }
+
+                if (settings.showTimeLines)
+                {
+                    using Pen pen = new(Color.FromArgb(100, Color.White));
+                    pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    for (int i = 1; i < 10; i++)
+                    {
+                        int pxFromLeft = (int)(i * 60 / spec.SecPerPx);
+                        gfx.DrawLine(pen, pxFromLeft, 0, pxFromLeft, spec.Height);
+                    }
                 }
 
                 if (settings.roll && drawVerticalLine)
