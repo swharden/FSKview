@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#pragma warning disable CA1416 // Ignore System.Drawing platform compatibility
+
 namespace FSKview
 {
     public partial class FormMain : Form

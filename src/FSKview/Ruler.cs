@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable CA1416 // Ignore System.Drawing platform compatibility
+
 namespace FSKview
 {
     public static class Ruler

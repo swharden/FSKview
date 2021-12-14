@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net;
 
+#pragma warning disable SYSLIB0014 // Ignore obsolete WebClient
+
 namespace FSKview
 {
     public static class FTP
