@@ -20,7 +20,7 @@ namespace FSKview
     public partial class FormMain : Form
     {
         readonly ProgramSettings settings;
-        readonly Version version = Assembly.GetExecutingAssembly().GetName().Version;
+        readonly Version version = new(1, 1, 9);
 
         readonly Spectrogram.Colormap[] cmaps;
         WsprBand band;
