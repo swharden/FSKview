@@ -354,7 +354,6 @@
             this.Controls.Add(this.cbColormap);
             this.Controls.Add(this.nudBrightness);
             this.Controls.Add(this.audioControl1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
